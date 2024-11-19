@@ -10,7 +10,7 @@ public class index extends Application {
 
     @Override
     public void start(Stage Stage) throws Exception {
-            Parent root = FXMLLoader.load(getClass().getResource("frontEnd/Login/login_view.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("stages/login/login_view.fxml"));
 
             Stage.setTitle("LMS!");
             Image icon = new Image(getClass().getResource("icons/icon_LMS.png").toExternalForm());
