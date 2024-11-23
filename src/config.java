@@ -43,75 +43,69 @@ public class config {
     public void createTable() {
         try {
             //Establish connection
-            String url = "jdbc:mysql://localhost:3306/";
+            String url = "jdbc:mysql://localhost:3306/librarydb";
             String user = "root";
             String password = "";
             conn = DriverManager.getConnection(url, user, password);
             stmt = conn.createStatement();
 
+            String sqlTableCategory = "CREATE TABLE IF NOT EXISTS librarydb.bkcategory (" +
+                    "ctgry_id INT NOT NULL AUTO_INCREMENT, " +
+                    "ctgry_name VARCHAR(64) NOT NULL," +
+                    "PRIMARY KEY(ctgry_id))";
+            stmt.executeUpdate(sqlTableCategory);
+            System.out.println("Table 'category' created successfully");
+
             //Create Book Table
             String sqlTableBook = "CREATE TABLE IF NOT EXISTS librarydb.book (" +
-                    "BOOK_ID INT NOT NULL AUTO_INCREMENT, " +
-                    "TITLE VARCHAR(64) NOT NULL, " +
-                    "AUTHOR VARCHAR(64) NOT NULL, " +
-                    "ISBN INT(13) NOT NULL, " +
-                    "CATEGORY VARCHAR(64) NOT NULL, " +
-                    "QUANTITY INT(24) NOT NULL, " +
-                    "BORROWED INT NOT NULL," +             //0 If all available, more than 0 if there is borrowed
-                    "PRIMARY KEY(BOOK_ID))";
+                    "book_id INT NOT NULL AUTO_INCREMENT," +
+                    "title VARCHAR(64) NOT NULL," +
+                    "author VARCHAR(64) NOT NULL," +
+                    "isbn INT(13) NOT NULL," +
+                    "category_id INT NOT NULL," +
+                    "quantity INT(24) NOT NULL," +
+                    "borrowed INT NOT NULL," +
+                    "FOREIGN KEY(category_id) REFERENCES bkcategory(ctgry_id), " +
+                    "PRIMARY KEY(book_id));";
             stmt.executeUpdate(sqlTableBook);
             System.out.println("Table 'book' created succesfully");
 
+            String sqlTableStudent = "CREATE TABLE IF NOT EXISTS librarydb.student (" +
+                    "stud_id INT NOT NULL, " +
+                    "fName VARCHAR(64) NOT NULL, " +
+                    "lName VARCHAR(64) NOT NULL, " +
+                    "section VARCHAR(64) NOT NULL, " +
+                    "email VARCHAR(64) NOT NULL, " +
+                    "password VARCHAR(64) NOT NULL, " +
+                    "penalty DOUBLE NOT NULL, " +
+                    "PRIMARY KEY(stud_id))";
+            stmt.executeUpdate(sqlTableStudent);
+            System.out.println("Table 'student' created successfully");
+
             String sqlTableTransact = "CREATE TABLE IF NOT EXISTS librarydb.transact (" +
-                    "TRANS_ID INT NOT NULL AUTO_INCREMENT, " +
-                    "BORROWER_ID INT NOT NULL, " +
-                    "BOOK_ID INT NOT NULL, " +
-                    "BORROW_DATE DATE NOT NULL, " +
-                    "PENALTY_COST DOUBLE," +
-                    "RETURN_DATE DATE, " +
-                    "PRIMARY KEY(TRANS_ID))";
+                    "trans_id INT NOT NULL AUTO_INCREMENT, " +
+                    "stud_id INT, " +
+                    "book_id INT , " +
+                    "borrow_date DATE NOT NULL, " +
+                    "penalty DOUBLE," +
+                    "return_date DATE, " +
+                    "FOREIGN KEY(stud_id) REFERENCES student(stud_id)," +
+                    "FOREIGN KEY(book_id) REFERENCES book(book_id)," +
+                    "PRIMARY KEY(trans_id))";
             stmt.executeUpdate(sqlTableTransact);
             System.out.println("Table 'transact' created succesfully");
 
             String sqlTableStaff = "CREATE TABLE IF NOT EXISTS librarydb.staff (" +
-                    "STAFF_ID INT NOT NULL AUTO_INCREMENT, " +
-                    "FNAME VARCHAR(64) NOT NULL, " +
-                    "LNAME VARCHAR(64) NOT NULL, " +
-                    "EMAIL VARCHAR(64) NOT NULL, " +
-                    "PASSWORD VARCHAR(64) NOT NULL, " +
-                    "PRIMARY KEY(STAFF_ID))";
+                    "staff_id INT NOT NULL AUTO_INCREMENT, " +
+                    "fName VARCHAR(64) NOT NULL, " +
+                    "lName VARCHAR(64) NOT NULL, " +
+                    "email VARCHAR(64) NOT NULL, " +
+                    "password VARCHAR(64) NOT NULL, " +
+                    "PRIMARY KEY(staff_id))";
             stmt.executeUpdate(sqlTableStaff);
             System.out.println("Table 'staff' created successfully");
 
-            String sqlTableStudent = "CREATE TABLE IF NOT EXISTS librarydb.student (" +
-                    "STUD_ID INT NOT NULL AUTO_INCREMENT, " +
-                    "SCHOOL_ID INT (10) NOT NULL, " +
-                    "FNAME VARCHAR(64) NOT NULL, " +
-                    "LNAME VARCHAR(64) NOT NULL, " +
-                    "SECTION VARCHAR(64) NOT NULL, " +
-                    "EMAIL VARCHAR(64) NOT NULL, " +
-                    "PASSWORD VARCHAR(64) NOT NULL, " +
-                    "PENALTY DOUBLE NOT NULL, " +
-                    "PRIMARY KEY(STUD_ID))";
-            stmt.executeUpdate(sqlTableStudent);
-            System.out.println("Table 'student' created successfully");
-
-//            String sqlTableCollege = "CREATE TABLE IF NOT EXISTS librarydb.college (" +
-//                    "COLLEGE_ID INT NOT NULL AUTO_INCREMENT, " +
-//                    "NAME VARCHAR(64) NOT NULL, " +
-//                    "PRIMARY KEY(COLLEGE_ID))";
-//            stmt.executeUpdate(sqlTableCollege);
-//            System.out.println("Table 'college' created successfully");
-//
-//            String sqlTableProgram = "CREATE TABLE IF NOT EXISTS librarydb.program (" +
-//                    "PROG_ID INT NOT NULL AUTO_INCREMENT, " +
-//                    "COLL_ID INT NOT NULL, " +
-//                    "NAME VARCHAR(64) NOT NULL, " +
-//                    "PRIMARY KEY(PROG_ID))";
-//            stmt.executeUpdate(sqlTableProgram);
-//            System.out.println("Table 'program' created successfully");
-
-            insertSampleBook();
+            //insertSampleBook();
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, e.getMessage(), "Create Table Error", JOptionPane.ERROR_MESSAGE);
         } catch (Exception e) {

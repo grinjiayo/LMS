@@ -15,8 +15,18 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import Function.*;
+
+import javax.swing.*;
+import java.sql.*;
 
 public class LoginController {
+    Connection conn;
+    PreparedStatement pstmt;
+    ResultSet rs;
+
+    Function fnc = new Function();
+    dbFunction dbFunc = new dbFunction();
 
     private Stage stage;
     private Scene scene;
@@ -54,6 +64,9 @@ public class LoginController {
 
     @FXML
     private AnchorPane sidedoor;
+
+    @FXML
+    private TextField tf_staffid;
 
     @FXML
     public void togglePasswordVisibility() {
@@ -126,4 +139,42 @@ public class LoginController {
     public void switchStaff(ActionEvent event) throws Exception {
         slidePaneToLeft(); // Slide sidedoor to the left
     }
+
+    public void staffLoginEvt(ActionEvent event) throws Exception {
+        try {
+            conn = dbFunc.connectToDB();
+
+            String id = tf_staffid.getText();
+            String password = passwordtextfield.getText();
+
+            if(fnc.staffIDChecker(id)) {
+                int staffId = Integer.parseInt(id);
+                String sqlFindStaff = "SELECT * FROM staff WHERE staff_id = ? AND password = ?";
+                pstmt = conn.prepareStatement(sqlFindStaff);
+                pstmt.setInt(1, staffId);
+                pstmt.setString(2, password);
+                rs = pstmt.executeQuery();
+                if (rs.next()) {
+                    //INSERT THE STAFF MENU HERE
+                    System.out.println("Login successful");
+                } else {
+                    JOptionPane.showMessageDialog(null,
+                            "Wrong id or password",
+                            "Login Failed",
+                            JOptionPane.ERROR_MESSAGE);
+                }
+            }else {
+                JOptionPane.showMessageDialog(null,
+                        "Wrong id or password",
+                        "Login Failed",
+                        JOptionPane.ERROR_MESSAGE);
+            }
+
+        }catch(SQLException e){
+            System.out.println(e.getMessage());
+        }catch(Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
 }
