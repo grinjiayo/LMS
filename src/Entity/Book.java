@@ -41,11 +41,11 @@ public class Book {
         this.author = author;
     }
 
-    public String getGenre() {
+    public String getCategory() {
         return category;
     }
 
-    public void setGenre(String genre) {
+    public void setCategory(String genre) {
         this.category = genre;
     }
 

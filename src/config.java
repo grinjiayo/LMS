@@ -122,12 +122,14 @@ public class config {
             conn = DriverManager.getConnection(url, user, password);
             stmt = conn.createStatement();
 
-            String insertSql = "INSERT INTO book (TITLE, AUTHOR, ISBN, CATEGORY, QUANTITY, BORROWED) VALUES ('HarryPotter', 'JK Rowling', 01023840, 'SciFi', 12, 0)";
-            String insertSql2 = "INSERT INTO book (TITLE, AUTHOR, ISBN, CATEGORY, QUANTITY, BORROWED) VALUES ('King', 'AntMan', 01023840, 'Fiction', 13, 1)";
-            String insertSql3 = "INSERT INTO book (TITLE, AUTHOR, ISBN, CATEGORY, QUANTITY, BORROWED) VALUES ('Ashland', 'JK Rowling', 01023840, 'SciFi', 12, 0)";
+            String insertSql = "INSERT INTO book (TITLE, AUTHOR, ISBN, CATEGORY_ID, QUANTITY, BORROWED) VALUES ('HarryPotter', 'JK Rowling', 01023840, 2, 12, 2)";
+            String insertSql2 = "INSERT INTO book (TITLE, AUTHOR, ISBN, CATEGORY_ID, QUANTITY, BORROWED) VALUES ('King', 'AntMan', 01023840, 3, 13, 1)";
+            String insertSql3 = "INSERT INTO book (TITLE, AUTHOR, ISBN, CATEGORY_ID, QUANTITY, BORROWED) VALUES ('Ashland', 'JK Rowling', 01023840, 1, 12, 0)";
             stmt.executeUpdate(insertSql);
             stmt.executeUpdate(insertSql2);
             stmt.executeUpdate(insertSql3);
+
+            System.out.println("Books inserted successfully");
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage(), "INSERT BOOK ERROR", JOptionPane.ERROR_MESSAGE);
         } catch (Exception e) {

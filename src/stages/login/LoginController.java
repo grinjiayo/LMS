@@ -156,7 +156,10 @@ public class LoginController {
                 rs = pstmt.executeQuery();
                 if (rs.next()) {
                     //INSERT THE STAFF MENU HERE
-                    System.out.println("Login successful");
+                    JOptionPane.showMessageDialog(null,
+                            "Wrong id or password",
+                            "Login Failed",
+                            JOptionPane.ERROR_MESSAGE);
                 } else {
                     JOptionPane.showMessageDialog(null,
                             "Wrong id or password",

@@ -25,6 +25,7 @@ public class DoublyLinkList {
 
     public void insertNOrder(Book e) {  //The algo is like insertAfter but after the right alphabetical order
 
+        //The to be inserted book
         Link newLink = new Link(e);
         String title = newLink.getElement().getTitle();
 

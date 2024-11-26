@@ -44,11 +44,11 @@ public class Function {
     }
 
     public boolean staffIDChecker(String s) {
-        return true;
 //        int i = 0;
 //        if(s.charAt(i)=='S') {  //The staffID should start at 0
 //            f
 //        }else return false;
+        return true;
     }
 
     public boolean digitChecker(String s) {
