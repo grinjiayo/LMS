@@ -1,0 +1,139 @@
+.dbadmin{
+    -fx-background-color: #382819;
+    -fx-background-radius: 5px;
+}
+
+.iconCB{
+    -fx-background-color: #ffeac5;
+    -fx-background-radius: 30px;
+}
+
+.close{
+    -fx-background-color:transparent;
+    -fx-cursor: hand;
+}
+
+.close:hover{
+    -fx-background-color:#ff3535;-fx-cursor: hand;
+
+}
+.closeB{
+    -fx-background-color:transparent;
+    -fx-cursor: hand;
+}
+
+.closeB:hover{
+    -fx-cursor: hand;
+}
+
+.tag {
+    -fx-background-color: #2c2c2c;
+    -fx-shape: "M0,20 L30,0 L90,0 Q100,0 100,10 L100,30 Q100,40 90,40 L30,40 L0,20 Z";
+    -fx-background-radius: 10px;
+}
+
+.tag:hover {
+    -fx-background-color: #ff3535;
+    -fx-cursor: hand;
+}
+
+.userButton{
+    -fx-background-color:#6c4f31;
+    -fx-background-radius: 15px;
+}
+
+.userButton:hover{
+    -fx-background-color:#ffeac5;
+    -fx-cursor: hand;
+}
+
+.frame:hover{
+    -fx-background-color:#b3d7ce;
+    -fx-cursor: hand;
+}
+
+.userBut{
+    -fx-background-color:#603f26;
+    -fx-background-radius: 40px;
+}
+
+.userBut:hover{
+    -fx-background-color:#b23636;
+    -fx-border-radius: 15px;
+    -fx-cursor: hand;
+}
+
+
+
+.managebutton{
+    -fx-background-color:#6c4f31;
+    -fx-background-radius: 15px;
+}
+
+.managebutton:hover{
+    -fx-background-color:#382819;
+    -fx-border-color: #FFEAC5;
+    -fx-border-radius: 15px;
+    -fx-cursor: hand;
+}
+
+.logoutBtn{
+    -fx-background-color:#6c4f31;
+    -fx-background-radius: 15px;
+}
+
+.logoutBtn:hover{
+    -fx-background-color:#382819;
+    -fx-border-color: #FFEAC5;
+    -fx-border-radius: 15px;
+    -fx-cursor: hand;
+}
+
+.accountbutton{
+    -fx-background-color:#6c4f31;
+    -fx-text-fill: white;
+}
+
+.accountbutton:hover{
+    -fx-background-color:#382819;
+    -fx-border-color: #FFEAC5;
+    -fx-border-radius: 15px;
+    -fx-cursor: hand;
+}
+
+.inventorybutton{
+    -fx-background-color:#6c4f31;
+    -fx-background-radius: 15px;
+}
+
+.inventorybutton:hover{
+    -fx-background-color:#382819;
+    -fx-border-color: #FFEAC5;
+    -fx-border-radius: 15px;
+    -fx-cursor: hand;
+}
+
+
+.brrwbutton{
+    -fx-background-color:#6c4f31;
+    -fx-background-radius: 15px;
+}
+
+.brrwbutton:hover{
+    -fx-background-color:#382819;
+    -fx-border-color: #FFEAC5;
+    -fx-border-radius: 15px;
+    -fx-cursor: hand;
+}
+
+.rportsbutton{
+    -fx-background-color:#6c4f31;
+    -fx-background-radius: 15px;
+}
+
+.rportsbutton:hover{
+    -fx-background-color:#382819;
+    -fx-border-color: #FFEAC5;
+    -fx-border-radius: 15px;
+    -fx-cursor: hand;
+}

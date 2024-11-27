@@ -39,24 +39,20 @@ public class dbFunction {
     }
 
     //LINKED LIST FUNCTION
-
-    //Edit the category in which to retrieve the category_name from category table
     public DoublyLinkList retrieveBooksnOrder() {
         try {
             DoublyLinkList books = new DoublyLinkList();
 
             conn = connectToDB();
 
-            String sqlGetBook = "SELECT * FROM book INNER JOIN bkcategory ON book.category_id = bkcategory.ctgry_id";
-            pstmt = conn.prepareStatement(sqlGetBook);
-            rs = pstmt.executeQuery();
-
+            String sqlGetBook = "SELECT * FROM books";
+            rs = pstmt.executeQuery(sqlGetBook);
             while(rs.next()) {
                 //Retrieve all
                 String title = rs.getString("title");
                 String author = rs.getString("author");
                 int isbn = rs.getInt("isbn");
-                String category = rs.getString("ctgry_name");
+                String category = rs.getString("category_id");
                 int quantity = rs.getInt("quantity");
                 int borrowed = rs.getInt("borrowed");   //0 if available, signify the number of books borrowed
 

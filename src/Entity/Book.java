@@ -41,11 +41,11 @@ public class Book {
         this.author = author;
     }
 
-    public String getCategory() {
+    public String getGenre() {
         return category;
     }
 
-    public void setCategory(String genre) {
+    public void setGenre(String genre) {
         this.category = genre;
     }
 
@@ -71,5 +71,13 @@ public class Book {
 
     public void setBorrowed(int borrowed) {
         this.borrowed = borrowed;
+    }
+
+    public Object getCategory() {
+        return category;
+    }
+
+    public void setCategory(Object category) {
+        this.category = category.toString();
     }
 }

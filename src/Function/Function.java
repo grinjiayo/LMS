@@ -12,6 +12,14 @@ public class Function {
         else return false;
     }
 
+    public boolean staffIDChecker(String s) {
+        return true;
+//        int i = 0;
+//        if(s.charAt(i)=='S') {  //The staffID should start at 0
+//            f
+//        }else return false;
+    }
+
     public boolean digitChecker(String s) {
         for(int i = 0; i<s.length(); i++) {
             if(Character.isDigit(s.charAt(i))==false) {
