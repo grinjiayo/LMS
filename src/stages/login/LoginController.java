@@ -40,7 +40,7 @@ public class LoginController {
     @FXML private AnchorPane adminRoot, staffRoot, userRoot, loginRoot, setFrame;
     @FXML private Button passButton, staffLog, userLog, signInStudent, exit;
     @FXML private PasswordField passwordtextfield;
-    @FXML private TextField passwordTextVisible, tf_staffid;
+    @FXML private TextField passwordTextVisible, tf_staffid, tfAdminName;
     @FXML private ImageView passwordIcon;
 
 //EXIT=======================================================================================================================================================================================
@@ -141,6 +141,7 @@ public class LoginController {
         timeline.play();
     }
 
+    //STAFF LOGIN
     public void staffLoginEvt(ActionEvent event) throws Exception {
         try {
             conn = dbFunc.connectToDB();
@@ -181,12 +182,46 @@ public class LoginController {
         }
     }
 
+    //ADMIN LOGIN
+    public void adminLoginEvt(ActionEvent event) throws Exception {
+        try {
+            conn = dbFunc.connectToDB();
+
+            String username = tfAdminName.getText();
+            String password = passwordtextfield.getText();
+
+            System.out.println(username);
+            System.out.println(password);
+            //Use the fName and password for admin login
+            String sqlFindStaff = "SELECT * FROM staff WHERE fName = ? AND password = ? AND staff_id=1";
+            pstmt = conn.prepareStatement(sqlFindStaff);
+            pstmt.setString(1, username);
+            pstmt.setString(2, password);
+            rs = pstmt.executeQuery();
+            if (rs.next()) {
+                //INSERT THE STAFF MENU HERE
+                Parent root = FXMLLoader.load(getClass().getResource("/stages/admin/adminFXML/admin_dashboard.fxml"));
+                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                stage.setScene(new Scene(root));
+                stage.show();
+            } else {
+                JOptionPane.showMessageDialog(null,
+                        "Wrong id or password",
+                        "Login Failed",
+                        JOptionPane.ERROR_MESSAGE);
+            }
+
+        }catch(SQLException e){
+            System.out.println(e.getMessage());
+        }catch(Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
 //Login_USER=======================================================================================================================================================================================
 
     @FXML
     public void switchUser(ActionEvent event) throws IOException {
-
-
 
         Parent root = FXMLLoader.load(getClass().getResource("logFXML/userLogin_view.fxml"));
 

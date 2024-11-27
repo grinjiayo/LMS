@@ -4,9 +4,14 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import Function.*;
+
 public class config {
     Connection conn;
     Statement stmt;
+
+    dbFunction dbFunct = new dbFunction();
+    Function funct = new Function();
 
     public config() {
         createDB();
@@ -105,11 +110,27 @@ public class config {
             stmt.executeUpdate(sqlTableStaff);
             System.out.println("Table 'staff' created successfully");
 
-            //insertSampleBook();
+            insertAdmin();
+//            insertSampleBook();
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, e.getMessage(), "Create Table Error", JOptionPane.ERROR_MESSAGE);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.getMessage(), "Create Table Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    public void insertAdmin() { //Add admin account in staff
+        try {
+            conn = dbFunct.connectToDB();
+            stmt = conn.createStatement();
+
+            String sqlAddAdmin = "INSERT INTO staff(staff_id, fName, lName, email, password) VALUES (0, 'Admin123', 'N/A', 'N/A', 'admin@123')";
+            stmt.executeUpdate(sqlAddAdmin);
+            System.out.println("Admin successfully setup");
+        }catch(SQLException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage(), "INSERT BOOK ERROR", JOptionPane.ERROR_MESSAGE);
+        }catch(Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage(), "INSERT BOOK ERROR", JOptionPane.ERROR_MESSAGE);
         }
     }
 

@@ -35,7 +35,7 @@
             </Label>
             <Line endX="190.9998779296875" endY="1.52587890625E-5" layoutX="195.0" layoutY="212.0" startX="-145.2003173828125" startY="1.52587890625E-5" stroke="#818080" strokeWidth="2.0" />
             <Line endX="190.4998779296875" layoutX="195.0" layoutY="314.0" startX="-145.2003173828125" startY="1.52587890625E-5" stroke="#818080" strokeWidth="2.0" />
-            <Button fx:id="staffllogin" layoutX="137.0" layoutY="371.0" mnemonicParsing="false" prefHeight="72.0" prefWidth="163.0" styleClass="userBut" stylesheets="@../../../style_File/LoginSyle.css" text="LOGIN" textFill="WHITE">
+            <Button fx:id="staffllogin" layoutX="137.0" layoutY="371.0" mnemonicParsing="false" onAction="#adminLoginEvt" prefHeight="72.0" prefWidth="163.0" styleClass="userBut" stylesheets="@../../../style_File/LoginSyle.css" text="LOGIN" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="29.0" />
                </font>
@@ -54,7 +54,7 @@
                   </ImageView>
                </graphic>
             </Button>
-            <TextField layoutX="105.0" layoutY="164.0" prefHeight="40.0" prefWidth="257.0" promptText="Admin Id | username" styleClass="textFrame" stylesheets="@../../../style_File/LoginSyle.css">
+            <TextField fx:id="tfAdminName" layoutX="105.0" layoutY="164.0" prefHeight="40.0" prefWidth="257.0" promptText="Username" styleClass="textFrame" stylesheets="@../../../style_File/LoginSyle.css">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
