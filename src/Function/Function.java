@@ -1,54 +1,15 @@
 package Function;
 
+import javax.swing.*;
+import java.util.Date;
+
 public class Function {
-
-    public boolean emailChecker(String s) { //returns true if the email contains @ otherwise false
-        char[] charEmail = s.toCharArray();
-        int i = 0;
-        boolean isAt = false;
-
-        for(i=0; isAt==false; i++) {
-            System.out.println("ch-" + charEmail[i] + " ");
-
-            if (Character.isLetterOrDigit(charEmail[i]) == true) {       //Checks if it is letter or digit and stops if reached @
-                continue;
-            }else if(charEmail[i]=='@'){    //is End of emailName
-                isAt=true;
-            }else {
-                System.out.println("INVALID: Invalid email format");
-                return false;
-            }
-
-            //Reach the end of email without @
-            if(i==charEmail.length && charEmail[i]!='@') {
-                return false;
-            }
-        }
-
-        for(; i<charEmail.length; i++) {
-            System.out.println("ch2-" + charEmail[i] + " ");
-
-            if(Character.isLetterOrDigit(charEmail[i])==true || charEmail[i]=='.') {
-                continue;
-            }else {
-                System.out.println("INVALID: Incorrect email format");
-                return false;
-            }
-        }
-        return true;
-    }
+    Date dateNow = new Date();
+    int year = dateNow.getYear();
 
     public boolean passLengthChecker(String s) {
         if(s.length()>=8) return true;
         else return false;
-    }
-
-    public boolean staffIDChecker(String s) {
-//        int i = 0;
-//        if(s.charAt(i)=='S') {  //The staffID should start at 0
-//            f
-//        }else return false;
-        return true;
     }
 
     public boolean digitChecker(String s) {
@@ -58,5 +19,62 @@ public class Function {
             }
         }
         return true;
+    }
+
+    public int studentIDChecker(String s) { //Returns the int value of id otherwise 0;
+        int studentId = 0;
+        int idYrInt, idInt;
+        String idYrStr, idStr;
+        boolean validYr = false, validId = false;
+
+        //Checks the year
+        idYrStr = s.substring(0, 4);
+        System.out.println(idYrStr);
+        if(digitChecker(idYrStr)) {    //Valid year
+            idYrInt = Integer.parseInt(idYrStr);
+            if(idYrInt>1900 && idYrInt<year) {  //Year is greater than 1900 and less than this year/ VALID
+                validYr = true;
+            }else  {        //INVALID year
+                JOptionPane.showMessageDialog(null,
+                        "ID year should be between 1900-"+year,
+                        "Invalid ID format", 0);
+                validYr= false;
+            }
+        }else {     //Year is not all digits
+            validYr=false;
+            JOptionPane.showMessageDialog(null,
+                    "ID format should be (YYYY-NNNNN)",
+                    "Invalid ID format", 0);
+        }
+
+        if(validYr) {   //Checks the (-id)
+            if(s.charAt(4)=='-') {  //Valid apostrophe
+                idStr = s.substring(5);
+                System.out.println(idStr);
+                if(digitChecker(idStr)) {
+                    idInt = Integer.parseInt(idStr);
+
+                    //Returns the ID cause valid
+                    String idString = idYrStr + idStr;
+                    studentId = Integer.parseInt(idString);
+
+                    validId = true;
+                }
+            }else { //Wrong apostrophe
+                validId = false;
+                JOptionPane.showMessageDialog(null,
+                        "ID format should be (YYYY-NNNNN)",
+                        "Invalid ID format", 0);
+            }
+        }
+
+        return studentId;
+    }
+
+    public boolean staffIDChecker(String s) {
+        return true;
+//        int i = 0;
+//        if(s.charAt(i)=='S') {  //The staffID should start at 0
+//        }else return false;
     }
 }
