@@ -37,36 +37,11 @@ public class LoginController {
 
 
     //@FXML=======================================================================================================================================================================================
-
-    @FXML
-    private AnchorPane adminRoot;
-    @FXML
-    private AnchorPane staffRoot;
-    @FXML
-    private AnchorPane userRoot;
-    @FXML
-    private AnchorPane loginRoot;
-    @FXML
-    private AnchorPane setFrame;
-
-    @FXML
-    private Button passButton;
-    @FXML
-    private Button staffLog;
-    @FXML
-    private Button userLog;
-    @FXML
-    private Button exit;
-
-    @FXML
-    private PasswordField passwordtextfield;
-    @FXML
-    private TextField passwordTextVisible;
-    @FXML
-    private TextField tf_staffid;
-
-    @FXML
-    private ImageView passwordIcon;
+    @FXML private AnchorPane adminRoot, staffRoot, userRoot, loginRoot, setFrame;
+    @FXML private Button passButton, staffLog, userLog, signInStudent, exit;
+    @FXML private PasswordField passwordtextfield;
+    @FXML private TextField passwordTextVisible, tf_staffid;
+    @FXML private ImageView passwordIcon;
 
 //EXIT=======================================================================================================================================================================================
 
@@ -235,6 +210,38 @@ public class LoginController {
         timeline.setOnFinished(t -> {
             Node container = loginRoot.getChildren().get(0); // Get the old scene
             loginRoot.getChildren().remove(container);      // Remove the old scene
+        });
+
+        // Play the animation
+        timeline.play();
+
+    }public void switchSignInUser(ActionEvent event) throws IOException {
+        // Load the new FXML file for the student sign-in view
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("logFXML/signInStudents_view.fxml"));
+        Parent root = loader.load();
+
+        // Get the current root node (parent container)
+        AnchorPane loginRoot = (AnchorPane) ((Node) event.getSource()).getScene().getRoot();
+
+        // Set initial position of the new view off-screen to the right
+        double sceneWidth = loginRoot.getWidth();
+        root.translateXProperty().set(sceneWidth);
+
+        // Add the new view to the current root's children
+        loginRoot.getChildren().add(root);
+
+        // Create the animation timeline for sliding in the new view
+        Timeline timeline = new Timeline();
+
+        // KeyFrame for sliding the new scene into view
+        KeyValue kvIn = new KeyValue(root.translateXProperty(), 0, Interpolator.EASE_BOTH);
+        KeyFrame kfIn = new KeyFrame(Duration.seconds(0.6), kvIn);
+        timeline.getKeyFrames().add(kfIn);
+
+        // Remove the old view when the animation completes
+        timeline.setOnFinished(t -> {
+            Node oldView = loginRoot.getChildren().get(0); // The old view is always at index 0
+            loginRoot.getChildren().remove(oldView);      // Remove it from the container
         });
 
         // Play the animation

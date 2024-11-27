@@ -40,7 +40,7 @@
                   <Image url="@../../../icons/passicon.png" />
                </image>
             </ImageView>
-            <Button layoutX="231.0" layoutY="323.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="100.0" styleClass="closeB" stylesheets="@../../../style_File/LoginSyle.css" text="Sign In " textFill="#6517ed">
+            <Button fx:id="signInStudent" layoutX="231.0" layoutY="323.0" mnemonicParsing="false" onAction="#switchSignInUser" prefHeight="28.0" prefWidth="100.0" styleClass="closeB" stylesheets="@../../../style_File/LoginSyle.css" text="Sign In " textFill="#6517ed">
                <graphic>
                   <ImageView fitHeight="20.0" fitWidth="29.0" pickOnBounds="true" preserveRatio="true">
                      <image>
