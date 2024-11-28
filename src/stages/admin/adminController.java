@@ -49,8 +49,10 @@ public class adminController {
         System.exit(0); // Slide sidedoor to the left
     }
 
+    public void logout() {
 
+    }
 
-
-
+//
+//
 }

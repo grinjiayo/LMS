@@ -39,7 +39,7 @@
                         </Group>
                         <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="738.0" layoutY="15.0">
                            <image>
-                              <Image url="@/icons/asuicon.png" />
+                              <Image url="@/icons/admin icon.png"/>
                            </image>
                         </ImageView>
                      </children>

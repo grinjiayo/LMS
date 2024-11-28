@@ -149,6 +149,8 @@ public class LoginController {
             String id = tf_staffid.getText();
             String password = passwordtextfield.getText();
 
+            System.out.println(id);
+            System.out.println(password);
             if(fnc.staffIDChecker(id)) {
                 int staffId = Integer.parseInt(id);
                 String sqlFindStaff = "SELECT * FROM staff WHERE staff_id = ? AND password = ?";
