@@ -1,0 +1,33 @@
+.transparent {
+    -fx-background-color: rgba(0,0,0,0);
+}
+
+.round-layout {
+    -fx-border-radius: 50;
+    -fx-border-color: #070707;
+}
+
+.menuSelected {
+    -fx-background-color: #603f26;
+}
+
+.mouse-moved: hover {
+    -fx-border-width: 2px;
+    -fx-border-color: #603f26;
+}
+
+.bgcolor-brown {
+    -fx-background-color: #603f26;
+}
+
+.bgcolor-darkbrown {
+    -fx-background-color: #37281A;
+}
+
+.bgcolor-lightPink {
+    -fx-background-color: #ffeac5;
+}
+
+.bgcolor-white {
+    -fx-background-color: white;
+}

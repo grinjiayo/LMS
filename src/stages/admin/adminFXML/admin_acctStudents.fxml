@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane blendMode="DARKEN" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="675.0" prefWidth="970.0" stylesheets="@../../../style_File/Dashboard.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="stages.admin.dashboardController">
+<BorderPane blendMode="DARKEN" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="675.0" prefWidth="970.0" stylesheets="@../../../style_File/Dashboard.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="stages.admin.studentAccountController">
    <top>
       <HBox prefHeight="68.0" prefWidth="970.0" styleClass="bgcolor-lightPink" stylesheets="@../../../style_File/Dashboard.css" BorderPane.alignment="CENTER">
          <children>
@@ -57,9 +57,9 @@
       <VBox prefHeight="607.0" prefWidth="197.0" styleClass="bgcolor-brown" stylesheets="@../../../style_File/Dashboard.css" BorderPane.alignment="CENTER">
          <children>
             <VBox prefHeight="22.0" prefWidth="198.0" />
-            <VBox prefHeight="300.0" prefWidth="198.0">
+            <VBox prefHeight="360.0" prefWidth="198.0">
                <children>
-                  <HBox fx:id="dashboardBtn" alignment="CENTER" prefHeight="38.0" prefWidth="198.0" styleClass="bgcolor-darkbrown" stylesheets="@../../../style_File/Dashboard.css">
+                  <HBox fx:id="dashboardBtn" alignment="CENTER" onMouseClicked="#goDashboard" prefHeight="38.0" prefWidth="198.0" stylesheets="@../../../style_File/Dashboard.css">
                      <children>
                         <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -131,7 +131,7 @@
                         </Label>
                      </children>
                   </HBox>
-                  <HBox fx:id="acctBtn" alignment="CENTER_LEFT" onMouseClicked="#goAccountStaff" prefHeight="38.0" prefWidth="198.0">
+                  <HBox alignment="CENTER_LEFT" prefHeight="38.0" prefWidth="198.0">
                      <children>
                         <HBox prefHeight="38.0" prefWidth="19.0" />
                         <ImageView fitHeight="22.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true">
@@ -145,11 +145,36 @@
                               <Font name="System Bold" size="14.0" />
                            </font>
                         </Label>
-                        <ImageView fitHeight="13.0" fitWidth="10.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="13.0" fitWidth="10.0" pickOnBounds="true" preserveRatio="true" rotate="30.0">
                            <image>
                               <Image url="@../../../icons/triangleIcon.png" />
                            </image>
                         </ImageView>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" prefHeight="31.0" prefWidth="198.0">
+                     <children>
+                        <HBox prefHeight="31.0" prefWidth="51.0" />
+                        <HBox prefHeight="31.0" prefWidth="148.0">
+                           <children>
+                              <Label fx:id="acctStaffBtn" alignment="CENTER" onMouseClicked="#goAccountStaff" prefHeight="31.0" prefWidth="148.0" styleClass="bgcolor-darkbrown" stylesheets="@../../../style_File/Dashboard.css" text="Staff" textFill="WHITE">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </HBox>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" prefHeight="31.0" prefWidth="198.0">
+                     <children>
+                        <HBox prefHeight="31.0" prefWidth="51.0" />
+                        <HBox prefHeight="31.0" prefWidth="3.0" styleClass="bgcolor-white" stylesheets="@../../../style_File/Dashboard.css" />
+                        <Label fx:id="acctStudentBtn" alignment="CENTER" prefHeight="31.0" prefWidth="144.0" styleClass="bgcolor-darkbrown" stylesheets="@../../../style_File/Dashboard.css" text="Student" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Label>
                      </children>
                   </HBox>
                   <HBox fx:id="reportsBtn" alignment="CENTER_LEFT" onMouseClicked="#goReports" prefHeight="38.0" prefWidth="198.0">
@@ -170,7 +195,7 @@
                   </HBox>
                </children>
             </VBox>
-            <HBox prefHeight="226.0" prefWidth="198.0" />
+            <HBox prefHeight="166.0" prefWidth="198.0" />
             <HBox fx:id="logoutBtn" alignment="CENTER" onMouseClicked="#goLogout" prefHeight="36.0" prefWidth="198.0">
                <children>
                   <ImageView fitHeight="20.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">

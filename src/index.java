@@ -45,7 +45,7 @@ public class index extends Application {
 
         // Configure the stage
         stage.setScene(scene);
-        stage.initStyle(StageStyle.TRANSPARENT);
+        stage.setResizable(false);
         stage.show();
     }
 

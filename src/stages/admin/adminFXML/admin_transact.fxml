@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane blendMode="DARKEN" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="675.0" prefWidth="970.0" stylesheets="@../../../style_File/Dashboard.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="stages.admin.dashboardController">
+<BorderPane blendMode="DARKEN" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="675.0" prefWidth="970.0" stylesheets="@../../../style_File/Dashboard.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="stages.admin.bkTransactController">
    <top>
       <HBox prefHeight="68.0" prefWidth="970.0" styleClass="bgcolor-lightPink" stylesheets="@../../../style_File/Dashboard.css" BorderPane.alignment="CENTER">
          <children>
@@ -38,7 +38,7 @@
             <HBox alignment="CENTER_RIGHT" prefHeight="68.0" prefWidth="226.0">
                <children>
                   <Label />
-                  <ImageView fitHeight="46.0" fitWidth="47.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="adminProfileBtn" fitHeight="46.0" fitWidth="47.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../../icons/userIcon.png" />
                      </image>
@@ -59,7 +59,7 @@
             <VBox prefHeight="22.0" prefWidth="198.0" />
             <VBox prefHeight="300.0" prefWidth="198.0">
                <children>
-                  <HBox fx:id="dashboardBtn" alignment="CENTER" prefHeight="38.0" prefWidth="198.0" styleClass="bgcolor-darkbrown" stylesheets="@../../../style_File/Dashboard.css">
+                  <HBox fx:id="dashboardBtn" alignment="CENTER" onMouseClicked="#goDashboard" prefHeight="38.0" prefWidth="198.0" stylesheets="@../../../style_File/Dashboard.css">
                      <children>
                         <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -83,7 +83,7 @@
                         </Label>
                      </children>
                   </VBox>
-                  <HBox fx:id="bkManageBtn" alignment="CENTER_LEFT" onMouseClicked="#goManageBooks" prefHeight="38.0" prefWidth="198.0">
+                  <HBox fx:id="bkManageBtn" alignment="CENTER_LEFT" onMouseClicked="#goManageBooks" prefHeight="38.0" prefWidth="198.0" stylesheets="@../../../style_File/Dashboard.css">
                      <children>
                         <HBox prefHeight="38.0" prefWidth="21.0" />
                         <ImageView fitHeight="20.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
@@ -115,7 +115,7 @@
                         </Label>
                      </children>
                   </HBox>
-                  <HBox fx:id="borrowTransBtn" alignment="CENTER_LEFT" onMouseClicked="#goBorrowTransact" prefHeight="38.0" prefWidth="198.0">
+                  <HBox fx:id="borrowTransBtn" alignment="CENTER_LEFT" prefHeight="38.0" prefWidth="198.0" styleClass="bgcolor-darkbrown" stylesheets="@../../../style_File/Dashboard.css">
                      <children>
                         <HBox prefHeight="38.0" prefWidth="19.0" />
                         <ImageView fitHeight="22.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true">

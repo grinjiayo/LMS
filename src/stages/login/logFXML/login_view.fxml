@@ -22,7 +22,7 @@
                   </Label>
                   <AnchorPane layoutX="290.0" layoutY="329.0" prefHeight="159.0" prefWidth="391.0">
                       <children>
-                          <Button fx:id="userLog" layoutX="84.0" layoutY="22.0" mnemonicParsing="false" onAction="#switchUser" prefHeight="116.0" prefWidth="296.0" styleClass="userButton" stylesheets="@../../../style_File/LoginSyle.css" text="       Students">
+                          <Button fx:id="userLog" layoutX="84.0" layoutY="22.0" mnemonicParsing="false" onAction="#switchUser" prefHeight="110.0" prefWidth="303.0" styleClass="userButton" stylesheets="@../../../style_File/LoginSyle.css" text="       Students">
                               <font>
                                   <Font name="Agency FB Bold" size="51.0" />
                               </font>
@@ -35,7 +35,7 @@
                               <children>
                                   <ImageView fitHeight="142.0" fitWidth="142.0" layoutX="13.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true">
                                       <image>
-                                          <Image url="@../../../icons/usericon.png" />
+                                          <Image url="@/icons/studentIcon.png" />
                                       </image>
                                   </ImageView>
                               </children>
@@ -44,7 +44,7 @@
                   </AnchorPane>
                   <AnchorPane layoutX="283.0" layoutY="126.0" prefHeight="181.0" prefWidth="402.0" stylesheets="@../../../style_File/LoginSyle.css">
                       <children>
-                          <Button fx:id="staffLog" layoutX="83.0" layoutY="29.0" mnemonicParsing="false" onAction="#switchStaff" prefHeight="109.0" prefWidth="303.0" styleClass="userButton" stylesheets="@../../../style_File/LoginSyle.css" text="       Staff">
+                          <Button fx:id="staffLog" layoutX="83.0" layoutY="29.0" mnemonicParsing="false" onAction="#switchStaff" prefHeight="110.0" prefWidth="303.0" styleClass="userButton" stylesheets="@../../../style_File/LoginSyle.css" text="       Staff">
                               <font>
                                   <Font name="Agency FB Bold" size="51.0" />
                               </font>
