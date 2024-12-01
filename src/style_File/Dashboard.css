@@ -12,8 +12,22 @@
 }
 
 .mouse-moved: hover {
-    -fx-border-width: 2px;
-    -fx-border-color: #603f26;
+    -fx-border-width: 0px 0px 0px 3px;
+    -fx-border-color: #ffffff;
+}
+
+.border-right {
+    -fx-border-width: 0px 0.5px 0px 0px;
+    -fx-border-color: #000000;
+}
+
+.border-left {
+    -fx-border-width: 0px 0px 0px 1px;
+    -fx-border-color: #000000;
+}
+
+.mouse-highlight: hover {
+    -fx-background-color: #603200;
 }
 
 .bgcolor-brown {
@@ -30,4 +44,8 @@
 
 .bgcolor-white {
     -fx-background-color: white;
+}
+
+.bgcolor-midBrown {
+    -fx-background-color: #623C20;
 }

@@ -19,6 +19,7 @@ public class config {
 
     public void createDB() {
         try {
+
             //Establish connection
             String url = "jdbc:mysql://localhost:3306/";
             String user = "root";
@@ -77,6 +78,7 @@ public class config {
 
             String sqlTableStudent = "CREATE TABLE IF NOT EXISTS librarydb.student (" +
                     "stud_id INT NOT NULL, " +
+                    "school_id INT NOT NULL, " +
                     "fName VARCHAR(64) NOT NULL, " +
                     "lName VARCHAR(64) NOT NULL, " +
                     "section VARCHAR(64) NOT NULL, " +
