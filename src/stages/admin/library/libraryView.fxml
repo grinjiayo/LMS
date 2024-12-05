@@ -1,12 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
 <VBox maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="552.0" prefWidth="505.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="stages.admin.library.libraryController">
    <children>
-      <HBox prefHeight="54.0" prefWidth="506.0" styleClass="bgcolor-darkbrown" stylesheets="@../../../style_File/Dashboard.css" />
+      <HBox prefHeight="54.0" prefWidth="506.0" styleClass="bgcolor-darkbrown" stylesheets="@../../../style_File/Dashboard.css">
+         <children>
+            <TabPane prefHeight="54.0" prefWidth="546.0" side="LEFT">
+              <tabs>
+                <Tab closable="false" text="Untitled Tab 1" />
+              </tabs>
+            </TabPane>
+         </children></HBox>
       <VBox prefHeight="498.0" prefWidth="505.0" spacing="20.0" styleClass="bgcolor-brown" stylesheets="@../../../style_File/Dashboard.css">
          <children>
             <HBox fx:id="bookLayout" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="125.0" prefWidth="490.0" styleClass="bgcolor-darkbrown" stylesheets="@../../../style_File/Dashboard.css" />

@@ -45,7 +45,7 @@
                   </Label>
                   <ImageView fx:id="adminProfileBtn" fitHeight="46.0" fitWidth="47.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../../icons/userIcon.png" />
+                        <Image url="@../../../icons/usericon.png" />
                      </image>
                   </ImageView>
                </children>
@@ -192,6 +192,6 @@
       <VBox prefHeight="607.0" prefWidth="268.0" styleClass="bgcolor-white" stylesheets="@../../../style_File/Dashboard.css" BorderPane.alignment="CENTER" />
    </right>
    <center>
-      <VBox prefHeight="607.0" prefWidth="505.0" styleClass="bgcolor-darkbrown" stylesheets="@../../../style_File/Dashboard.css" BorderPane.alignment="CENTER" />
+      <VBox fx:id="libraryBox" prefHeight="607.0" prefWidth="505.0" styleClass="bgcolor-darkbrown" stylesheets="@../../../style_File/Dashboard.css" BorderPane.alignment="CENTER" />
    </center>
 </BorderPane>

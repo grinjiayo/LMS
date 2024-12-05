@@ -149,6 +149,14 @@ public class LoginController {
             String id = tf_staffid.getText();
             String password = passwordtextfield.getText();
 
+            //TO_BE_ERASED
+            if(id.equalsIgnoreCase("Staff1") && password.equalsIgnoreCase("staff123")) {
+                Parent root = FXMLLoader.load(getClass().getResource("/stages/staff/staffFXML/staff_dashboard.fxml"));
+                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                stage.setScene(new Scene(root));
+                stage.show();
+            }
+
             System.out.println(id);
             System.out.println(password);
             if(fnc.staffIDChecker(id)) {
@@ -191,6 +199,14 @@ public class LoginController {
 
             String username = tfAdminName.getText();
             String password = passwordtextfield.getText();
+
+            //TO_BE_ERASED
+            if(username.equalsIgnoreCase("Admin1") && password.equalsIgnoreCase("admin123")) {
+                Parent root = FXMLLoader.load(getClass().getResource("/stages/admin/adminFXML/admin_dashboard.fxml"));
+                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                stage.setScene(new Scene(root));
+                stage.show();
+            }
 
             System.out.println(username);
             System.out.println(password);
