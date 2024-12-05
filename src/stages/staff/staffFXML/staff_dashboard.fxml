@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane blendMode="DARKEN" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="675.0" prefWidth="970.0" stylesheets="@../../../style_File/Dashboard.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="stages.admin.inventoryController">
+<BorderPane blendMode="DARKEN" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="675.0" prefWidth="970.0" stylesheets="@../../../style_File/Dashboard.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="stages.staff.dashboardController">
    <top>
       <HBox prefHeight="68.0" prefWidth="970.0" styleClass="bgcolor-lightPink" stylesheets="@../../../style_File/Dashboard.css" BorderPane.alignment="CENTER">
          <children>
@@ -59,7 +59,7 @@
             <VBox prefHeight="22.0" prefWidth="198.0" />
             <VBox prefHeight="300.0" prefWidth="198.0">
                <children>
-                  <HBox fx:id="dashboardBtn" alignment="CENTER" onMouseClicked="#goDashboard" prefHeight="38.0" prefWidth="198.0" styleClass="bgcolor-darkbrown" stylesheets="@../../../style_File/Dashboard.css">
+                  <HBox fx:id="dashboardBtn" alignment="CENTER" prefHeight="38.0" prefWidth="198.0" styleClass="bgcolor-darkbrown" stylesheets="@../../../style_File/Dashboard.css">
                      <children>
                         <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -99,7 +99,7 @@
                         </Label>
                      </children>
                   </HBox>
-                  <HBox fx:id="inventoryBtn" alignment="CENTER_LEFT" prefHeight="38.0" prefWidth="198.0" styleClass="mouse-moved" stylesheets="@../../../style_File/Dashboard.css">
+                  <HBox fx:id="inventoryBtn" alignment="CENTER_LEFT" onMouseClicked="#goInventory" prefHeight="38.0" prefWidth="198.0" styleClass="mouse-moved" stylesheets="@../../../style_File/Dashboard.css">
                      <children>
                         <HBox prefHeight="38.0" prefWidth="19.0" />
                         <ImageView fitHeight="20.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
