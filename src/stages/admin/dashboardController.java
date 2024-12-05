@@ -82,7 +82,8 @@ public class dashboardController {
         Parent root = FXMLLoader.load(getClass().getResource("/stages/admin/adminFXML/admin_bkManage.fxml"));
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setScene(new Scene(root));
-        stage.show();    }
+        stage.show();
+    }
 
     @FXML
     void goReports(MouseEvent event) throws IOException {

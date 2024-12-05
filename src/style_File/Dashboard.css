@@ -49,3 +49,13 @@
 .bgcolor-midBrown {
     -fx-background-color: #623C20;
 }
+
+.bookImg-Scale {
+    -fx-width: 35px;
+    -fx-height: 126px;
+}
+
+.shadow {
+    -fx-effect: dropShadow(three-pass-box, rgba(0,0,0,0), 10, 0, 0, 10);
+}
+

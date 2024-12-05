@@ -1,14 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="stages.admin.library.libraryController"
-            prefHeight="400.0" prefWidth="600.0">
-
-</AnchorPane>
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="552.0" prefWidth="505.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="stages.admin.library.libraryController">
+   <children>
+      <HBox prefHeight="54.0" prefWidth="506.0" styleClass="bgcolor-darkbrown" stylesheets="@../../../style_File/Dashboard.css" />
+      <VBox prefHeight="498.0" prefWidth="505.0" spacing="20.0" styleClass="bgcolor-brown" stylesheets="@../../../style_File/Dashboard.css">
+         <children>
+            <HBox fx:id="bookLayout" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="125.0" prefWidth="490.0" styleClass="bgcolor-darkbrown" stylesheets="@../../../style_File/Dashboard.css" />
+            <HBox fx:id="bookLayout2" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="125.0" prefWidth="490.0" styleClass="bgcolor-darkbrown" stylesheets="@../../../style_File/Dashboard.css" />
+            <HBox fx:id="bookLayout3" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="125.0" prefWidth="490.0" styleClass="bgcolor-darkbrown" stylesheets="@../../../style_File/Dashboard.css" />
+         </children>
+         <padding>
+            <Insets left="7.0" top="55.0" />
+         </padding>
+      </VBox>
+   </children>
+</VBox>

@@ -2,6 +2,7 @@ package stages.admin;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -9,12 +10,18 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
-public class bkManageController {
+public class bkManageController implements Initializable {
+
+    @FXML
+    private VBox libraryBox;
 
     @FXML
     private HBox acctBtn;
@@ -36,6 +43,22 @@ public class bkManageController {
 
     @FXML
     private HBox reportsBtn;
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            fxmlLoader.setLocation(bkManageController.class.getResource("/stages/admin/library/libraryView.fxml"));
+
+            VBox libraryView = fxmlLoader.load();
+            libraryBox.getChildren().add(libraryView);
+        }catch(Exception e) {
+            Alert error = new Alert(Alert.AlertType.ERROR, e.getMessage(), ButtonType.OK);
+            error.showAndWait();
+            e.printStackTrace();
+        }
+    }
+
 
     @FXML
     private void goDashboard(MouseEvent event) throws IOException {

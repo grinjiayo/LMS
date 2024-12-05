@@ -51,12 +51,13 @@ public class dbFunction {
                 //Retrieve all
                 String title = rs.getString("title");
                 String author = rs.getString("author");
+                String imageSrc = rs.getString("imageSrc");
                 int isbn = rs.getInt("isbn");
                 String category = rs.getString("category_id");
                 int quantity = rs.getInt("quantity");
                 int borrowed = rs.getInt("borrowed");   //0 if available, signify the number of books borrowed
 
-                Book nBook = new Book(title, author, category, isbn, quantity, borrowed);
+                Book nBook = new Book(title, author, category, imageSrc, isbn, quantity, borrowed);
 
                 //Insert books in order
                 books.insertNOrder(nBook);

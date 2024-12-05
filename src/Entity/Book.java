@@ -4,24 +4,26 @@ public class Book {
     private String title;
     private String author;
     private String category;
+    private String imageSrc;
     private int ISBN;
     private int quantity;
     private int borrowed;
 
-    public Book(String title, String author, String category, int isbn, int qty, int borrowed) {
+    public Book(String title, String author, String category, String imageSrc, int isbn, int qty, int borrowed) {
         this.title = title;
         this.author = author;
         this.category = category;
         this.ISBN = isbn;
         this.quantity = qty;
         this.borrowed = borrowed;
+        this.imageSrc = imageSrc;
     }
 
-    public Book(String title, String author, int quantity) {
+    public Book(String title, String author, String imageSrc, int quantity) {
         this.title = title;
         this.author = author;
         this.quantity = quantity;
-        int ISBN = 0;
+        this.imageSrc = imageSrc;
         String genre = null;
     }
 
@@ -79,5 +81,13 @@ public class Book {
 
     public void setCategory(Object category) {
         this.category = category.toString();
+    }
+
+    public String getImageSrc() {
+        return imageSrc;
+    }
+
+    public void setImageSrc(String imageSrc) {
+        this.imageSrc = imageSrc;
     }
 }
