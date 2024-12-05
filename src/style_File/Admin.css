@@ -65,75 +65,59 @@
 
 
 
-.managebutton{
-    -fx-background-color:#6c4f31;
-    -fx-background-radius: 15px;
+.bkManageBtn {
+    -fx-background-color: #603F26;
 }
 
-.managebutton:hover{
-    -fx-background-color:#382819;
-    -fx-border-color: #FFEAC5;
-    -fx-border-radius: 15px;
+.bkManageBtn:hover {
+    -fx-background-color: #382819;
     -fx-cursor: hand;
 }
 
-.logoutBtn{
-    -fx-background-color:#6c4f31;
-    -fx-background-radius: 15px;
+
+.acctBtn{
+    -fx-background-color:#603F26;
 }
 
-.logoutBtn:hover{
+.acctBtn:hover{
     -fx-background-color:#382819;
-    -fx-border-color: #FFEAC5;
-    -fx-border-radius: 15px;
     -fx-cursor: hand;
 }
 
-.accountbutton{
-    -fx-background-color:#6c4f31;
-    -fx-text-fill: white;
+.inventoryBtn{
+    -fx-background-color:#603F26;
 }
 
-.accountbutton:hover{
+.inventoryBtn:hover{
     -fx-background-color:#382819;
-    -fx-border-color: #FFEAC5;
-    -fx-border-radius: 15px;
-    -fx-cursor: hand;
-}
-
-.inventorybutton{
-    -fx-background-color:#6c4f31;
-    -fx-background-radius: 15px;
-}
-
-.inventorybutton:hover{
-    -fx-background-color:#382819;
-    -fx-border-color: #FFEAC5;
-    -fx-border-radius: 15px;
     -fx-cursor: hand;
 }
 
 
 .brrwbutton{
-    -fx-background-color:#6c4f31;
-    -fx-background-radius: 15px;
+    -fx-background-color:#603F26;
 }
 
 .brrwbutton:hover{
     -fx-background-color:#382819;
-    -fx-border-color: #FFEAC5;
-    -fx-border-radius: 15px;
     -fx-cursor: hand;
 }
 
-.rportsbutton{
-    -fx-background-color:#6c4f31;
-    -fx-background-radius: 15px;
+.reportsBtn{
+    -fx-background-color:#603F26;
 }
 
-.rportsbutton:hover{
+.reportsBtn:hover{
     -fx-background-color:#382819;
-    -fx-border-color: #FFEAC5;
-    -fx-border-radius: 15px;
+    -fx-cursor: hand;
+}
+
+
+.logoutBtn{
+    -fx-background-color:#603F26;
+}
+
+.logoutBtn:hover{
+    -fx-background-color:#382819;
     -fx-cursor: hand;
 }

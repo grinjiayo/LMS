@@ -1,4 +1,4 @@
-package stages.admin;
+package stages.staff;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -10,7 +10,6 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 
 import java.io.IOException;
 
@@ -65,7 +64,8 @@ public class dashboardController {
     void goLogout(MouseEvent event) throws IOException {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Logout");
-        alert.setHeaderText("You're about to logout! Do you want to continue?");
+        alert.setHeaderText("You're about to logout!");
+        alert.setContentText("Do you want to continue?");
 
         if(alert.showAndWait().get() == ButtonType.OK) {
             System.out.println("You successfully logged out!");
@@ -81,8 +81,7 @@ public class dashboardController {
         Parent root = FXMLLoader.load(getClass().getResource("/stages/admin/adminFXML/admin_bkManage.fxml"));
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setScene(new Scene(root));
-        stage.show();
-    }
+        stage.show();    }
 
     @FXML
     void goReports(MouseEvent event) throws IOException {
@@ -91,8 +90,5 @@ public class dashboardController {
         stage.setScene(new Scene(root));
         stage.show();
     }
-
-
-
 
 }

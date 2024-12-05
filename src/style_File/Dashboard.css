@@ -2,6 +2,12 @@
     -fx-background-color: rgba(0,0,0,0);
 }
 
+
+.bkManageBtn:hover {
+    -fx-background-color: #382819;
+    -fx-cursor: hand;
+}
+
 .round-layout {
     -fx-border-radius: 50;
     -fx-border-color: #070707;
@@ -11,25 +17,13 @@
     -fx-background-color: #603f26;
 }
 
-.mouse-moved: hover {
-    -fx-border-width: 0px 0px 0px 3px;
-    -fx-border-color: #ffffff;
+.mouse-moved:hover {
+    -fx-background-color: #502d0d;
 }
-
-.border-right {
-    -fx-border-width: 0px 0.5px 0px 0px;
-    -fx-border-color: #000000;
+.logoutm-m:hover {
+    -fx-background-radius: 60px;
+    -fx-background-color: #502d0d;
 }
-
-.border-left {
-    -fx-border-width: 0px 0px 0px 1px;
-    -fx-border-color: #000000;
-}
-
-.mouse-highlight: hover {
-    -fx-background-color: #603200;
-}
-
 .bgcolor-brown {
     -fx-background-color: #603f26;
 }
@@ -45,17 +39,3 @@
 .bgcolor-white {
     -fx-background-color: white;
 }
-
-.bgcolor-midBrown {
-    -fx-background-color: #623C20;
-}
-
-.bookImg-Scale {
-    -fx-width: 35px;
-    -fx-height: 126px;
-}
-
-.shadow {
-    -fx-effect: dropShadow(three-pass-box, rgba(0,0,0,0), 10, 0, 0, 10);
-}
-
