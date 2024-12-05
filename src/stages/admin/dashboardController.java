@@ -65,8 +65,7 @@ public class dashboardController {
     void goLogout(MouseEvent event) throws IOException {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Logout");
-        alert.setHeaderText("You're about to logout!");
-        alert.setContentText("Do you want to continue?");
+        alert.setHeaderText("You're about to logout! Do you want to continue?");
 
         if(alert.showAndWait().get() == ButtonType.OK) {
             System.out.println("You successfully logged out!");

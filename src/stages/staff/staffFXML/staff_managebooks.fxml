@@ -59,7 +59,7 @@
             <VBox prefHeight="22.0" prefWidth="198.0" />
             <VBox prefHeight="300.0" prefWidth="198.0">
                <children>
-                  <HBox fx:id="dashboardBtn" alignment="CENTER" onMouseClicked="#goDashboard" prefHeight="38.0" prefWidth="198.0" styleClass="bgcolor-darkbrown" stylesheets="@../../../style_File/Dashboard.css">
+                  <HBox fx:id="dashboardBtn" alignment="CENTER" onMouseClicked="#goDashboard" prefHeight="38.0" prefWidth="198.0" styleClass="mouse-moved" stylesheets="@../../../style_File/Dashboard.css">
                      <children>
                         <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -83,7 +83,7 @@
                         </Label>
                      </children>
                   </VBox>
-                  <HBox fx:id="bkManageBtn" alignment="CENTER_LEFT" onMouseClicked="#goManageBooks" prefHeight="38.0" prefWidth="198.0" styleClass="mouse-moved" stylesheets="@../../../style_File/Dashboard.css">
+                  <HBox fx:id="bkManageBtn" alignment="CENTER_LEFT" onMouseClicked="#goManageBooks" prefHeight="38.0" prefWidth="198.0" styleClass="bgcolor-darkbrown" stylesheets="@../../../style_File/Dashboard.css">
                      <children>
                         <HBox prefHeight="38.0" prefWidth="21.0" />
                         <ImageView fitHeight="20.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
