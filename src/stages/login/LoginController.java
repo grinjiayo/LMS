@@ -42,7 +42,6 @@ public class LoginController {
     @FXML private PasswordField passwordtextfield;
     @FXML private TextField passwordTextVisible, tf_staffid, tfAdminName;
     @FXML private ImageView passwordIcon;
-
 //EXIT=======================================================================================================================================================================================
 
     public void close() {

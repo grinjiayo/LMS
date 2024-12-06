@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.lang.String?>
-<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.effect.BoxBlur?>
@@ -20,7 +19,7 @@
                           <Font name="System Bold" size="40.0" />
                       </font>
                   </Label>
-                  <AnchorPane layoutX="290.0" layoutY="329.0" prefHeight="159.0" prefWidth="391.0">
+                  <AnchorPane layoutX="291.0" layoutY="369.0" prefHeight="159.0" prefWidth="391.0">
                       <children>
                           <Button fx:id="userLog" layoutX="84.0" layoutY="22.0" mnemonicParsing="false" onAction="#switchUser" prefHeight="110.0" prefWidth="303.0" styleClass="userButton" stylesheets="@../../../style_File/LoginSyle.css" text="       Students">
                               <font>
@@ -42,7 +41,7 @@
                           </AnchorPane>
                       </children>
                   </AnchorPane>
-                  <AnchorPane layoutX="283.0" layoutY="126.0" prefHeight="181.0" prefWidth="402.0" stylesheets="@../../../style_File/LoginSyle.css">
+                  <AnchorPane layoutX="285.0" layoutY="145.0" prefHeight="181.0" prefWidth="402.0" stylesheets="@../../../style_File/LoginSyle.css">
                       <children>
                           <Button fx:id="staffLog" layoutX="83.0" layoutY="29.0" mnemonicParsing="false" onAction="#switchStaff" prefHeight="110.0" prefWidth="303.0" styleClass="userButton" stylesheets="@../../../style_File/LoginSyle.css" text="       Staff">
                               <font>
@@ -101,21 +100,5 @@
             </AnchorPane>
              </children>
           </AnchorPane>
-      <AnchorPane layoutX="923.0" layoutY="17.0" minHeight="17.0" minWidth="26.0" onMouseClicked="#switchLogins" prefHeight="24.0" prefWidth="36.0" styleClass="admintag" stylesheets="@../../../style_File/LoginSyle.css">
-         <children>
-            <ImageView fitHeight="11.0" fitWidth="11.0" layoutX="16.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../../icons/interface-icon.png" />
-               </image>
-               <cursor>
-                  <Cursor fx:constant="DEFAULT" />
-               </cursor>
-            </ImageView>
-            <Button fx:id="close" layoutX="1.0" layoutY="-1.0" mnemonicParsing="false" onAction="#close" prefHeight="25.0" prefWidth="34.0" styleClass="closeB" stylesheets="@../../../style_File/LoginSyle.css" />
-         </children>
-         <cursor>
-            <Cursor fx:constant="DEFAULT" />
-         </cursor>
-      </AnchorPane>
         </children>
     </AnchorPane>
