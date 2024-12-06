@@ -9,6 +9,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.layout.HBox;
 
+import javax.swing.*;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -92,5 +93,29 @@ public class libraryController implements Initializable {
         books.insertNOrder(new Book("Percy Jackson", "Adriano Santos", "/bookImages/percy_book.jpg", 3));
 
         return books;
+    }
+
+    //To retrieve the range of books
+    public DoublyLinkList copyValueList(DoublyLinkList books, int atStart, int atEnd) {
+        DoublyLinkList list = new DoublyLinkList(); //Store the copy here
+
+        if(atStart < 0 || atEnd> books.getSize()) { //Invalid value of start and end
+            Alert alert = new Alert(Alert.AlertType.WARNING, "Library View Copy Error");
+            return null;
+        }else {
+            //Go to the desired start of list
+            Link current = books.getFirst();
+            int i; //index
+
+            for(i = 0; i<atStart; i++) {
+                current = current.getNext();
+            }
+
+            //Add the range until reaches the end
+            for(; i < atEnd; i++) {
+                list.insertNOrder(current.getElement());
+            }
+        }
+        return list;
     }
 }

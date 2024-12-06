@@ -28,6 +28,17 @@ public class DoublyLinkList {
         first = newLink;
     }
 
+    public int getSize() {  //Return the size of linked list
+        Link current = first;
+        int size = 0;
+
+        while(current!=null) {
+            size++;
+            current = current.next;
+        }
+        return size;
+    }
+
     public void insertNOrder(Book e) {  //The algo is like insertAfter but after the right alphabetical order
 
         Link newLink = new Link(e);

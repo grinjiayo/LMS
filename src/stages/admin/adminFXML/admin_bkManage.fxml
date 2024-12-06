@@ -192,6 +192,11 @@
       <VBox prefHeight="607.0" prefWidth="268.0" styleClass="bgcolor-white" stylesheets="@../../../style_File/Dashboard.css" BorderPane.alignment="CENTER" />
    </right>
    <center>
-      <VBox fx:id="libraryBox" prefHeight="607.0" prefWidth="505.0" styleClass="bgcolor-darkbrown" stylesheets="@../../../style_File/Dashboard.css" BorderPane.alignment="CENTER" />
+      <VBox fx:id="libraryBox" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+         <children>
+            <VBox prefHeight="200.0" prefWidth="100.0" styleClass="bgcolor-darkbrown" stylesheets="@../../../style_File/Dashboard.css" />
+            <VBox fx:id="libraryBox" minHeight="-Infinity" minWidth="-Infinity" prefHeight="552.0" prefWidth="505.0" styleClass="bgcolor-brown" stylesheets="@../../../style_File/Dashboard.css" />
+         </children>
+      </VBox>
    </center>
 </BorderPane>
