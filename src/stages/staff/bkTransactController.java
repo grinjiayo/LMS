@@ -1,4 +1,4 @@
-package stages.admin;
+package stages.staff;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -10,7 +10,6 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 
 import java.io.IOException;
 
@@ -42,19 +41,12 @@ public class bkTransactController {
 
     @FXML
     private void goDashboard(MouseEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/stages/admin/adminFXML/admin_dashboard.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/stages/staff/staffFXML/staff_dashboard.fxml"));
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setScene(new Scene(root));
         stage.show();
     }
 
-    @FXML
-    private void goAccountStaff(MouseEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/stages/admin/adminFXML/admin_acctStaffs.fxml"));
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        stage.setScene(new Scene(root));
-        stage.show();
-    }
 
 //    @FXML
 //    private void goBorrowTransact(MouseEvent event) throws IOException {
@@ -66,7 +58,7 @@ public class bkTransactController {
 
     @FXML
     private void goInventory(MouseEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/stages/admin/adminFXML/admin_inventory.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/stages/staff/staffFXML/staff_inventory.fxml"));
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setScene(new Scene(root));
         stage.show();
@@ -90,7 +82,7 @@ public class bkTransactController {
 
     @FXML
     private void goManageBooks(MouseEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/stages/admin/adminFXML/admin_bkManage.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/stages/staff/staffFXML/staff_managebooks.fxml"));
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setScene(new Scene(root));
         stage.show();
@@ -103,7 +95,7 @@ public class bkTransactController {
 
     @FXML
     private void goReports(MouseEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/stages/admin/adminFXML/admin_reports.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/stages/staff/staffFXML/staff_reports.fxml"));
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setScene(new Scene(root));
         stage.show();

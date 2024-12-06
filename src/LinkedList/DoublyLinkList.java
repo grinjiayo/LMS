@@ -11,6 +11,11 @@ public class DoublyLinkList {
         last = null;
     }
 
+    public DoublyLinkList(DoublyLinkList list1) {
+        this.first = list1.first;
+        this.last = list1.last;
+    }
+
     public boolean isEmpty() {
         return first==null;
     }

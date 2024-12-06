@@ -2,6 +2,12 @@
     -fx-background-color: rgba(0,0,0,0);
 }
 
+
+.bkManageBtn:hover {
+    -fx-background-color: #382819;
+    -fx-cursor: hand;
+}
+
 .round-layout {
     -fx-border-radius: 50;
     -fx-border-color: #070707;
@@ -11,11 +17,13 @@
     -fx-background-color: #603f26;
 }
 
-.mouse-moved: hover {
-    -fx-border-width: 2px;
-    -fx-border-color: #603f26;
+.mouse-moved:hover {
+    -fx-background-color: #502d0d;
 }
-
+.logoutm-m:hover {
+    -fx-background-radius: 60px;
+    -fx-background-color: #502d0d;
+}
 .bgcolor-brown {
     -fx-background-color: #603f26;
 }
