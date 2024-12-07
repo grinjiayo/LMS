@@ -37,8 +37,6 @@ public class index extends Application {
                     controller.adminLogin(event);
                 } catch (IOException e) {
                     throw new RuntimeException(e);
-                } catch (Exception e) {
-                    throw new RuntimeException(e);
                 }
             }
         });

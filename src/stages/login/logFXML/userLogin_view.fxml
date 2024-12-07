@@ -117,5 +117,20 @@
             <BoxBlur height="0.0" width="1.0" />
          </effect>
       </AnchorPane>
+      <AnchorPane fx:id="sidedoor2" layoutX="960.0" layoutY="-119.0" prefHeight="825.0" prefWidth="589.0" rotate="10.0" styleClass="iconCB" stylesheets="@../../../style_File/LoginSyle.css">
+         <children>
+            <ImageView fitHeight="769.0" fitWidth="539.0" layoutX="22.0" layoutY="48.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../icons/lmsbackground.png" />
+               </image>
+               <effect>
+                  <DropShadow height="41.52" radius="23.9225" width="56.17" />
+               </effect>
+            </ImageView>
+         </children>
+         <effect>
+            <BoxBlur height="0.0" width="1.0" />
+         </effect>
+      </AnchorPane>
    </children>
 </AnchorPane>

@@ -34,13 +34,28 @@
                   <Cursor fx:constant="DEFAULT" />
                </cursor>
             </ImageView>
-            <Button fx:id="back" layoutX="1.0" layoutY="-1.0" mnemonicParsing="false" onAction="#switchLogins" prefHeight="25.0" prefWidth="34.0" styleClass="closeB" stylesheets="@../../../style_File/LoginSyle.css" />
+            <Button fx:id="back" layoutX="1.0" layoutY="-1.0" mnemonicParsing="false" onAction="#switchUser" prefHeight="25.0" prefWidth="34.0" styleClass="closeB" stylesheets="@../../../style_File/LoginSyle.css" />
          </children>
          <cursor>
             <Cursor fx:constant="DEFAULT" />
          </cursor>
       </AnchorPane>
-      <AnchorPane fx:id="sidedoor" layoutX="-412.0" layoutY="-106.0" prefHeight="825.0" prefWidth="589.0" rotate="10.0" styleClass="iconCB" stylesheets="@../../../style_File/LoginSyle.css">
+      <AnchorPane fx:id="sidedoor2" layoutX="-412.0" layoutY="-106.0" prefHeight="825.0" prefWidth="589.0" rotate="10.0" styleClass="iconCB" stylesheets="@../../../style_File/LoginSyle.css">
+         <children>
+            <ImageView fitHeight="769.0" fitWidth="539.0" layoutX="22.0" layoutY="48.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../icons/lmsbackground.png" />
+               </image>
+               <effect>
+                  <DropShadow height="41.52" radius="23.9225" width="56.17" />
+               </effect>
+            </ImageView>
+         </children>
+         <effect>
+            <BoxBlur height="0.0" width="1.0" />
+         </effect>
+      </AnchorPane>
+      <AnchorPane fx:id="sidedoor" layoutX="979.0" layoutY="-104.0" prefHeight="825.0" prefWidth="589.0" rotate="10.0" styleClass="iconCB" stylesheets="@../../../style_File/LoginSyle.css">
          <children>
             <ImageView fitHeight="769.0" fitWidth="539.0" layoutX="22.0" layoutY="48.0" pickOnBounds="true" preserveRatio="true">
                <image>
