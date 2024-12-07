@@ -12,7 +12,7 @@ public class FXMLFileRunner extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/stages/admin/library/libraryView.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/stages/admin/adminFXML/admin_bkManage.fxml"));
         Parent root = loader.load();
 
         Scene scene = new Scene(root);

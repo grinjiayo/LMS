@@ -44,7 +44,7 @@ public class libraryController implements Initializable {
     private Label cabinetPos;
 
     private DoublyLinkList books;
-    private int cabinetIndex = 1;
+    private int cabinetIndex = 0;
     private int cabinetCount;
 
     @Override
@@ -55,7 +55,7 @@ public class libraryController implements Initializable {
 
             int bookCount = books.getSize();      //Indicates the number of books
             bookNum.setText(Integer.toString(bookCount));
-            cabinetPos.setText(Integer.toString(cabinetIndex));
+            cabinetPos.setText(Integer.toString(cabinetIndex+1));
             cabinetCount = bookCount/42;      //Number of cabinets(each contains 42 books;
             if(bookCount%42!=0) {       //Add another cabinet
                 cabinetCount++;
@@ -89,14 +89,13 @@ public class libraryController implements Initializable {
     @FXML
     void moveLeftEvt(ActionEvent event) {
         try {
-            if(cabinetIndex>1) {
+            if(cabinetIndex>=0) {
                 moveRightBtn.setDisable(false); //Update the moving btn cause he can now move right
                 cabinetIndex--;
                 int start = cabinetIndex * 42;
                 int end = start + 42;
                 DoublyLinkList bookList = copyValueList(books, start, end);
 
-                int bookCount = bookList.getSize();      //Indicates the number of books
                 Link current = bookList.getFirst();
 
                 bookLayout.getChildren().clear();
@@ -117,15 +116,15 @@ public class libraryController implements Initializable {
                         bookLayout2.getChildren().add(bookBox);
                     } else if (count < 42) {
                         bookLayout3.getChildren().add(bookBox);
-                    }
+                    } else break;
                     count++;
                     current = current.getNext();
                 }
 
                 //Update the cabinet index
-                cabinetPos.setText(Integer.toString(cabinetIndex));
+                cabinetPos.setText(Integer.toString(cabinetIndex+1));
 
-                moveLeftBtn.setDisable(cabinetIndex == 1);
+                moveLeftBtn.setDisable(cabinetIndex == 0);
             }
         }catch(Exception e) {
             Alert alert = new Alert(Alert.AlertType.ERROR, e.getMessage());
@@ -163,15 +162,15 @@ public class libraryController implements Initializable {
                         bookLayout2.getChildren().add(bookBox);
                     } else if (count < 42) {
                         bookLayout3.getChildren().add(bookBox);
-                    }
+                    } else break;
                     count++;
                     current = current.getNext();
                 }
 
                 //Update the cabinet index
-                cabinetPos.setText(Integer.toString(cabinetIndex));
+                cabinetPos.setText(Integer.toString(cabinetIndex+1));
 
-                moveRightBtn.setDisable(cabinetIndex == cabinetCount);
+                moveRightBtn.setDisable(cabinetIndex == cabinetCount-1);
             }
         }catch(Exception e) {
             Alert alert = new Alert(Alert.AlertType.ERROR, e.getMessage());
@@ -267,7 +266,7 @@ public class libraryController implements Initializable {
     public DoublyLinkList copyValueList(DoublyLinkList books, int atStart, int atEnd) {
         DoublyLinkList list = new DoublyLinkList(); //Store the copy here
 
-        if(atStart < 0 || atEnd> books.getSize()) { //Invalid value of start and end
+        if(atStart < 0) { //Invalid value of start and end
             Alert alert = new Alert(Alert.AlertType.WARNING, "Library View Copy Error");
             return list;
         }else {
@@ -278,6 +277,7 @@ public class libraryController implements Initializable {
             for(i = 0; i<atStart; i++) {
                 current = current.getNext();
             }
+
 
             //Add the range until reaches the end
             for(; current!=null && i < atEnd; i++) {        //Copy the value to list
