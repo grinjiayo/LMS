@@ -39,3 +39,13 @@
 .bgcolor-white {
     -fx-background-color: white;
 }
+
+.border-darkbrown {
+    -fx-border-width: 2px;
+    -fx-border-color:   #37281A;
+}
+
+.button-switchLibrary {
+    -fx-border-width: 5px 5px 0px 5px;
+    -fx-border-color: #603f26;
+}
