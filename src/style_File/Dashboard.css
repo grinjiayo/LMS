@@ -36,6 +36,10 @@
     -fx-background-color: #ffeac5;
 }
 
+.bgcolor-red {
+    -fx-background-color: #BC2D2D;
+}
+
 .bgcolor-white {
     -fx-background-color: white;
 }
