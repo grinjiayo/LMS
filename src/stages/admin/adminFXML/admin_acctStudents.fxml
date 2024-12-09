@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.image.Image?>
@@ -11,7 +12,7 @@
 
 <BorderPane blendMode="DARKEN" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="675.0" prefWidth="970.0" stylesheets="@../../../style_File/Dashboard.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="stages.admin.studentAccountController">
    <top>
-      <HBox prefHeight="68.0" prefWidth="970.0" styleClass="bgcolor-lightPink" stylesheets="@../../../style_File/Dashboard.css" BorderPane.alignment="CENTER">
+      <HBox prefHeight="68.0" prefWidth="970.0" stylesheets="@../../../style_File/Dashboard.css" BorderPane.alignment="CENTER">
          <children>
             <HBox alignment="CENTER_RIGHT" prefHeight="68.0" prefWidth="60.0">
                <children>
@@ -25,7 +26,6 @@
             <Separator orientation="VERTICAL" prefHeight="68.0" prefWidth="0.0" styleClass="bgcolor-darkbrown" stylesheets="@../../../style_File/Dashboard.css" visible="false" />
             <HBox alignment="CENTER" prefHeight="68.0" prefWidth="281.0">
                <children>
-                  <Separator orientation="VERTICAL" prefHeight="200.0" />
                   <Label prefHeight="27.0" prefWidth="256.0" text="LIBRARY SYSTEM">
                      <font>
                         <Font name="System Bold" size="18.0" />
@@ -33,9 +33,8 @@
                   </Label>
                </children>
             </HBox>
-            <Separator orientation="VERTICAL" prefHeight="200.0" />
             <HBox prefHeight="68.0" prefWidth="317.0" />
-            <HBox alignment="CENTER" prefHeight="68.0" prefWidth="300.0">
+            <HBox alignment="CENTER" prefHeight="68.0" prefWidth="306.0">
                <children>
                   <Label />
                   <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="27.0" prefWidth="181.0" text="Welcome Admin">
@@ -45,16 +44,20 @@
                   </Label>
                   <ImageView fitHeight="46.0" fitWidth="47.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@/icons/susericon.png" />
+                        <Image url="@../../../icons/usericon.png" />
                      </image>
                   </ImageView>
                </children>
             </HBox>
          </children>
+         <styleClass>
+            <String fx:value="bgcolor-lightPink" />
+            <String fx:value="outlineDown" />
+         </styleClass>
       </HBox>
    </top>
    <left>
-      <VBox alignment="CENTER" prefHeight="607.0" prefWidth="197.0" styleClass="bgcolor-brown" stylesheets="@../../../style_File/Dashboard.css" BorderPane.alignment="CENTER">
+      <VBox alignment="CENTER" prefHeight="607.0" prefWidth="197.0" stylesheets="@../../../style_File/Dashboard.css" BorderPane.alignment="CENTER">
          <children>
             <VBox prefHeight="22.0" prefWidth="198.0" />
             <VBox prefHeight="360.0" prefWidth="198.0">
@@ -211,10 +214,18 @@
                </children>
             </HBox>
          </children>
+         <styleClass>
+            <String fx:value="bgcolor-brown" />
+            <String fx:value="outlineRight" />
+         </styleClass>
       </VBox>
    </left>
    <right>
-      <VBox prefHeight="607.0" prefWidth="268.0" styleClass="bgcolor-white" stylesheets="@../../../style_File/Dashboard.css" BorderPane.alignment="CENTER" />
+      <VBox prefHeight="607.0" prefWidth="268.0" stylesheets="@../../../style_File/Dashboard.css" BorderPane.alignment="CENTER">
+         <styleClass>
+            <String fx:value="bgcolor-white" />
+            <String fx:value="outlineLeft" />
+         </styleClass></VBox>
    </right>
    <center>
       <VBox prefHeight="607.0" prefWidth="505.0" styleClass="bgcolor-darkbrown" stylesheets="@../../../style_File/Dashboard.css" BorderPane.alignment="CENTER" />

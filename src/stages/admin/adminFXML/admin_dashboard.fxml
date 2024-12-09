@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.image.Image?>
@@ -11,7 +13,7 @@
 
 <BorderPane blendMode="DARKEN" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="675.0" prefWidth="970.0" stylesheets="@../../../style_File/Dashboard.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="stages.admin.dashboardController">
    <top>
-      <HBox prefHeight="68.0" prefWidth="970.0" styleClass="bgcolor-lightPink" stylesheets="@../../../style_File/Dashboard.css" BorderPane.alignment="CENTER">
+      <HBox prefHeight="68.0" prefWidth="970.0" stylesheets="@../../../style_File/Dashboard.css" BorderPane.alignment="CENTER">
          <children>
             <HBox alignment="CENTER_RIGHT" prefHeight="68.0" prefWidth="60.0">
                <children>
@@ -25,7 +27,6 @@
             <Separator orientation="VERTICAL" prefHeight="68.0" prefWidth="0.0" styleClass="bgcolor-darkbrown" stylesheets="@../../../style_File/Dashboard.css" visible="false" />
             <HBox alignment="CENTER" prefHeight="68.0" prefWidth="281.0">
                <children>
-                  <Separator orientation="VERTICAL" prefHeight="200.0" />
                   <Label prefHeight="27.0" prefWidth="256.0" text="LIBRARY SYSTEM">
                      <font>
                         <Font name="System Bold" size="18.0" />
@@ -33,9 +34,8 @@
                   </Label>
                </children>
             </HBox>
-            <Separator orientation="VERTICAL" prefHeight="200.0" />
             <HBox prefHeight="68.0" prefWidth="317.0" />
-            <HBox alignment="CENTER" prefHeight="68.0" prefWidth="300.0">
+            <HBox alignment="CENTER" prefHeight="68.0" prefWidth="306.0">
                <children>
                   <Label />
                   <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="27.0" prefWidth="181.0" text="Welcome Admin">
@@ -51,10 +51,14 @@
                </children>
             </HBox>
          </children>
+         <styleClass>
+            <String fx:value="bgcolor-lightPink" />
+            <String fx:value="outlineDown" />
+         </styleClass>
       </HBox>
    </top>
    <left>
-      <VBox alignment="CENTER" prefHeight="607.0" prefWidth="197.0" styleClass="bgcolor-brown" stylesheets="@../../../style_File/Dashboard.css" BorderPane.alignment="CENTER">
+      <VBox alignment="CENTER" prefHeight="607.0" prefWidth="197.0" stylesheets="@../../../style_File/Dashboard.css" BorderPane.alignment="CENTER">
          <children>
             <VBox prefHeight="22.0" prefWidth="198.0" />
             <VBox prefHeight="300.0" prefWidth="198.0">
@@ -186,12 +190,136 @@
                </children>
             </HBox>
          </children>
+         <styleClass>
+            <String fx:value="bgcolor-brown" />
+            <String fx:value="outlineRight" />
+         </styleClass>
       </VBox>
    </left>
-   <right>
-      <VBox prefHeight="607.0" prefWidth="268.0" styleClass="bgcolor-white" stylesheets="@../../../style_File/Dashboard.css" BorderPane.alignment="CENTER" />
-   </right>
    <center>
-      <VBox prefHeight="607.0" prefWidth="505.0" styleClass="bgcolor-darkbrown" stylesheets="@../../../style_File/Dashboard.css" BorderPane.alignment="CENTER" />
+      <VBox prefHeight="607.0" prefWidth="505.0" styleClass="bgcolor-darkbrown" stylesheets="@../../../style_File/Dashboard.css" BorderPane.alignment="CENTER">
+         <padding>
+            <Insets left="35.0" top="45.0" />
+         </padding>
+         <children>
+            <HBox prefHeight="119.0" prefWidth="748.0" spacing="40.0">
+               <children>
+                  <VBox prefHeight="119.0" prefWidth="150.0" stylesheets="@../../../style_File/Dashboard.css">
+                     <styleClass>
+                        <String fx:value="bgcolor-white" />
+                        <String fx:value="roundEdge" />
+                     </styleClass>
+                     <children>
+                        <Label alignment="CENTER" prefHeight="34.0" prefWidth="152.0" stylesheets="@../../../style_File/Dashboard.css" text="Book Total" textFill="WHITE">
+                           <styleClass>
+                              <String fx:value="roundEdgeTop" />
+                              <String fx:value="bgcolor-brown" />
+                           </styleClass>
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="18.0">
+                           <children>
+                              <ImageView fitHeight="45.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../icons/dashboard/book.png" />
+                                 </image>
+                              </ImageView>
+                              <Label text="0">
+                                 <font>
+                                    <Font size="40.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+                  <VBox prefHeight="119.0" prefWidth="150.0" stylesheets="@../../../style_File/Dashboard.css">
+                     <styleClass>
+                        <String fx:value="bgcolor-white" />
+                        <String fx:value="roundEdge" />
+                     </styleClass>
+                     <children>
+                        <Label alignment="CENTER" prefHeight="34.0" prefWidth="152.0" stylesheets="@../../../style_File/Dashboard.css" text="Staff Total" textFill="WHITE">
+                           <styleClass>
+                              <String fx:value="roundEdgeTop" />
+                              <String fx:value="bgcolor-brown" />
+                           </styleClass>
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="18.0">
+                           <children>
+                              <ImageView fitHeight="45.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../icons/dashboard/staff.png" />
+                                 </image>
+                              </ImageView>
+                              <Label text="0">
+                                 <font>
+                                    <Font size="40.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+                  <VBox prefHeight="119.0" prefWidth="150.0" stylesheets="@../../../style_File/Dashboard.css">
+                     <styleClass>
+                        <String fx:value="bgcolor-white" />
+                        <String fx:value="roundEdge" />
+                     </styleClass>
+                     <children>
+                        <Label alignment="CENTER" prefHeight="34.0" prefWidth="152.0" stylesheets="@../../../style_File/Dashboard.css" text="Student Total" textFill="WHITE">
+                           <styleClass>
+                              <String fx:value="roundEdgeTop" />
+                              <String fx:value="bgcolor-brown" />
+                           </styleClass>
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="18.0">
+                           <children>
+                              <ImageView fitHeight="46.0" fitWidth="58.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../icons/dashboard/student.png" />
+                                 </image>
+                              </ImageView>
+                              <Label text="0">
+                                 <font>
+                                    <Font size="40.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+            <HBox prefHeight="426.0" prefWidth="733.0" spacing="15.0">
+               <padding>
+                  <Insets top="20.0" />
+               </padding>
+               <children>
+                  <HBox prefHeight="384.0" prefWidth="354.0" styleClass="bgcolor-white" stylesheets="@../../../style_File/Dashboard.css">
+                     <children>
+                        <HBox alignment="CENTER_LEFT" maxHeight="-Infinity" prefHeight="30.0" prefWidth="354.0" styleClass="bgcolor-brown" stylesheets="@../../../style_File/Dashboard.css">
+                           <children>
+                              <Label text="Student Account" textFill="WHITE">
+                                 <font>
+                                    <Font size="13.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </HBox>
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="384.0" prefWidth="354.0" styleClass="bgcolor-white" stylesheets="@../../../style_File/Dashboard.css" />
+               </children>
+            </HBox>
+         </children></VBox>
    </center>
 </BorderPane>

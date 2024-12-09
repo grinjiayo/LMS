@@ -1,17 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
 <BorderPane blendMode="DARKEN" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="675.0" prefWidth="970.0" stylesheets="@../../../style_File/Dashboard.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="stages.admin.bkManageController">
    <top>
-      <HBox prefHeight="68.0" prefWidth="970.0" styleClass="bgcolor-lightPink" stylesheets="@../../../style_File/Dashboard.css" BorderPane.alignment="CENTER">
+      <HBox prefHeight="68.0" prefWidth="970.0" stylesheets="@../../../style_File/Dashboard.css" BorderPane.alignment="CENTER">
          <children>
             <HBox alignment="CENTER_RIGHT" prefHeight="68.0" prefWidth="60.0">
                <children>
@@ -25,7 +30,6 @@
             <Separator orientation="VERTICAL" prefHeight="68.0" prefWidth="0.0" styleClass="bgcolor-darkbrown" stylesheets="@../../../style_File/Dashboard.css" visible="false" />
             <HBox alignment="CENTER" prefHeight="68.0" prefWidth="281.0">
                <children>
-                  <Separator orientation="VERTICAL" prefHeight="200.0" />
                   <Label prefHeight="27.0" prefWidth="256.0" text="LIBRARY SYSTEM">
                      <font>
                         <Font name="System Bold" size="18.0" />
@@ -33,9 +37,8 @@
                   </Label>
                </children>
             </HBox>
-            <Separator orientation="VERTICAL" prefHeight="200.0" />
             <HBox prefHeight="68.0" prefWidth="317.0" />
-            <HBox alignment="CENTER" prefHeight="68.0" prefWidth="300.0">
+            <HBox alignment="CENTER" prefHeight="68.0" prefWidth="306.0">
                <children>
                   <Label />
                   <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="30.0" prefWidth="181.0" text="Welcome Admin">
@@ -51,10 +54,14 @@
                </children>
             </HBox>
          </children>
+         <styleClass>
+            <String fx:value="bgcolor-lightPink" />
+            <String fx:value="outlineDown" />
+         </styleClass>
       </HBox>
    </top>
    <left>
-      <VBox alignment="CENTER" prefHeight="607.0" prefWidth="197.0" styleClass="bgcolor-brown" stylesheets="@../../../style_File/Dashboard.css" BorderPane.alignment="CENTER">
+      <VBox alignment="CENTER" prefHeight="607.0" prefWidth="197.0" stylesheets="@../../../style_File/Dashboard.css" BorderPane.alignment="CENTER">
          <children>
             <VBox prefHeight="22.0" prefWidth="198.0" />
             <VBox prefHeight="300.0" prefWidth="198.0">
@@ -92,7 +99,7 @@
                            </image>
                         </ImageView>
                         <HBox prefHeight="38.0" prefWidth="10.0" />
-                        <Label prefHeight="20.0" prefWidth="113.0" text="Manage Books" textFill="WHITE">
+                        <Label prefHeight="20.0" prefWidth="113.0" text="View Library" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font>
@@ -186,15 +193,137 @@
                </children>
             </HBox>
          </children>
+         <styleClass>
+            <String fx:value="bgcolor-brown" />
+            <String fx:value="outlineRight" />
+         </styleClass>
       </VBox>
    </left>
    <right>
-      <VBox prefHeight="607.0" prefWidth="268.0" styleClass="bgcolor-white" stylesheets="@../../../style_File/Dashboard.css" BorderPane.alignment="CENTER" />
+      <VBox alignment="TOP_CENTER" prefHeight="607.0" prefWidth="268.0" stylesheets="@../../../style_File/Dashboard.css" BorderPane.alignment="CENTER">
+         <styleClass>
+            <String fx:value="bgcolor-white" />
+            <String fx:value="outlineLeft" />
+         </styleClass>
+         <padding>
+            <Insets top="20.0" />
+         </padding>
+         <children>
+            <HBox alignment="CENTER" prefHeight="24.0" prefWidth="266.0">
+               <children>
+                  <TextField maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="200.0" promptText="Search" stylesheets="@../../../style_File/Dashboard.css">
+                     <styleClass>
+                        <String fx:value="bgcolor-white" />
+                        <String fx:value="outlineAllBlack" />
+                     </styleClass>
+                  </TextField>
+                  <VBox maxHeight="-Infinity" minHeight="-Infinity" prefHeight="25.0" prefWidth="31.0" styleClass="bgcolor-darkbrown" stylesheets="@../../../style_File/Dashboard.css">
+                     <children>
+                        <ImageView fitHeight="20.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../icons/searchIcon.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                     <padding>
+                        <Insets left="4.0" top="2.0" />
+                     </padding>
+                  </VBox>
+               </children>
+            </HBox>
+            <Pane prefHeight="54.0" prefWidth="266.0" />
+            <VBox alignment="TOP_CENTER" prefHeight="418.0" prefWidth="266.0" stylesheets="@../../../style_File/Dashboard.css">
+               <children>
+                  <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="215.0" prefWidth="155.0" styleClass="outlineAllBlack" stylesheets="@../../../style_File/Dashboard.css">
+                     <children>
+                        <ImageView fitHeight="215.0" fitWidth="155.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../icons/defaultImage.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </VBox>
+                  <VBox prefHeight="200.0" prefWidth="100.0" spacing="2.0">
+                     <padding>
+                        <Insets left="20.0" top="20.0" />
+                     </padding>
+                     <children>
+                        <HBox prefHeight="22.0" prefWidth="245.0">
+                           <children>
+                              <Label prefHeight="22.0" prefWidth="43.0" text="Title : ">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                              </Label>
+                              <Label prefHeight="22.0" prefWidth="189.0" />
+                           </children>
+                        </HBox>
+                        <HBox prefHeight="22.0" prefWidth="245.0">
+                           <children>
+                              <Label prefHeight="22.0" prefWidth="62.0" text="Author : ">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                              </Label>
+                              <Label prefHeight="22.0" prefWidth="189.0" />
+                           </children>
+                        </HBox>
+                        <HBox prefHeight="22.0" prefWidth="245.0">
+                           <children>
+                              <Label prefHeight="22.0" prefWidth="62.0" text="ISBN : ">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                              </Label>
+                              <Label prefHeight="22.0" prefWidth="189.0" />
+                           </children>
+                        </HBox>
+                        <HBox prefHeight="22.0" prefWidth="245.0">
+                           <children>
+                              <Label prefHeight="22.0" prefWidth="94.0" text="Category : ">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                              </Label>
+                              <Label prefHeight="22.0" prefWidth="189.0" />
+                           </children>
+                        </HBox>
+                        <HBox prefHeight="22.0" prefWidth="245.0">
+                           <children>
+                              <Label prefHeight="22.0" prefWidth="94.0" text="Available : ">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                              </Label>
+                              <Label prefHeight="22.0" prefWidth="189.0" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </children>
+            </VBox>
+         </children></VBox>
    </right>
    <center>
-      <VBox fx:id="libraryBox" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+      <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
          <children>
-            <VBox prefHeight="200.0" prefWidth="100.0" styleClass="bgcolor-darkbrown" stylesheets="@../../../style_File/Dashboard.css" />
+            <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" styleClass="bgcolor-darkbrown" stylesheets="@../../../style_File/Dashboard.css">
+               <children>
+                  <Label prefHeight="28.0" prefWidth="82.0" styleClass="text-menuHeader" stylesheets="@../../../style_File/Dashboard.css" text="LIBRARY" textFill="WHITE" wrapText="true">
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font>
+                     <padding>
+                        <Insets left="3.0" />
+                     </padding>
+                  </Label>
+                  <Pane prefHeight="56.0" prefWidth="258.0" />
+                  <ChoiceBox prefHeight="26.0" prefWidth="142.0" styleClass="bgcolor-white" stylesheets="@../../../style_File/Dashboard.css" />
+               </children>
+               <padding>
+                  <Insets left="10.0" />
+               </padding>
+            </HBox>
             <VBox fx:id="libraryBox" minHeight="-Infinity" minWidth="-Infinity" prefHeight="552.0" prefWidth="505.0" styleClass="bgcolor-brown" stylesheets="@../../../style_File/Dashboard.css" />
          </children>
       </VBox>

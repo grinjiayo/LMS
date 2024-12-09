@@ -71,6 +71,7 @@ public class config {
                     "category_id INT NOT NULL," +
                     "quantity INT(24) NOT NULL," +
                     "borrowed INT NOT NULL," +
+                    "imageFile LONGBLOB NOT NULL, " +
                     "FOREIGN KEY(category_id) REFERENCES bkcategory(ctgry_id), " +
                     "PRIMARY KEY(book_id));";
             stmt.executeUpdate(sqlTableBook);
