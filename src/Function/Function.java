@@ -21,6 +21,7 @@ public class Function {
         return true;
     }
 
+
     public int studentIDChecker(String s) { //Returns the int value of id otherwise 0;
         int studentId = 0;
         int idYrInt, idInt;

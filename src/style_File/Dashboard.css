@@ -36,6 +36,60 @@
     -fx-background-color: #ffeac5;
 }
 
+.bgcolor-red {
+    -fx-background-color: #BC2D2D;
+}
+
 .bgcolor-white {
     -fx-background-color: white;
 }
+
+.border-darkbrown {
+    -fx-border-width: 2px;
+    -fx-border-color: #37281A;
+}
+
+.button-switchLibrary {
+    -fx-border-width: 5px 5px 0px 5px;
+    -fx-border-color: #603f26;
+}
+
+.outlineRight {
+    -fx-border-width: 0px 2px 0px 0px;
+    -fx-border-color: #37281A;
+}
+
+.outlineLeft {
+    -fx-border-width: 0px 0px 0px 1px;
+    -fx-border-color: #37281A;
+}
+
+.outlineDown {
+    -fx-border-width: 0px 0px 1px 0px;
+    -fx-border-color: #37281A;
+}
+
+.outlineAllBlack {
+    -fx-border-width: 1px 1px 1px 1px;
+    -fx-border-color: #000000;
+}
+
+.outlineAllGray {
+    -fx-border-width: 1px 1px 1px 1px;
+    -fx-border-color: #D9D9D9;
+}
+
+.text-menuHeader {
+    -fx-text-fill: #ffeac5;
+    -fx-border-width: 0px 0px 2px 0px;
+    -fx-border-color: #ffeac5;
+}
+
+.roundEdge {
+    -fx-background-radius: 15;
+}
+
+.roundEdgeTop {
+    -fx-background-radius: 15 15 0 0;
+}
+

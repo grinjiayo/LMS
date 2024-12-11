@@ -1,29 +1,62 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Tab?>
-<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="552.0" prefWidth="505.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="stages.admin.library.libraryController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="552.0" prefWidth="505.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="stages.admin.library.libraryController">
    <children>
       <HBox prefHeight="54.0" prefWidth="506.0" styleClass="bgcolor-darkbrown" stylesheets="@../../../style_File/Dashboard.css">
          <children>
-            <TabPane prefHeight="54.0" prefWidth="546.0" side="LEFT">
-              <tabs>
-                <Tab closable="false" text="Untitled Tab 1" />
-              </tabs>
-            </TabPane>
+            <Button fx:id="moveLeftBtn" mnemonicParsing="false" onAction="#moveLeftEvt" prefHeight="54.0" prefWidth="46.0" stylesheets="@../../../style_File/Dashboard.css" text="&lt;" textFill="WHITE">
+               <font>
+                  <Font name="Arial Bold" size="23.0" />
+               </font>
+               <styleClass>
+                  <String fx:value="button-switchLibrary" />
+                  <String fx:value="bgcolor-darkbrown" />
+               </styleClass>
+            </Button>
+            <HBox prefHeight="54.0" prefWidth="418.0" />
+            <Button fx:id="moveRightBtn" mnemonicParsing="false" onAction="#moveRightEvt" prefHeight="54.0" prefWidth="46.0" stylesheets="@../../../style_File/Dashboard.css" text="&gt;" textFill="WHITE">
+               <font>
+                  <Font name="Arial Bold" size="23.0" />
+               </font>
+               <styleClass>
+                  <String fx:value="button-switchLibrary" />
+                  <String fx:value="bgcolor-darkbrown" />
+               </styleClass>
+            </Button>
          </children></HBox>
-      <VBox prefHeight="498.0" prefWidth="505.0" spacing="20.0" styleClass="bgcolor-brown" stylesheets="@../../../style_File/Dashboard.css">
+      <VBox fx:id="cabinet" prefHeight="498.0" prefWidth="505.0" spacing="15.0" styleClass="bgcolor-brown" stylesheets="@../../../style_File/Dashboard.css">
          <children>
             <HBox fx:id="bookLayout" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="125.0" prefWidth="490.0" styleClass="bgcolor-darkbrown" stylesheets="@../../../style_File/Dashboard.css" />
             <HBox fx:id="bookLayout2" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="125.0" prefWidth="490.0" styleClass="bgcolor-darkbrown" stylesheets="@../../../style_File/Dashboard.css" />
             <HBox fx:id="bookLayout3" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="125.0" prefWidth="490.0" styleClass="bgcolor-darkbrown" stylesheets="@../../../style_File/Dashboard.css" />
+            <HBox prefHeight="38.0" prefWidth="498.0">
+               <children>
+                  <Label prefHeight="38.0" prefWidth="102.0" text="Number of Books:" textFill="WHITE" />
+                  <Label fx:id="bookNum" prefHeight="38.0" prefWidth="46.0" text="0" textFill="WHITE">
+                     <font>
+                        <Font size="13.0" />
+                     </font>
+                  </Label>
+                  <HBox prefHeight="38.0" prefWidth="236.0" />
+                  <Label prefHeight="38.0" prefWidth="50.0" text="Cabinet" textFill="WHITE" />
+                  <Label fx:id="cabinetPos" alignment="CENTER" prefHeight="35.0" prefWidth="35.0" styleClass="border-darkbrown" stylesheets="@../../../style_File/Dashboard.css" text="1" textFill="WHITE">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
          </children>
          <padding>
-            <Insets left="7.0" top="55.0" />
+            <Insets left="7.0" top="35.0" />
          </padding>
       </VBox>
    </children>
