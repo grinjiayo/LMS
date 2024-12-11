@@ -12,7 +12,11 @@ public class FXMLFileRunner extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
+//<<<<<<< Updated upstream
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/stages/admin/adminFXML/admin_bkManage.fxml"));
+//=======
+//        FXMLLoader loader = new FXMLLoader(getClass().getResource("/stages/student/studentFXML/student_dashboard.fxml"));
+//>>>>>>> Stashed changes
         Parent root = loader.load();
 
         Scene scene = new Scene(root);
