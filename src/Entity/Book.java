@@ -1,6 +1,14 @@
 package Entity;
 
+import javax.swing.*;
+import java.io.File;
+
 public class Book {
+    private File f = null;
+    private String path = null;
+    private ImageIcon format = null;
+    private byte[] pImage = null;
+
     private String title;
     private String author;
     private String category;

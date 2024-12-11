@@ -41,7 +41,6 @@ public class inventoryController {
     private HBox reportsBtn;
 
 //SWITCHING MENU
-
     @FXML
     private void goDashboard(MouseEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/stages/admin/adminFXML/admin_dashboard.fxml"));

@@ -31,7 +31,6 @@ public class BookController {
 
         bookTitle.setText(book.getTitle());
         bookInitial.setText(Character.toString(book.getTitle().charAt(0)));
-        //box.setStyle("-fx-background-color: #ffffff");
     }
 
 }
