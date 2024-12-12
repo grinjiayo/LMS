@@ -302,6 +302,46 @@ public class LoginController {
         timeline.play();
     }
 
+    @FXML
+    private void switchUsers(ActionEvent event) throws IOException {
+
+        Parent root = FXMLLoader.load(getClass().getResource("logFXML/userLogin_view.fxml"));
+
+        // Get the current scene and its width
+        Scene scene = exit.getScene();
+        double sceneWidth = scene.getWidth();
+
+        // Set the initial position of the new root outside the left edge
+        root.translateXProperty().set(-sceneWidth);
+
+        // Get the parent container (assuming AnchorPane is the root)
+        AnchorPane loginRoot = (AnchorPane) scene.getRoot();
+
+        // Add the new root to the parent container
+        loginRoot.getChildren().add(root);
+
+        // Create a timeline animation for sliding the new scene into view
+        Timeline timeline = new Timeline();
+
+        // Animate the new root sliding in from the left to the center
+        KeyValue kvIn = new KeyValue(root.translateXProperty(), 0, Interpolator.EASE_BOTH);
+        KeyFrame kfIn = new KeyFrame(Duration.seconds(0.6), kvIn);
+        timeline.getKeyFrames().add(kfIn);
+
+        // When the animation finishes, remove the old root (previous scene)
+        timeline.setOnFinished(t -> {
+            if (!loginRoot.getChildren().isEmpty()) {
+                Node oldScene = loginRoot.getChildren().get(0); // First child is the old scene
+                loginRoot.getChildren().remove(oldScene);      // Remove the old scene
+            }
+        });
+
+        // Play the animation
+        timeline.play();
+        System.out.println("Exit Node: " + exit);
+        System.out.println("Login Root: " + loginRoot);
+    }
+
 //Login_ADMIN=======================================================================================================================================================================================
 
     @FXML

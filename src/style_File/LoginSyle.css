@@ -87,11 +87,7 @@
 
 
 
-.checkbox {
-    -fx-background-color: #ffffff;
-    -fx-background-radius: 5px;
-    
-}
+
 
 
 .scrollframe {
@@ -108,3 +104,12 @@
 }
 
 
+/* General styles for the checkbox */
+.checkbox {
+    appearance: none; /* Remove the default checkbox styling */
+    width: 20px; /* Adjust size as needed */
+    height: 20px;
+    background-color: black; /* Make the square black */
+    border: 2px solid black; /* Optional: black border for styling */
+    cursor: pointer;
+}
