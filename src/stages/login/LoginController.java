@@ -269,7 +269,7 @@ public class LoginController {
 
     }public void switchSignInUser(ActionEvent event) throws IOException {
         // Load the new FXML file for the student sign-in view
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("logFXML/signInStudents_view.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("logFXML/signInStudent.fxml"));
         Parent root = loader.load();
 
         // Get the current root node (parent container)
