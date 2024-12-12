@@ -229,7 +229,7 @@
                                     <Image url="@../../../icons/dashboard/book.png" />
                                  </image>
                               </ImageView>
-                              <Label text="0">
+                              <Label fx:id="bookQty" text="0">
                                  <font>
                                     <Font size="40.0" />
                                  </font>

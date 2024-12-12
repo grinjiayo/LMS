@@ -1,7 +1,11 @@
 package Function;
 
 import LinkedList.DoublyLinkList;
+import javafx.fxml.FXML;
 import javafx.scene.Group;
+import javafx.scene.control.TableView;
+
+import java.util.ArrayList;
 
 public class globalVariable {
 

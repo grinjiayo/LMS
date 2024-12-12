@@ -1,20 +1,25 @@
 package stages.admin;
 
+import LinkedList.DoublyLinkList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
+import Function.*;
 
-public class dashboardController {
+public class dashboardController implements Initializable {
 
     @FXML
     private HBox acctBtn;
@@ -38,6 +43,19 @@ public class dashboardController {
     private HBox reportsBtn;
 
     @FXML
+    private Label bookQty;
+
+    Function fnc = new Function();
+
+    //INITIALIZE
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        DoublyLinkList books = globalVariable.bookList;
+        bookQty.setText(Integer.toString(fnc.countBkQuantity(books)));
+    }
+
+    //SWAP MENU
+    @FXML
     void goAccountStaff(MouseEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/stages/admin/adminFXML/admin_acctStaffs.fxml"));
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -47,7 +65,7 @@ public class dashboardController {
 
     @FXML
     void goBorrowTransact(MouseEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/stages/admin/adminFXML/admin_transact.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/stages/admin/adminFXML/transact/admin_transact.fxml"));
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setScene(new Scene(root));
         stage.show();
@@ -55,7 +73,7 @@ public class dashboardController {
 
     @FXML
     void goInventory(MouseEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/stages/admin/adminFXML/admin_inventory.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/stages/admin/adminFXML/inventory/admin_inventory.fxml"));
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setScene(new Scene(root));
         stage.show();
@@ -91,8 +109,5 @@ public class dashboardController {
         stage.setScene(new Scene(root));
         stage.show();
     }
-
-
-
 
 }

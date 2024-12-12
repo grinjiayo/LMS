@@ -267,7 +267,9 @@ public class LoginController {
         // Play the animation
         timeline.play();
 
-    }public void switchSignInUser(ActionEvent event) throws IOException {
+    }
+
+    public void switchSignInUser(ActionEvent event) throws IOException {
         // Load the new FXML file for the student sign-in view
         FXMLLoader loader = new FXMLLoader(getClass().getResource("logFXML/signInStudents_view.fxml"));
         Parent root = loader.load();

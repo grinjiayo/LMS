@@ -32,6 +32,10 @@
     -fx-background-color: #37281A;
 }
 
+.bgcolor-black {
+    -fx-background-color: black;
+}
+
 .bgcolor-lightPink {
     -fx-background-color: #ffeac5;
 }

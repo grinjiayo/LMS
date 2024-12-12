@@ -1,7 +1,13 @@
 package Function;
 
+import LinkedList.DoublyLinkList;
+import LinkedList.Link;
+
 import javax.swing.*;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
+import Entity.*;
 
 public class Function {
     Date dateNow = new Date();
@@ -21,6 +27,50 @@ public class Function {
         return true;
     }
 
+    public int countBkQuantity(DoublyLinkList list) {
+        int bookQuantity = 0;
+        Link current = list.getFirst();
+        while(current!=null) {
+            Book book = current.getElement();
+            bookQuantity += book.getQuantity();
+            current=current.getNext();
+        }
+        return bookQuantity;
+    }
+
+    public int countUniBkQuantity(DoublyLinkList list) {
+        int uniqueBook = 0;
+        Link current = list.getFirst();
+        while(current!=null) {
+            uniqueBook++;
+            current = current.getNext();
+        }
+        return uniqueBook;
+    }
+
+    public String getDateNowStr() {
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+        LocalDateTime now = LocalDateTime.now();
+        return dtf.format(now);
+    }
+
+    public Date getDateNow() {
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDateTime now = LocalDateTime.now();
+        Date date = new Date(dtf.format(now));
+        return date;
+    }
+
+    public int countBkBorrow(DoublyLinkList list) {
+        int bookBorrow = 0;
+        Link current = list.getFirst();
+        while(current!=null) {
+            Book book = current.getElement();
+            bookBorrow += book.getBorrowed();
+            current = current.getNext();
+        }
+        return bookBorrow;
+    }
 
     public int studentIDChecker(String s) { //Returns the int value of id otherwise 0;
         int studentId = 0;

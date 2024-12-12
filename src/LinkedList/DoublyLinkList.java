@@ -54,7 +54,7 @@ public class DoublyLinkList {
         String tempStr = current.getElement().getTitle();
 
         //Iterate until the compare return 0 or 1
-        while(current!=null && title.compareToIgnoreCase(tempStr)>0) {      //Comparres the tempStr to title first if the title not over the alpabeta
+        while(current!=null && title.compareToIgnoreCase(tempStr)>0) {      //Comparres the tempStr to title first if the title not over the alpabet
             current = current.next;
             if(current!=null) tempStr = current.getElement().getTitle();
         }
@@ -86,7 +86,6 @@ public class DoublyLinkList {
 
     public Link remove(Link e) {
         Link current = first;
-        //while(e.get)
         return null;
     }
 
