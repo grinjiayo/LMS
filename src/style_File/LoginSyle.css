@@ -84,10 +84,27 @@
 
 }
 
+
+
+
+.checkbox {
+    -fx-background-color: #ffffff;
+    -fx-background-radius: 5px;
+    
+}
+
+
 .scrollframe {
     -fx-background-color: #ffffff;
     -fx-background-radius: 5px;
-}
 
+}
+.textD {
+    -fx-background-color: #ffffff;
+    -fx-background-radius: 10px;
+    -fx-border-color: #000000;
+    -fx-border-radius: 10px;
+    -fx-border-width: 1px;
+}
 
 
