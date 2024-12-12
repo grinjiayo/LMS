@@ -84,16 +84,27 @@
 
 }
 
-/* HTML: <div class="loader"></div> */
-.loader {
-    width: 15px;
-    aspect-ratio: 1;
-    border-radius: 50%;
-    animation: l5 1s infinite linear alternate;
+
+
+
+.checkbox {
+    -fx-background-color: #ffffff;
+    -fx-background-radius: 5px;
+    
 }
-@keyframes l5 {
-    0%  {box-shadow: 20px 0 #000, -20px 0 #0002;background: #000 }
-    33% {box-shadow: 20px 0 #000, -20px 0 #0002;background: #0002}
-    66% {box-shadow: 20px 0 #0002,-20px 0 #000; background: #0002}
-    100%{box-shadow: 20px 0 #0002,-20px 0 #000; background: #000 }
+
+
+.scrollframe {
+    -fx-background-color: #ffffff;
+    -fx-background-radius: 5px;
+
 }
+.textD {
+    -fx-background-color: #ffffff;
+    -fx-background-radius: 10px;
+    -fx-border-color: #000000;
+    -fx-border-radius: 10px;
+    -fx-border-width: 1px;
+}
+
+
