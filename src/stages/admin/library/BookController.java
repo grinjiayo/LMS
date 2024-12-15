@@ -25,7 +25,7 @@ public class BookController {
     private Label bookInitial;
 
     public void setData(Book book) {
-        Image image = new Image(getClass().getResourceAsStream(book.getImageSrc()));
+        Image image = book.getImageSrc();
 
         bookImage.setImage(image);
 

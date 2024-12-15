@@ -9,6 +9,9 @@ import java.util.ArrayList;
 
 public class globalVariable {
 
+    public static Function fnc = new Function();
+    public static dbFunction dbFnc = new dbFunction();
+
     public static Group cabinets = new Group();
     public static DoublyLinkList bookList = new DoublyLinkList();
 

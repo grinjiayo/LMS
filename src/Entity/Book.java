@@ -1,5 +1,7 @@
 package Entity;
 
+import javafx.scene.image.Image;
+
 import javax.swing.*;
 import java.io.File;
 
@@ -12,12 +14,12 @@ public class Book {
     private String title;
     private String author;
     private String category;
-    private String imageSrc;
-    private int ISBN;
+    private Image imageSrc;
+    private String ISBN;
     private int quantity;
     private int borrowed;
 
-    public Book(String title, String author, String category, String imageSrc, int isbn, int qty, int borrowed) {
+    public Book(String title, String author, String category, Image imageSrc, String isbn, int qty, int borrowed) {
         this.title = title;
         this.author = author;
         this.category = category;
@@ -27,12 +29,21 @@ public class Book {
         this.imageSrc = imageSrc;
     }
 
-    public Book(String title, String author, String imageSrc, int quantity) {
+    public Book(String title, String author, String category, Image imageSrc, String isbn, int qty) {
+        this.title = title;
+        this.author = author;
+        this.category = category;
+        this.ISBN = isbn;
+        this.quantity = qty;
+        this.imageSrc = imageSrc;
+    }
+
+    public Book(String title, String author, String category, Image imageSrc, int quantity) {
         this.title = title;
         this.author = author;
         this.quantity = quantity;
+        this.category = category;
         this.imageSrc = imageSrc;
-        String genre = null;
     }
 
     public String getTitle() {
@@ -59,11 +70,11 @@ public class Book {
         this.category = genre;
     }
 
-    public int getISBN() {
+    public String getISBN() {
         return ISBN;
     }
 
-    public void setISBN(int ISBN) {
+    public void setISBN(String ISBN) {
         this.ISBN = ISBN;
     }
 
@@ -83,7 +94,7 @@ public class Book {
         this.borrowed = borrowed;
     }
 
-    public Object getCategory() {
+    public String getCategory() {
         return category;
     }
 
@@ -91,11 +102,11 @@ public class Book {
         this.category = category.toString();
     }
 
-    public String getImageSrc() {
+    public Image getImageSrc() {
         return imageSrc;
     }
 
-    public void setImageSrc(String imageSrc) {
+    public void setImageSrc(Image imageSrc) {
         this.imageSrc = imageSrc;
     }
 }
