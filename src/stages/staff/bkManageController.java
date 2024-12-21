@@ -44,7 +44,6 @@ public class bkManageController {
         stage.show();
     }
 
-
     @FXML
     private void goBorrowTransact(MouseEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/stages/staff/staffFXML/staff_brrowtrans.fxml"));
@@ -62,7 +61,7 @@ public class bkManageController {
     }
 
     @FXML
-    private void goLogout(MouseEvent event) throws IOException {
+    void goLogout(MouseEvent event) throws IOException {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Logout");
         alert.setHeaderText("You're about to logout!");
@@ -78,25 +77,19 @@ public class bkManageController {
     }
 
 //    @FXML
-//    private void goManageBooks(MouseEvent event) throws IOException {
-//        Parent root = FXMLLoader.load(getClass().getResource("/stages/admin/adminFXML/admin_bkManage.fxml"));
+//    void goManageBooks(MouseEvent event) throws IOException {
+//        Parent root = FXMLLoader.load(getClass().getResource("/stages/staff/staffFXML/staff_managebooks.fxml"));
 //        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 //        stage.setScene(new Scene(root));
 //        stage.show();
 //    }
 
     @FXML
-    private void goProfileAdmin(MouseEvent event) {
-
-    }
- 
-    @FXML
-    public void goReports(MouseEvent event) throws IOException {
+    void goReports(MouseEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/stages/staff/staffFXML/staff_reports.fxml"));
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setScene(new Scene(root));
         stage.show();
     }
-
 
 }

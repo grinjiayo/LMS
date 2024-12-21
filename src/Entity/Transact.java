@@ -27,9 +27,21 @@ public class Transact {
 
     private Button acceptBtn;
     private Button declineBtn;
+    private Button returnBtn;
 
     public Transact(int transID, String title, String ISBN, int borrowerID, String borrowerName, int bookID, String status) {
-        setButton();
+        setBorrowButton();
+        this.transID = transID;
+        this.bookTitle = title;
+        this.bkIsbn = ISBN;
+        this.borrowerID = borrowerID;
+        this.borrowerName = borrowerName;
+        this.bookID = bookID;
+        this.status = status;
+    }
+
+    public void TransactReturn(int transID, String title, String ISBN, int borrowerID, String borrowerName, int bookID, String status, Date borrowDate) {
+        setReturnButton();
         this.transID = transID;
         this.bookTitle = title;
         this.bkIsbn = ISBN;
@@ -47,7 +59,27 @@ public class Transact {
         this.transID = transID;
     }
 
-    public void setButton() {
+    public void setReturnButton() {
+        acceptBtn = new Button("Return");
+        acceptBtn.setOnAction(event -> {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION, "Book Request", ButtonType.NO, ButtonType.YES);
+            alert.setTitle("Return Book");
+            alert.setHeaderText("Accept Return Request");
+            alert.setContentText("Borrower Info\nBorrower ID:  " + borrowerID +
+                    "\nBorrower Name:  " + borrowerName +
+                    "\n\nBook Info \nTitle:  " + bookTitle +
+                    "\nISBN:  " + bkIsbn
+            );
+
+            if(alert.showAndWait().get() == ButtonType.YES) {
+                this.status = "RETURNED";
+            }else {
+                alert.close();
+            }
+        });
+    }
+
+    public void setBorrowButton() {
         acceptBtn = new Button("Accept");
         acceptBtn.setOnAction(event -> {
             Alert alert = new Alert(Alert.AlertType.INFORMATION, "Book Request", ButtonType.NO, ButtonType.YES);

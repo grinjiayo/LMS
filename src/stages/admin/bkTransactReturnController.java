@@ -1,6 +1,8 @@
 package stages.admin;
 
 import Entity.Transact;
+import Function.Function;
+import Function.dbFunction;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -19,14 +21,10 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.Date;
 import java.util.ResourceBundle;
 
-import Function.*;
-
-public class bkTransactController implements Initializable {
+public class bkTransactReturnController implements Initializable {
 
     Connection conn;
     Statement stmt;
@@ -62,40 +60,7 @@ public class bkTransactController implements Initializable {
     //INITIALIZE
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        try {
-            sortBy.getItems().addAll(sortType);
-            sortBy.setValue(sortType[0]);
-
-            //SET BORROW TRANSACTION TABLE
-            titleCol.setCellValueFactory(new PropertyValueFactory<Transact, String>("bookTitle"));
-            isbnCol.setCellValueFactory(new PropertyValueFactory<Transact, String>("bkIsbn"));
-            studentIDCol.setCellValueFactory(new PropertyValueFactory<Transact, String>("borrowerID"));
-            studentNameCol.setCellValueFactory(new PropertyValueFactory<Transact, String>("borrowerName"));
-            acceptBtnCol.setCellValueFactory(new PropertyValueFactory<Transact, String>("acceptBtn"));
-            declineBtnCol.setCellValueFactory(new PropertyValueFactory<Transact, String>("declineBtn"));
-
-            //Get the data in the database
-            ObservableList<Transact> transacts = FXCollections.observableArrayList();
-//            conn = dbFnc.connectToDB();
-//            stmt = conn.createStatement();
-
-            //DBFUNCTION get the transact from db to here
-
-            //Sample data
-            transacts.add(new Transact(1, "Nano", "120383013457", 20230015, "Santos, A", 00215, "PENDING"));
-            transacts.add(new Transact(1, "Oano", "120383013457", 20230015, "Santos, A", 00215, "PENDING"));
-            transacts.add(new Transact(1, "Pano", "120383013457", 20230015, "Santos, A", 00215, "PENDING"));
-            transacts.add(new Transact(1, "Qano", "120383013457", 20230015, "Santos, A", 00215, "PENDING"));
-
-            brrwTransTblView.setItems(transacts);
-//        }catch(SQLException e) {
-//            Alert alert = new Alert(Alert.AlertType.ERROR, e.getMessage(), ButtonType.OK);
-//            alert.show();
-        }catch(Exception e) {
-            Alert alert = new Alert(Alert.AlertType.ERROR, e.getMessage(), ButtonType.OK);
-            alert.setResizable(true);
-            alert.show();
-        }
+        
     }
 
 
@@ -118,13 +83,13 @@ public class bkTransactController implements Initializable {
         stage.show();
     }
 
-//    @FXML
-//    private void goBorrowTransact(MouseEvent event) throws IOException {
-//        Parent root = FXMLLoader.load(getClass().getResource("/stages/admin/adminFXML/admin_transact.fxml"));
-//        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-//        stage.setScene(new Scene(root));
-//        stage.show();
-//    }
+    @FXML
+    private void goBorrowTransact(MouseEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/stages/admin/adminFXML/transact/admin_transact.fxml"));
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setScene(new Scene(root));
+        stage.show();
+    }
 
     @FXML
     private void goInventory(MouseEvent event) throws IOException {
@@ -165,14 +130,6 @@ public class bkTransactController implements Initializable {
     @FXML
     private void goReports(MouseEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/stages/admin/adminFXML/admin_reports.fxml"));
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        stage.setScene(new Scene(root));
-        stage.show();
-    }
-
-    @FXML
-    private void goReturnTransact(MouseEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/stages/admin/adminFXML/transact/admin_transactReturn.fxml"));
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setScene(new Scene(root));
         stage.show();

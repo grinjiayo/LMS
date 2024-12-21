@@ -1,5 +1,9 @@
 package stages.admin;
 
+import Entity.Book;
+import Entity.Category;
+import Function.*;
+import Function.globalVariable;
 import LinkedList.DoublyLinkList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -8,9 +12,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.Label;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -20,54 +22,44 @@ import javafx.stage.Stage;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-import Function.*;
-
-import javax.swing.*;
-
-public class inventoryController implements Initializable {
-
+public class inventoryInsertController implements Initializable {
 
     @FXML
-    private HBox acctBtn;
+    private TextField tfAuthor;
 
     @FXML
-    private HBox bkManageBtn;
+    private ChoiceBox<Category> tfCategory;
 
     @FXML
-    private HBox borrowTransBtn;
+    private TextField tfISBN;
 
     @FXML
-    private HBox dashboardBtn;
+    private TextField tfQuantity;
 
     @FXML
-    private HBox inventoryBtn;
+    private TextField tfTitle;
 
     @FXML
-    private HBox logoutBtn;
+    private TextField pathField;
 
     @FXML
-    private HBox reportsBtn;
+    private ImageView imgView;
 
     @FXML
-    private Label bookBrrwQty;
+    private Label lblError;
 
-    @FXML
-    private Label bookQty;
-
-    @FXML
-    private Label bookUniqueQty;
-
-    Function fnc = new Function();
+    private Image newImage;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        DoublyLinkList books = globalVariable.bookList;
-        bookQty.setText(Integer.toString(fnc.countBkQuantity(books)));
-        bookUniqueQty.setText(Integer.toString(fnc.countUniBkQuantity(books)));
-        bookBrrwQty.setText(Integer.toString(fnc.countBkBorrow(books)));
+        ArrayList<Category> category = globalVariable.dbFnc.retrieveCategories();
+        tfCategory.getItems().addAll();
+        tfCategory.setValue(category.get(0));
     }
 
 //SWITCHING MENU
@@ -155,6 +147,75 @@ public class inventoryController implements Initializable {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setScene(new Scene(root));
         stage.show();
+    }
+
+    //INSERT FUNCTIONS
+    @FXML
+    private void browseImage(ActionEvent event) {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Select an Image");
+
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg")
+        );
+        File file = fileChooser.showOpenDialog(null);
+
+        if (file != null) {
+            String filePath = file.toURI().toString();
+            pathField.setText(filePath);
+
+            newImage = new Image(filePath);
+
+            imgView.setImage(newImage);
+            imgView.setFitWidth(120);
+            imgView.setFitHeight(144);
+            imgView.setPreserveRatio(false);
+        }
+    }
+
+    @FXML
+    private void createBook(ActionEvent event) {
+        if(newImage==null) {
+            lblError.setText("No image selected");  return;
+        }else if(tfTitle.getText()==null) {
+            lblError.setText("Title is blank");  return;
+        }else if(tfAuthor.getText()==null) {
+            lblError.setText("Author is blank"); return;
+        }else if(tfISBN.getText()==null) {
+            lblError.setText("ISBN is blank");return;
+        }else if(globalVariable.fnc.digitChecker(tfISBN.getText())==false) {
+            lblError.setText("ISBN should be all digits"); return;
+        }else if(tfCategory.getSelectionModel()==null) {
+            lblError.setText("No category selected"); return;
+        }else if(tfQuantity.getText()==null) {
+            lblError.setText("Quantity is blank"); return;
+        }else if(globalVariable.fnc.digitChecker(tfQuantity.getText()) == false) {
+            lblError.setText("Quantity should be digits"); return;
+        }
+
+        //Upload the image to database
+        int id = globalVariable.dbFnc.insertBookImageDB(newImage);
+
+        String bkTitle = tfTitle.getText();
+        String bkAuthor = tfAuthor.getText();
+        String bkISBN = tfISBN.getText();
+        Category ctgryObj = tfCategory.getSelectionModel().getSelectedItem();
+        String category = ctgryObj.getName();
+        int quantity = Integer.parseInt(tfQuantity.getText());
+
+        Book newBook = new Book(bkTitle, bkAuthor, category, newImage, bkISBN, quantity);
+
+        //Upload the book to database
+        boolean ifSuccess = globalVariable.dbFnc.insertBookDB(newBook, id);
+        if(ifSuccess) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION, "Book inserted successfully", ButtonType.OK);
+            alert.setTitle("Book Insert");
+            alert.show();
+        }else {
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Book is not inserted", ButtonType.OK);
+            alert.setTitle("Book Insert");
+            alert.show();
+        }
     }
 
 }

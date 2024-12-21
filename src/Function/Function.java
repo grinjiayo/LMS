@@ -6,6 +6,7 @@ import LinkedList.Link;
 import javax.swing.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Date;
 import Entity.*;
 
@@ -36,6 +37,28 @@ public class Function {
             current=current.getNext();
         }
         return bookQuantity;
+    }
+
+    public String retrieveStudentID(String ID)  {
+        String studentID = null;
+        if (!ID.isEmpty()) {
+            if (ID.matches("\\d{4}-\\d{5}")) {
+                studentID = ID.replace("-", "");
+            } else {
+                return null;
+            }
+        } else {
+            return null;
+        }
+        return studentID;
+    }
+
+    public String[] arrayListToStringArray(ArrayList<String> strs) {
+        String[] strings = new String[strs.size()];
+        for(int i = 0; i<strs.size(); i++) {
+            strings[i] = strs.get(i);
+        }
+        return strings;
     }
 
     public int countUniBkQuantity(DoublyLinkList list) {

@@ -1,10 +1,15 @@
 package Function;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 import Entity.Book;
+import Entity.Category;
 import LinkedList.*;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
+import javafx.scene.image.Image;
 
 import javax.swing.*;
 
@@ -38,6 +43,34 @@ public class dbFunction {
         return null;
     }
 
+    public ArrayList<Category> retrieveCategories() {
+        ArrayList<Category> categories = new ArrayList<Category>();
+        try{
+            conn = connectToDB();
+
+            String sqlGetCategory = "SELECT ctgry_id, ctgry_name FROM bkcategory";
+            pstmt = conn.prepareStatement(sqlGetCategory);
+
+            //Retrieve the category starting from id 1
+            rs = pstmt.executeQuery();
+            while(rs.next()) {
+                int id = rs.getInt("ctgry_id");
+                String ctgryName = rs.getString("ctgry_name");
+                categories.add(new Category(id, ctgryName));
+                System.out.println("Inserted category" + id + ", " + ctgryName);
+            }
+        }catch(SQLException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR, e.getMessage(), ButtonType.OK);
+            alert.setTitle("RetrieveCategoryError");
+            alert.show();
+        }catch(Exception e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR, e.getMessage(), ButtonType.OK);
+            alert.setTitle("RetrieveCategoryError");
+            alert.show();
+        }
+        return categories;
+    }
+
     //LINKED LIST FUNCTION
     public DoublyLinkList retrieveBooksnOrder() {
         try {
@@ -51,9 +84,9 @@ public class dbFunction {
                 //Retrieve all
                 String title = rs.getString("title");
                 String author = rs.getString("author");
-                String imageSrc = rs.getString("imageSrc");
-                int isbn = rs.getInt("isbn");
-                String category = rs.getString("category_id");
+                Image imageSrc =(Image) rs.getBlob("imageSrc");
+                String isbn = rs.getString("isbn");
+                String category = rs.getString("category");
                 int quantity = rs.getInt("quantity");
                 int borrowed = rs.getInt("borrowed");   //0 if available, signify the number of books borrowed
 
@@ -64,16 +97,20 @@ public class dbFunction {
             }
             return books;
         }catch(SQLException e) {
-            System.out.println(e.getMessage());
+            Alert alert = new Alert(Alert.AlertType.ERROR, e.getMessage(), ButtonType.OK);
+            alert.setTitle("RetrieveBookError");
+            alert.show();
         }catch(Exception e) {
-            System.out.println(e.getMessage());
+            Alert alert = new Alert(Alert.AlertType.ERROR, e.getMessage(), ButtonType.OK);
+            alert.setTitle("RetrieveBookError");
+            alert.show();
         }
         return null;
     }
 
-    public void resetAutoIncrement(Connection conn, String table, String column) {
+    public int resetAutoIncrement(Connection conn, String table, String column) {
+        int id = 0;
         try {
-            int id = 0;
             Statement stmt = conn.createStatement();
             String sqlChecker = "SELECT MAX(" + column + ") FROM " + table + " ;";
             ResultSet rs = stmt.executeQuery(sqlChecker);
@@ -86,13 +123,66 @@ public class dbFunction {
             }
             String sqlAlterInc = "ALTER TABLE " + table + " AUTO_INCREMENT=" + (id + 1) + ";";
             stmt.executeUpdate(sqlAlterInc);
+            return id+1;
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-            e.printStackTrace();
+            Alert alert = new Alert(Alert.AlertType.ERROR, e.getMessage(), ButtonType.OK);
+            alert.setTitle("ResetIncrementError");
+            alert.show();
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-            e.printStackTrace();
-
+            Alert alert = new Alert(Alert.AlertType.ERROR, e.getMessage(), ButtonType.OK);
+            alert.setTitle("ResetIncrementError");
+            alert.show();
         }
+        return id+1;
+    }
+
+    public boolean insertBookDB(Book book, int imageID) {
+        try{
+            conn = connectToDB();
+            String sqlInsertBook = "INSERT INTO librarydb.book" +
+                    "(title, author, isbn, category_id, quantity, borrowed, imgID)" +
+                    "VALUES (?, ?, ?, ?, ?, 0, ?)";
+            pstmt = conn.prepareStatement(sqlInsertBook);
+            pstmt.setString(1, book.getTitle());
+            pstmt.setString(2, book.getAuthor());
+            pstmt.setString(3, book.getISBN());
+            pstmt.setString(4, book.getCategory());
+            pstmt.setBlob(5, (Blob) book.getImageSrc());
+            pstmt.setInt(6, imageID);
+            rs = pstmt.executeQuery();
+            return true;
+        }catch(SQLException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR, e.getMessage(), ButtonType.OK);
+            alert.setTitle("InsertBookError");
+            alert.show();
+        }catch(Exception e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR, e.getMessage(), ButtonType.OK);
+            alert.setTitle("InsertBookError");
+            alert.show();
+        }
+        return false;
+    }
+
+    public int insertBookImageDB(Image img) {
+        int id = 0;
+        try{
+            conn = connectToDB();
+            id = resetAutoIncrement(conn, "image", "imgID");
+            String sqlInsertImage = "INSERT INTO librarydb.image(imgID, imgFile) VALUES (?, ?)";
+            pstmt = conn.prepareStatement(sqlInsertImage);
+            pstmt.setInt(1, id);
+            pstmt.setBlob(2, (Blob) img);
+            pstmt.execute();
+            return id;
+        }catch(SQLException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR, e.getMessage(), ButtonType.OK);
+            alert.setTitle("InsertBkImgError");
+            alert.show();
+        }catch(Exception e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR, e.getMessage(), ButtonType.OK);
+            alert.setTitle("InsertBkImgError");
+            alert.show();
+        }
+        return id;
     }
 }
