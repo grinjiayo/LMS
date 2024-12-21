@@ -1,5 +1,7 @@
 package stages.admin;
 
+import Entity.Book;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -8,10 +10,13 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import stages.admin.library.BookSelectionService;
 
 import java.io.IOException;
 import java.net.URL;
@@ -23,41 +28,55 @@ public class bkManageController implements Initializable {
     private VBox libraryBox;
 
     @FXML
-    private HBox acctBtn;
+    private TextField bkTitleField;
 
     @FXML
-    private HBox bkManageBtn;
+    private TextField bkAuthorField;
 
     @FXML
-    private HBox borrowTransBtn;
+    private TextField bkISBNField;
 
     @FXML
-    private HBox dashboardBtn;
+    private TextField bkCtgryField;
 
     @FXML
-    private HBox inventoryBtn;
+    private TextField bkQtyField;
 
     @FXML
-    private HBox logoutBtn;
-
-    @FXML
-    private HBox reportsBtn;
+    private ImageView bkImage;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {
+            // Load the library view
             FXMLLoader fxmlLoader = new FXMLLoader();
             fxmlLoader.setLocation(bkManageController.class.getResource("/stages/admin/library/libraryView.fxml"));
-
             VBox libraryView = fxmlLoader.load();
             libraryBox.getChildren().add(libraryView);
-        }catch(Exception e) {
+
+            // Listen for changes in the selected book
+            BookSelectionService.getInstance().selectedBookProperty().addListener((observable, oldBook, newBook) -> {
+                if (newBook != null) {
+                    setBookData(newBook);
+                }
+            });
+
+        } catch (Exception e) {
             Alert error = new Alert(Alert.AlertType.ERROR, e.getMessage(), ButtonType.OK);
             error.showAndWait();
-            e.printStackTrace();
         }
     }
 
+    public void setBookData(Book book) {
+        if (book != null) {
+            bkImage.setImage(book.getImageSrc());
+            bkTitleField.setText(book.getTitle());
+            bkAuthorField.setText(book.getAuthor());
+            bkISBNField.setText(book.getISBN());
+            bkCtgryField.setText(book.getCategory());
+            bkQtyField.setText(Integer.toString(book.getQuantity()));
+        }
+    }
 
     @FXML
     private void goDashboard(MouseEvent event) throws IOException {

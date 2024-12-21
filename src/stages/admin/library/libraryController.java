@@ -9,13 +9,17 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Group;
+import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+import stages.admin.bkManageController;
 
 import javax.swing.*;
 import java.io.IOException;
@@ -50,15 +54,19 @@ public class libraryController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {
-            books = new DoublyLinkList(libraryBooks()); //Get the books
+            // Continue initializing books and library view
+            books = new DoublyLinkList(libraryBooks());
             moveLeftBtn.setDisable(true);
 
-            int bookCount = books.getSize();      //Indicates the number of books
+            int bookCount = books.getSize(); // Indicates the number of books
             bookNum.setText(Integer.toString(bookCount));
-            cabinetPos.setText(Integer.toString(cabinetIndex+1));
-            cabinetCount = bookCount/42;      //Number of cabinets(each contains 42 books;
-            if(bookCount%42!=0) {       //Add another cabinet
+            cabinetPos.setText(Integer.toString(cabinetIndex + 1));
+            cabinetCount = bookCount / 42;
+            if (bookCount % 42 != 0 && bookCount>42) { // Add another cabinet
                 cabinetCount++;
+            }
+            if(bookCount<=42) {
+                moveRightBtn.setDisable(true);
             }
 
             int count = 0;
@@ -70,19 +78,21 @@ public class libraryController implements Initializable {
                 HBox bookBox = fxmlLoader.load();
                 BookController bookController = fxmlLoader.getController();
                 bookController.setData(current.getElement());
-                if(count<14) {
+
+                if (count < 14) {
                     bookLayout.getChildren().add(bookBox);
-                }else if(count<28) {
+                } else if (count < 28) {
                     bookLayout2.getChildren().add(bookBox);
-                }else if(count<42) {
+                } else if (count < 42) {
                     bookLayout3.getChildren().add(bookBox);
                 }
                 count++;
                 current = current.getNext();
             }
 
-        }catch(IOException e) {
+        } catch (IOException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR, e.getMessage());
+            alert.showAndWait();
         }
     }
 
@@ -178,8 +188,14 @@ public class libraryController implements Initializable {
     }
 
     //TO BE ERASED
-    private DoublyLinkList libraryBooks() { //Create a list of books
+    private DoublyLinkList libraryBooks() throws IOException { //Create a list of books
         DoublyLinkList books = new DoublyLinkList();
+
+        books.insertNOrder(new Book("Call of the Wild", "Simpson", "Fiction", new Image(getClass().getResource("/bookImages/call_Book.png").toExternalForm()), "201237871823", 3));
+        books.insertNOrder(new Book("Dracula", "Simpson", "Fiction", new Image(getClass().getResource("/bookImages/dracula_book.jpg").toExternalForm()), "201237871823", 3));
+        books.insertNOrder(new Book("Howl", "Simpson", "Fiction", new Image(getClass().getResource("/bookImages/howl_Book.jpg").toExternalForm()), "201237871823", 3));
+        books.insertNOrder(new Book("Odyssey", "Simpson", "Fiction", new Image(getClass().getResource("/bookImages/odyssey_book.jpg").toExternalForm()), "201237871823", 3));
+
         return books;
     }
 

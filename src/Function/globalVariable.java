@@ -1,5 +1,6 @@
 package Function;
 
+import Entity.Student;
 import LinkedList.DoublyLinkList;
 import javafx.fxml.FXML;
 import javafx.scene.Group;
@@ -11,6 +12,7 @@ public class globalVariable {
 
     public static Function fnc = new Function();
     public static dbFunction dbFnc = new dbFunction();
+    public static Student loginStudent;
 
     public static Group cabinets = new Group();
     public static DoublyLinkList bookList = new DoublyLinkList();

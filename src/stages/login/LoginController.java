@@ -1,5 +1,6 @@
 package stages.login;
 
+import Entity.Student;
 import javafx.animation.*;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyEvent;
@@ -283,8 +284,17 @@ public class LoginController {
             pstmt.setString(2, password);
             rs = pstmt.executeQuery();
             if (rs.next()) {
-                //INSERT THE STUDENT MENU HERE
-                Parent root = FXMLLoader.load(getClass().getResource("/stages/admin/adminFXML/admin_dashboard.fxml"));
+                int school_id = rs.getInt("school_id");
+                String fName = rs.getString("fName");
+                String lName = rs.getString("lName");
+                String section = rs.getString("section");
+                String email = rs.getString("email");
+                String pass = rs.getString("password");
+                Double penalty = rs.getDouble("penalty");
+
+                globalVariable.loginStudent = new Student(school_id, fName,lName, section, email, pass, penalty);
+
+                Parent root = FXMLLoader.load(getClass().getResource("/stages/student/studentFXML/student_dashboard.fxml"));
                 Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                 stage.setScene(new Scene(root));
                 stage.show();

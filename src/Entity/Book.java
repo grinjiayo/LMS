@@ -1,5 +1,8 @@
 package Entity;
 
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.image.Image;
 
 import javax.swing.*;
@@ -108,6 +111,20 @@ public class Book {
 
     public void setImageSrc(Image imageSrc) {
         this.imageSrc = imageSrc;
+    }
+
+    public void bookDataView() {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION, "Book Request", ButtonType.NO, ButtonType.YES);
+        alert.setTitle("Return Book");
+        alert.setHeaderText("Accept Return Request");
+        alert.showAndWait();
+    }
+
+    public void borrowBookView() {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION, "Book Request", ButtonType.NO, ButtonType.YES);
+        alert.setTitle("Return Book");
+        alert.setHeaderText("Accept Return Request");
+        alert.showAndWait();
     }
 
 }

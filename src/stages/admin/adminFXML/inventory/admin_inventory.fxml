@@ -210,7 +210,7 @@
          <children>
             <HBox alignment="CENTER" prefHeight="24.0" prefWidth="266.0">
                <children>
-                  <TextField maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="200.0" promptText="Search" stylesheets="@../../../../style_File/Dashboard.css">
+                  <TextField focusTraversable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="200.0" promptText="Search" stylesheets="@../../../../style_File/Dashboard.css">
                      <styleClass>
                         <String fx:value="bgcolor-white" />
                         <String fx:value="outlineAllBlack" />
