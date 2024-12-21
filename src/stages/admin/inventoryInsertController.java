@@ -58,7 +58,7 @@ public class inventoryInsertController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         ArrayList<Category> category = globalVariable.dbFnc.retrieveCategories();
-        tfCategory.getItems().addAll(category);
+        tfCategory.getItems().addAll();
         tfCategory.setValue(category.get(0));
     }
 

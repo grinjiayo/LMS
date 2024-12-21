@@ -1,6 +1,7 @@
 package stages.login;
 
 import javafx.animation.*;
+import javafx.scene.control.*;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -9,12 +10,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.image.ImageView;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
 import javafx.event.ActionEvent;
 import javafx.animation.Interpolator;
 import java.io.IOException;
@@ -40,7 +38,7 @@ public class LoginController {
     @FXML private AnchorPane adminRoot, staffRoot, userRoot, loginRoot, setFrame;
     @FXML private Button passButton, staffLog, userLog, signInStudent, exit;
     @FXML private PasswordField passwordtextfield;
-    @FXML private TextField passwordTextVisible, tf_staffid, tfAdminName;
+    @FXML private TextField passwordTextVisible, tf_staffid, tfAdminName, studentIDField;
     @FXML private ImageView passwordIcon;
 //EXIT=======================================================================================================================================================================================
 
@@ -144,6 +142,10 @@ public class LoginController {
     public void staffLoginEvt(ActionEvent event) throws Exception {
         try {
             conn = dbFunc.connectToDB();
+            if (conn == null) {
+                System.out.println("Database connection failed.");
+                return;
+            }
 
             String id = tf_staffid.getText();
             String password = passwordtextfield.getText();
@@ -206,9 +208,8 @@ public class LoginController {
                 stage.setScene(new Scene(root));
                 stage.show();
             }
+            //END OF TO_BE_ERASED
 
-            System.out.println(username);
-            System.out.println(password);
             //Use the fName and password for admin login
             String sqlFindStaff = "SELECT * FROM staff WHERE fName = ? AND password = ? AND staff_id=1";
             pstmt = conn.prepareStatement(sqlFindStaff);
@@ -222,12 +223,76 @@ public class LoginController {
                 stage.setScene(new Scene(root));
                 stage.show();
             } else {
-                JOptionPane.showMessageDialog(null,
-                        "Wrong id or password",
-                        "Login Failed",
-                        JOptionPane.ERROR_MESSAGE);
+                Alert alert = new Alert(Alert.AlertType.NONE, "Wrong ID or password", ButtonType.OK);
+                alert.setTitle("Login Failed");
+                alert.show();
             }
 
+        }catch(SQLException e){
+            Alert alert = new Alert(Alert.AlertType.NONE, e.getMessage(), ButtonType.OK);
+            alert.setTitle("Login Error");
+            alert.show();
+        }catch(Exception e) {
+            Alert alert = new Alert(Alert.AlertType.NONE, e.getMessage(), ButtonType.OK);
+            alert.setTitle("Login Error");
+            alert.show();
+        }
+    }
+
+    @FXML
+    private void loginStudent(ActionEvent event) {
+        try {
+            conn = dbFunc.connectToDB();
+
+            String studentID = studentIDField.getText();
+            String password = passwordtextfield.getText();
+
+            //TO_BE_ERASED
+            if(studentID.equalsIgnoreCase("Student1") && password.equalsIgnoreCase("student123")) {
+                Parent root = FXMLLoader.load(getClass().getResource("/stages/student/studentFXML/student_dashboard.fxml"));
+                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                stage.setScene(new Scene(root));
+                stage.show();
+            }
+            //END OF TO_BE_ERASED
+
+            //Use the fName and password for admin login
+            if(studentID.isEmpty()) {
+                Alert alert = new Alert(Alert.AlertType.NONE, "Missing ID", ButtonType.OK);
+                alert.setTitle("Login");
+                alert.show();
+                return;
+            }
+            if(password.isEmpty()) {
+                Alert alert = new Alert(Alert.AlertType.NONE, "Missing password", ButtonType.OK);
+                alert.setTitle("Login");
+                alert.show();
+                return;
+            }
+
+            studentID = fnc.retrieveStudentID(studentID);   //Retrieve the ID in correct formatt
+            if(studentID==null) {//If wrong format
+                Alert alert = new Alert(Alert.AlertType.NONE, "Invalid ID format", ButtonType.OK);
+                alert.setTitle("Login");
+                alert.show();
+                return;
+            }
+            String sqlFindStaff = "SELECT * FROM student WHERE school_id = ? AND password = ?";
+            pstmt = conn.prepareStatement(sqlFindStaff);
+            pstmt.setString(1, studentID);
+            pstmt.setString(2, password);
+            rs = pstmt.executeQuery();
+            if (rs.next()) {
+                //INSERT THE STUDENT MENU HERE
+                Parent root = FXMLLoader.load(getClass().getResource("/stages/admin/adminFXML/admin_dashboard.fxml"));
+                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                stage.setScene(new Scene(root));
+                stage.show();
+            } else {
+                Alert alert = new Alert(Alert.AlertType.NONE, "Student not found", ButtonType.OK);
+                alert.setTitle("Login Failed");
+                alert.show();
+            }
         }catch(SQLException e){
             System.out.println(e.getMessage());
         }catch(Exception e) {

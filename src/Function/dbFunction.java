@@ -48,7 +48,7 @@ public class dbFunction {
         try{
             conn = connectToDB();
 
-            String sqlGetCategory = "SELECT (ctgry_id, ctgry_name) FROM category";
+            String sqlGetCategory = "SELECT ctgry_id, ctgry_name FROM bkcategory";
             pstmt = conn.prepareStatement(sqlGetCategory);
 
             //Retrieve the category starting from id 1
@@ -57,6 +57,7 @@ public class dbFunction {
                 int id = rs.getInt("ctgry_id");
                 String ctgryName = rs.getString("ctgry_name");
                 categories.add(new Category(id, ctgryName));
+                System.out.println("Inserted category" + id + ", " + ctgryName);
             }
         }catch(SQLException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR, e.getMessage(), ButtonType.OK);

@@ -1,7 +1,9 @@
 package stages.student;
 
+import Entity.Student;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -12,8 +14,10 @@ import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
-public class dashboardController {
+public class dashboardController implements Initializable {
 
     @FXML
     private HBox acctBtn;
@@ -36,21 +40,21 @@ public class dashboardController {
     @FXML
     private HBox reportsBtn;
 
-//    @FXML
-//    void goAccountStaff(MouseEvent event) throws IOException {
-//        Parent root = FXMLLoader.load(getClass().getResource("/stages/admin/adminFXML/admin_acctStaffs.fxml"));
-//        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-//        stage.setScene(new Scene(root));
-//        stage.show();
-//    }
+    private Student userStudent;
 
-//    @FXML
-//    void goBorrowTransact(MouseEvent event) throws IOException {
-//        Parent root = FXMLLoader.load(getClass().getResource("/stages/admin/adminFXML/admin_transact.fxml"));
-//        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-//        stage.setScene(new Scene(root));
-//        stage.show();
-//    }
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+
+    }
+
+    //Set the student
+    public void setUserStudent(Student user) {
+        if(user!=null) { //Checks if not null
+            userStudent = user;
+        }else {
+
+        }
+    }
 
     @FXML
     void gobrrowBooks(MouseEvent event) throws IOException {
@@ -81,6 +85,7 @@ public class dashboardController {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setScene(new Scene(root));
         stage.show();    }
+
 
 //    @FXML
 //    void goReports(MouseEvent event) throws IOException {

@@ -30,7 +30,6 @@ public class BookController {
         bookImage.setImage(image);
 
         bookTitle.setText(book.getTitle());
-        bookInitial.setText(Character.toString(book.getTitle().charAt(0)));
     }
 
 }

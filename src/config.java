@@ -62,17 +62,25 @@ public class config {
             stmt.executeUpdate(sqlTableCategory);
             System.out.println("Table 'category' created successfully");
 
+            String sqlTableImage = "CREATE TABLE IF NOT EXISTS librarydb.image (" +
+                    "imgID INT(24) NOT NULL AUTO_INCREMENT," +
+                    "imgPath VARCHAR(64), " +
+                    "imgFile LONGBLOB NOT NULL, " +
+                    "PRIMARY KEY(imgID))";
+            stmt.executeUpdate(sqlTableImage);
+            System.out.println("Table 'image' created successfully");
+
             //Create Book Table
             String sqlTableBook = "CREATE TABLE IF NOT EXISTS librarydb.book (" +
                     "book_id INT NOT NULL AUTO_INCREMENT," +
                     "title VARCHAR(64) NOT NULL," +
                     "author VARCHAR(64) NOT NULL," +
                     "isbn VARCHAR(24) NOT NULL," +
-                    "category VARCHAR(24) NOT NULL," +
                     "quantity INT(24) NOT NULL," +
                     "borrowed INT NOT NULL," +
+                    "ctgry_id INT(24) NOT NULL," +
                     "imgID INT NOT NULL, " +
-                    "FOREIGN KEY(category_id) REFERENCES bkcategory(ctgry_id), " +
+                    "FOREIGN KEY(ctgry_id) REFERENCES bkcategory(ctgry_id), " +
                     "FOREIGN KEY(imgID) REFERENCES image(imgID), " +
                     "PRIMARY KEY(book_id));";
             stmt.executeUpdate(sqlTableBook);
@@ -113,14 +121,6 @@ public class config {
                     "PRIMARY KEY(staff_id))";
             stmt.executeUpdate(sqlTableStaff);
             System.out.println("Table 'staff' created successfully");
-
-            String sqlTableImage = "CREATE TABLE IF NOT EXISTS librarydb.image (" +
-                    "imgID INT(24) NOT NULL AUTO_INCREMENT," +
-                    "imgPath VARCHAR(64), " +
-                    "imgFile LONGBLOB NOT NULL, " +
-                    "PRIMARY KEY(imgID))";
-            stmt.executeUpdate(sqlTableImage);
-            System.out.println("Table 'image' created successfully");
 
             insertAdmin();
 //            insertSampleBook();

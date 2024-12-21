@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.effect.ColorAdjust?>
 <?import javafx.scene.image.Image?>
@@ -10,29 +9,17 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="125.0" prefWidth="35.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="stages.admin.library.BookController">
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="125.0" prefWidth="35.0" styleClass="hoverBorderGray" stylesheets="@../../../style_File/Dashboard.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="stages.admin.library.BookController">
    <children>
-      <VBox fx:id="box" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="135.0" prefWidth="35.0" styleClass="transparent" stylesheets="@../../../style_File/Dashboard.css">
+      <VBox fx:id="box" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="126.0" prefWidth="35.0" styleClass="transparent" stylesheets="@../../../style_File/Dashboard.css">
          <children>
-            <HBox alignment="TOP_CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="6.0" prefWidth="35.0" styleClass="transparent" stylesheets="@../../../style_File/Dashboard.css">
-               <VBox.margin>
-                  <Insets />
-               </VBox.margin>
+            <HBox maxHeight="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="118.0" prefWidth="35.0" stylesheets="@../../../style_File/Dashboard.css">
                <children>
-                  <Label fx:id="bookInitial" alignment="CENTER" prefHeight="4.0" prefWidth="35.0" text="C" textFill="WHITE">
-                     <font>
-                        <Font size="5.0" />
-                     </font>
-                  </Label>
-               </children>
-            </HBox>
-            <HBox maxHeight="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="119.0" prefWidth="35.0" stylesheets="@../../../style_File/Dashboard.css">
-               <children>
-                  <StackPane maxHeight="-Infinity" minHeight="-Infinity" prefHeight="119.0" prefWidth="200.0">
+                  <StackPane maxHeight="-Infinity" minHeight="-Infinity" prefHeight="125.0" prefWidth="35.0">
                      <children>
-                        <VBox fx:id="imageContainer" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="118.0" prefWidth="35.0">
+                        <VBox fx:id="imageContainer" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="125.0" prefWidth="35.0">
                            <children>
-                              <ImageView fx:id="bookImage" fitHeight="119.0" fitWidth="35.0" pickOnBounds="true" styleClass="bkImage">
+                              <ImageView fx:id="bookImage" fitHeight="126.0" fitWidth="35.0" pickOnBounds="true" styleClass="bkImage">
                                  <image>
                                     <Image url="@../../../../../../../Downloads/call_Book.png" />
                                  </image>

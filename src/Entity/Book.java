@@ -109,4 +109,5 @@ public class Book {
     public void setImageSrc(Image imageSrc) {
         this.imageSrc = imageSrc;
     }
+
 }

@@ -16,7 +16,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane blendMode="DARKEN" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="675.0" prefWidth="970.0" stylesheets="@../../../../style_File/Dashboard.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="stages.admin.bkTransactController">
+<BorderPane blendMode="DARKEN" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="675.0" prefWidth="970.0" stylesheets="@../../../../style_File/Dashboard.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="stages.admin.bkTransactReturnController">
    <top>
       <HBox prefHeight="68.0" prefWidth="970.0" stylesheets="@../../../../style_File/Dashboard.css" BorderPane.alignment="CENTER">
          <children>
@@ -206,7 +206,7 @@
          <children>
             <HBox alignment="CENTER_LEFT" prefHeight="55.0" prefWidth="773.0">
                <children>
-                  <Label prefHeight="28.0" prefWidth="198.0" styleClass="text-menuHeader" stylesheets="@../../../../style_File/Dashboard.css" text="BORROW TRANSACTION" textFill="WHITE" wrapText="true">
+                  <Label prefHeight="28.0" prefWidth="198.0" styleClass="text-menuHeader" stylesheets="@../../../../style_File/Dashboard.css" text="RETURN TRANSACTION" textFill="WHITE" wrapText="true">
                      <font>
                         <Font name="System Bold" size="16.0" />
                      </font>
@@ -216,14 +216,14 @@
                   </Label>
                   <HBox alignment="CENTER_RIGHT" prefHeight="55.0" prefWidth="551.0">
                      <children>
-                        <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#goReturnTransact" prefHeight="30.0" prefWidth="194.0" spacing="5.0" stylesheets="@../../../../style_File/Dashboard.css">
+                        <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#goBorrowTransact" prefHeight="30.0" prefWidth="194.0" spacing="5.0" stylesheets="@../../../../style_File/Dashboard.css">
                            <children>
                               <ImageView fitHeight="18.0" fitWidth="19.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@../../../../icons/brrwIconBlack.png" />
                                  </image>
                               </ImageView>
-                              <Label prefHeight="30.0" prefWidth="146.0" text="Go To Return Transaction">
+                              <Label prefHeight="30.0" prefWidth="152.0" text="Go To Borrow Transaction">
                                  <font>
                                     <Font size="13.0" />
                                  </font>
@@ -243,7 +243,7 @@
             </HBox>
             <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="773.0" spacing="20.0">
                <children>
-                  <Button mnemonicParsing="false" prefHeight="27.0" prefWidth="144.0" styleClass="bgcolor-brown" stylesheets="@../../../../style_File/Dashboard.css" text="Transact History" textFill="WHITE">
+                  <Button mnemonicParsing="false" prefHeight="27.0" prefWidth="144.0" styleClass="bgcolor-brown" stylesheets="@../../../../style_File/Dashboard.css" text="Track Delinquency" textFill="WHITE">
                      <font>
                         <Font size="13.0" />
                      </font>
@@ -290,12 +290,12 @@
             </HBox>
             <TableView fx:id="brrwTransTblView" prefHeight="502.0" prefWidth="740.0" styleClass="outlineAllBlack" stylesheets="@../../../../style_File/Dashboard.css">
               <columns>
-                <TableColumn fx:id="titleCol" prefWidth="199.99997854232788" text="Title" />
-                <TableColumn fx:id="isbnCol" minWidth="0.0" prefWidth="132.0" text="ISBN" />
-                  <TableColumn fx:id="studentIDCol" prefWidth="146.4000244140625" text="Student ID" />
-                  <TableColumn fx:id="studentNameCol" prefWidth="140.80007934570312" text="Student Name" />
-                  <TableColumn fx:id="acceptBtnCol" minWidth="5.0" prefWidth="70.0" text="Accept" />
-                  <TableColumn fx:id="declineBtnCol" prefWidth="75.0" text="Decline" />
+                  <TableColumn prefWidth="121.59997701644897" text="Borrow Date" />
+                <TableColumn fx:id="isbnCol" minWidth="0.0" prefWidth="89.60002899169922" text="Days" />
+                <TableColumn fx:id="titleCol" prefWidth="185.5999755859375" text="Title" />
+                  <TableColumn fx:id="studentIDCol" prefWidth="122.40005493164062" text="Student ID" />
+                  <TableColumn fx:id="studentNameCol" prefWidth="171.20001220703125" text="Student Name" />
+                  <TableColumn fx:id="acceptBtnCol" minWidth="5.0" prefWidth="78.4000244140625" text="Return" />
               </columns>
             </TableView>
          </children></VBox>
