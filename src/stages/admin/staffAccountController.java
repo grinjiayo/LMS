@@ -1,5 +1,6 @@
 package stages.admin;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -52,7 +53,7 @@ public class staffAccountController {
 
     @FXML
     private void goAccountStaff(MouseEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/stages/admin/adminFXML/admin_acctStaffs.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/stages/admin/adminFXML/staff/admin_acctStaffsAdd.fxml"));
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setScene(new Scene(root));
         stage.show();
@@ -119,4 +120,10 @@ public class staffAccountController {
         stage.show();
     }
 
+    //doInsert para sa staff
+    public void doInsert(ActionEvent actionEvent) {
+    }
+    //doModify para sa staff
+    public void doModify(ActionEvent actionEvent) {
+    }
 }
