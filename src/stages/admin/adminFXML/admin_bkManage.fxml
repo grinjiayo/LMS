@@ -261,6 +261,9 @@
                                     <String fx:value="transparent" />
                                     <String fx:value="outlineDown" />
                                  </styleClass>
+                                 <font>
+                                    <Font size="13.0" />
+                                 </font>
                               </TextField>
                            </children>
                         </HBox>
@@ -276,6 +279,9 @@
                                     <String fx:value="transparent" />
                                     <String fx:value="outlineDown" />
                                  </styleClass>
+                                 <font>
+                                    <Font size="13.0" />
+                                 </font>
                               </TextField>
                            </children>
                         </HBox>
@@ -291,6 +297,9 @@
                                     <String fx:value="transparent" />
                                     <String fx:value="outlineDown" />
                                  </styleClass>
+                                 <font>
+                                    <Font size="13.0" />
+                                 </font>
                               </TextField>
                            </children>
                         </HBox>
@@ -306,6 +315,9 @@
                                     <String fx:value="transparent" />
                                     <String fx:value="outlineDown" />
                                  </styleClass>
+                                 <font>
+                                    <Font size="13.0" />
+                                 </font>
                               </TextField>
                            </children>
                            <VBox.margin>
@@ -324,6 +336,9 @@
                                     <String fx:value="transparent" />
                                     <String fx:value="outlineDown" />
                                  </styleClass>
+                                 <font>
+                                    <Font size="13.0" />
+                                 </font>
                               </TextField>
                            </children>
                            <VBox.margin>

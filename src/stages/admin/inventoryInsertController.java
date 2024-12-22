@@ -53,9 +53,13 @@ public class inventoryInsertController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        ArrayList<Category> category = globalVariable.dbFnc.retrieveCategories();
-        tfCategory.getItems().addAll();
-        tfCategory.setValue(category.get(0));
+        ArrayList<Category> categories = globalVariable.dbFnc.retrieveCategories();
+        if (categories != null && !categories.isEmpty()) {
+            tfCategory.getItems().addAll(categories);
+            tfCategory.setValue(categories.get(0)); // Optional: Set a default value
+        } else {
+            System.out.println("No categories retrieved.");
+        }
     }
 
 //SWITCHING MENU
@@ -190,8 +194,6 @@ public class inventoryInsertController implements Initializable {
         }
 
         //Upload the image to database
-        int id = globalVariable.dbFnc.insertBookImageDB(newImage);
-
         String bkTitle = tfTitle.getText();
         String bkAuthor = tfAuthor.getText();
         String bkISBN = tfISBN.getText();
@@ -199,14 +201,24 @@ public class inventoryInsertController implements Initializable {
         String category = ctgryObj.getName();
         int quantity = Integer.parseInt(tfQuantity.getText());
 
+        String imgName = globalVariable.dbFnc.insertBookImageDB(newImage, bkTitle+bkAuthor);
+
         Book newBook = new Book(bkTitle, bkAuthor, category, newImage, bkISBN, quantity);
 
         //Upload the book to database
-        boolean ifSuccess = globalVariable.dbFnc.insertBookDB(newBook, id);
+        boolean ifSuccess = globalVariable.dbFnc.insertBookDB(newBook, imgName);
         if(ifSuccess) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION, "Book inserted successfully", ButtonType.OK);
             alert.setTitle("Book Insert");
             alert.show();
+            globalVariable.bookList.insertNOrder(newBook);
+            imgView.setImage(null);
+            pathField.setText(null);
+            tfTitle.setText(null);
+            tfAuthor.setText(null);
+            tfISBN.setText(null);
+            tfQuantity.setText(null);
+            lblError.setText(null);
         }else {
             Alert alert = new Alert(Alert.AlertType.ERROR, "Book is not inserted", ButtonType.OK);
             alert.setTitle("Book Insert");

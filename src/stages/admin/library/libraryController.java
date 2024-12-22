@@ -26,9 +26,9 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class libraryController implements Initializable {
+import Function.*;
 
-    Function func = new Function();
+public class libraryController implements Initializable {
 
     @FXML
     private HBox bookLayout;
@@ -55,7 +55,8 @@ public class libraryController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {
             // Continue initializing books and library view
-            books = new DoublyLinkList(libraryBooks());
+            books = globalVariable.bookList;
+            System.out.println(books.getSize());
             moveLeftBtn.setDisable(true);
 
             int bookCount = books.getSize(); // Indicates the number of books
@@ -189,13 +190,7 @@ public class libraryController implements Initializable {
 
     //TO BE ERASED
     private DoublyLinkList libraryBooks() throws IOException { //Create a list of books
-        DoublyLinkList books = new DoublyLinkList();
-
-        books.insertNOrder(new Book("Call of the Wild", "Simpson", "Fiction", new Image(getClass().getResource("/bookImages/call_Book.png").toExternalForm()), "201237871823", 3));
-        books.insertNOrder(new Book("Dracula", "Simpson", "Fiction", new Image(getClass().getResource("/bookImages/dracula_book.jpg").toExternalForm()), "201237871823", 3));
-        books.insertNOrder(new Book("Howl", "Simpson", "Fiction", new Image(getClass().getResource("/bookImages/howl_Book.jpg").toExternalForm()), "201237871823", 3));
-        books.insertNOrder(new Book("Odyssey", "Simpson", "Fiction", new Image(getClass().getResource("/bookImages/odyssey_book.jpg").toExternalForm()), "201237871823", 3));
-
+        DoublyLinkList books = globalVariable.bookList;
         return books;
     }
 

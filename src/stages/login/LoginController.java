@@ -321,6 +321,7 @@ public class LoginController {
                 alert.show();
                 return;
             }
+
             String sqlFindStaff = "SELECT * FROM student WHERE school_id = ? AND password = ?";
             pstmt = conn.prepareStatement(sqlFindStaff);
             pstmt.setString(1, studentID);
