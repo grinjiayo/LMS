@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.gluonhq.charm.glisten.control.ToggleButtonGroup?>
 <?import java.lang.String?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
@@ -17,7 +18,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane blendMode="DARKEN" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="675.0" prefWidth="970.0" stylesheets="@../../../../style_File/Dashboard.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="stages.admin.inventoryController">
+<BorderPane blendMode="DARKEN" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="675.0" prefWidth="970.0" stylesheets="@../../../../style_File/Dashboard.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="stages.admin.inventoryModifyController">
     <top>
         <HBox prefHeight="68.0" prefWidth="970.0" stylesheets="@../../../../style_File/Dashboard.css" BorderPane.alignment="CENTER">
             <children>
@@ -214,7 +215,7 @@
          <children>
             <HBox prefHeight="32.0" prefWidth="267.0" spacing="5.0">
                <children>
-                  <HBox alignment="CENTER" prefHeight="29.0" prefWidth="38.0" stylesheets="@../../../../style_File/Dashboard.css">
+                  <HBox alignment="CENTER" onMouseClicked="#goInventory" prefHeight="29.0" prefWidth="38.0" stylesheets="@../../../../style_File/Dashboard.css">
                      <children>
                         <ImageView fitHeight="21.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -257,14 +258,18 @@
                   <HBox prefHeight="27.0" prefWidth="252.0" spacing="5.0">
                      <children>
                         <Label prefHeight="26.0" prefWidth="62.0" text="Search by: " />
-                        <RadioButton mnemonicParsing="false" prefHeight="26.0" prefWidth="52.0" selected="true" text="Title" />
-                        <RadioButton mnemonicParsing="false" prefHeight="26.0" prefWidth="57.0" text="ISBN" />
+                        <ToggleButtonGroup selectionType="SINGLE">
+                           <toggles>
+                              <RadioButton fx:id="titleRB" mnemonicParsing="false" prefHeight="26.0" prefWidth="52.0" selected="true" text="Title" />
+                              <RadioButton fx:id="isbnRB" mnemonicParsing="false" prefHeight="26.0" prefWidth="57.0" text="ISBN" />
+                           </toggles>
+                        </ToggleButtonGroup>
                      </children>
                   </HBox>
                   <HBox prefHeight="30.0" prefWidth="260.0">
                      <children>
-                        <TextField prefHeight="30.0" prefWidth="210.0" />
-                        <VBox maxHeight="-Infinity" minHeight="-Infinity" prefHeight="30.0" prefWidth="30.0" styleClass="bgcolor-darkbrown" stylesheets="@../../../../style_File/Dashboard.css">
+                        <TextField fx:id="searchField" prefHeight="30.0" prefWidth="210.0" />
+                        <VBox maxHeight="-Infinity" minHeight="-Infinity" onMouseClicked="#doSearch" prefHeight="30.0" prefWidth="30.0" styleClass="bgcolor-darkbrown" stylesheets="@../../../../style_File/Dashboard.css">
                            <children>
                               <ImageView fitHeight="20.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -278,6 +283,7 @@
                         </VBox>
                      </children>
                   </HBox>
+                  <Label fx:id="lblError" alignment="CENTER" prefHeight="18.0" prefWidth="242.0" textFill="RED" />
                </children>
                <padding>
                   <Insets left="15.0" />
@@ -287,7 +293,7 @@
                <children>
                   <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="128.0" prefWidth="106.0" styleClass="outlineAllGray" stylesheets="@../../../../style_File/Dashboard.css">
                      <children>
-                        <ImageView disable="true" fitHeight="107.0" fitWidth="105.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="bkImage" disable="true" fitHeight="107.0" fitWidth="105.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../../../../icons/defaultImage.png" />
                            </image>
@@ -296,7 +302,7 @@
                   </VBox>
                   <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="5.0">
                      <children>
-                        <Button disable="true" mnemonicParsing="false" styleClass="bgcolor-brown" stylesheets="@../../../../style_File/Dashboard.css" text="Change Image" textFill="WHITE" />
+                        <Button fx:id="changeImgBttn" disable="true" mnemonicParsing="false" onAction="#browseImage" styleClass="bgcolor-brown" stylesheets="@../../../../style_File/Dashboard.css" text="Change Image" textFill="WHITE" />
                      </children>
                   </VBox>
                </children>
@@ -310,7 +316,7 @@
                               <Font size="13.0" />
                            </font>
                         </Label>
-                        <TextField disable="true" prefHeight="30.0" prefWidth="267.0" stylesheets="@../../../../style_File/Dashboard.css">
+                        <TextField fx:id="titleField" disable="true" prefHeight="30.0" prefWidth="267.0" stylesheets="@../../../../style_File/Dashboard.css">
                            <styleClass>
                               <String fx:value="bgcolor-white" />
                               <String fx:value="outlineAllGray" />
@@ -328,7 +334,7 @@
                               <Font size="13.0" />
                            </font>
                         </Label>
-                        <TextField disable="true" prefHeight="30.0" prefWidth="267.0" stylesheets="@../../../../style_File/Dashboard.css">
+                        <TextField fx:id="authorField" disable="true" prefHeight="30.0" prefWidth="267.0" stylesheets="@../../../../style_File/Dashboard.css">
                            <styleClass>
                               <String fx:value="bgcolor-white" />
                               <String fx:value="outlineAllGray" />
@@ -346,7 +352,7 @@
                               <Font size="13.0" />
                            </font>
                         </Label>
-                        <TextField disable="true" prefHeight="30.0" prefWidth="267.0" stylesheets="@../../../../style_File/Dashboard.css">
+                        <TextField fx:id="isbnField" disable="true" prefHeight="30.0" prefWidth="267.0" stylesheets="@../../../../style_File/Dashboard.css">
                            <styleClass>
                               <String fx:value="bgcolor-white" />
                               <String fx:value="outlineAllGray" />
@@ -366,7 +372,7 @@
                                     <Font size="13.0" />
                                  </font>
                               </Label>
-                              <ChoiceBox disable="true" prefHeight="27.0" prefWidth="144.0" stylesheets="@../../../../style_File/Dashboard.css">
+                              <ChoiceBox fx:id="tfCategory" disable="true" prefHeight="27.0" prefWidth="144.0" stylesheets="@../../../../style_File/Dashboard.css">
                                  <styleClass>
                                     <String fx:value="bgcolor-white" />
                                     <String fx:value="outlineAllGray" />
@@ -384,7 +390,7 @@
                                     <Font size="13.0" />
                                  </font>
                               </Label>
-                              <TextField disable="true" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="80.0" stylesheets="@../../../../style_File/Dashboard.css">
+                              <TextField fx:id="qtyField" disable="true" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="80.0" stylesheets="@../../../../style_File/Dashboard.css">
                                  <styleClass>
                                     <String fx:value="bgcolor-white" />
                                     <String fx:value="outlineAllGray" />
@@ -402,9 +408,10 @@
                   <Insets top="20.0" />
                </padding>
             </VBox>
+            <Label fx:id="lblError2" alignment="CENTER" prefHeight="18.0" prefWidth="267.0" textFill="RED" />
             <HBox alignment="TOP_CENTER" prefHeight="64.0" prefWidth="267.0">
                <children>
-                  <Button disable="true" mnemonicParsing="false" prefHeight="44.0" prefWidth="127.0" stylesheets="@../../../../style_File/Dashboard.css" text="SAVE" textFill="WHITE">
+                  <Button fx:id="saveBttn" disable="true" mnemonicParsing="false" onAction="#editBook" prefHeight="44.0" prefWidth="127.0" stylesheets="@../../../../style_File/Dashboard.css" text="SAVE" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="15.0" />
                      </font>
@@ -434,9 +441,6 @@
                      </padding>
                   </Label>
                   <HBox alignment="CENTER_LEFT" prefHeight="56.0" prefWidth="261.0">
-                     <children>
-                        <ChoiceBox prefHeight="26.0" prefWidth="104.0" />
-                     </children>
                      <padding>
                         <Insets left="10.0" />
                      </padding>
@@ -448,7 +452,7 @@
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <ChoiceBox prefHeight="26.0" prefWidth="69.0" stylesheets="@../../../../style_File/Dashboard.css" />
+                        <ChoiceBox fx:id="sortCB" prefHeight="26.0" prefWidth="69.0" stylesheets="@../../../../style_File/Dashboard.css" />
                      </children>
                      <padding>
                         <Insets top="10.0" />

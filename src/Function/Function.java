@@ -187,4 +187,22 @@ public class Function {
         String pattern = "^(?=.*[a-zA-Z])(?=.*[\\d\\W]).+$";
         return s.matches(pattern);
     }
+
+    public DoublyLinkList selectCategoryBooks(Category ctgry) {
+        DoublyLinkList bookList = globalVariable.bookList;
+        DoublyLinkList categoryList = new DoublyLinkList();
+
+        if(bookList.isEmpty())  return null;
+
+        Link current = bookList.getFirst();
+        while (current != null) {
+            Book bk = current.getElement();
+            if (bk.getCategory().equals(ctgry)) {
+                categoryList.insertNOrder(bk);
+            }
+            current = current.getNext(); // Advance to the next link
+        }
+
+        return categoryList;
+    }
 }

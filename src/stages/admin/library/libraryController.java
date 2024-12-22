@@ -12,6 +12,7 @@ import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.layout.HBox;
@@ -54,44 +55,8 @@ public class libraryController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {
-            // Continue initializing books and library view
-            books = globalVariable.bookList;
-            System.out.println(books.getSize());
-            moveLeftBtn.setDisable(true);
-
-            int bookCount = books.getSize(); // Indicates the number of books
-            bookNum.setText(Integer.toString(bookCount));
-            cabinetPos.setText(Integer.toString(cabinetIndex + 1));
-            cabinetCount = bookCount / 42;
-            if (bookCount % 42 != 0 && bookCount>42) { // Add another cabinet
-                cabinetCount++;
-            }
-            if(bookCount<=42) {
-                moveRightBtn.setDisable(true);
-            }
-
-            int count = 0;
-            Link current = books.getFirst();
-            while (current != null) {
-                FXMLLoader fxmlLoader = new FXMLLoader();
-                fxmlLoader.setLocation(getClass().getResource("/stages/admin/library/Book.fxml"));
-
-                HBox bookBox = fxmlLoader.load();
-                BookController bookController = fxmlLoader.getController();
-                bookController.setData(current.getElement());
-
-                if (count < 14) {
-                    bookLayout.getChildren().add(bookBox);
-                } else if (count < 28) {
-                    bookLayout2.getChildren().add(bookBox);
-                } else if (count < 42) {
-                    bookLayout3.getChildren().add(bookBox);
-                }
-                count++;
-                current = current.getNext();
-            }
-
-        } catch (IOException e) {
+            initializeLibraryView(books = globalVariable.bookList);
+        } catch (Exception e) {
             Alert alert = new Alert(Alert.AlertType.ERROR, e.getMessage());
             alert.showAndWait();
         }
@@ -219,4 +184,115 @@ public class libraryController implements Initializable {
         }
         return list;
     }
+
+    public void initializeLibraryView(DoublyLinkList books) {
+        try {
+            // Check if the list of books is empty
+            if (books == null || books.isEmpty()) {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION, "Book list is empty", ButtonType.OK);
+                alert.setTitle("Book Display");
+                alert.show();
+                moveRightBtn.setDisable(true);
+                moveLeftBtn.setDisable(true);
+                return;
+            }
+
+            bookLayout.getChildren().removeAll();
+            bookLayout2.getChildren().removeAll();
+            bookLayout3.getChildren().removeAll();
+
+            moveLeftBtn.setDisable(true);
+
+            int bookCount = books.getSize(); // Indicates the number of books
+            bookNum.setText(Integer.toString(bookCount));
+            cabinetPos.setText(Integer.toString(cabinetIndex + 1));
+            cabinetCount = bookCount / 42;
+            if (bookCount % 42 != 0 && bookCount > 42) { // Add another cabinet
+                cabinetCount++;
+            }
+            if (bookCount <= 42) {
+                moveRightBtn.setDisable(true);
+            }
+
+            int count = 0;
+            Link current = books.getFirst();
+
+            while (current != null) {
+                FXMLLoader fxmlLoader = new FXMLLoader();
+                fxmlLoader.setLocation(getClass().getResource("/stages/admin/library/Book.fxml"));
+
+                HBox bookBox = fxmlLoader.load();
+                BookController bookController = fxmlLoader.getController();
+                bookController.setData(current.getElement());
+
+                if (count < 14) {
+                    bookLayout.getChildren().add(bookBox);
+                } else if (count < 28) {
+                    bookLayout2.getChildren().add(bookBox);
+                } else if (count < 42) {
+                    bookLayout3.getChildren().add(bookBox);
+                }
+                count++;
+                current = current.getNext();
+            }
+        } catch (IOException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR, e.getMessage());
+            alert.showAndWait();
+        }
+    }
+
+    public void initializeLibraryViewReverse(DoublyLinkList books) {
+        try {
+            // Check if the list of books is empty
+            if (books == null || books.isEmpty()) {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION, "Book list is empty", ButtonType.OK);
+                alert.setTitle("Book Display");
+                alert.show();
+                return;
+            }
+
+            moveLeftBtn.setDisable(true);
+
+            bookLayout.getChildren().removeAll();
+            bookLayout2.getChildren().removeAll();
+            bookLayout3.getChildren().removeAll();
+
+            int bookCount = books.getSize(); // Indicates the number of books
+            bookNum.setText(Integer.toString(bookCount));
+            cabinetPos.setText(Integer.toString(cabinetIndex + 1));
+            cabinetCount = bookCount / 42;
+            if (bookCount % 42 != 0 && bookCount > 42) { // Add another cabinet
+                cabinetCount++;
+            }
+            if (bookCount <= 42) {
+                moveRightBtn.setDisable(true);
+            }
+
+            int count = 0;
+            Link current = books.getLast();
+
+            while (current != null) {
+                FXMLLoader fxmlLoader = new FXMLLoader();
+                fxmlLoader.setLocation(getClass().getResource("/stages/admin/library/Book.fxml"));
+
+                HBox bookBox = fxmlLoader.load();
+                BookController bookController = fxmlLoader.getController();
+                bookController.setData(current.getElement());
+
+                if (count < 14) {
+                    bookLayout.getChildren().add(bookBox);
+                } else if (count < 28) {
+                    bookLayout2.getChildren().add(bookBox);
+                } else if (count < 42) {
+                    bookLayout3.getChildren().add(bookBox);
+                }
+                count++;
+                current = current.getPrev();
+            }
+        } catch (IOException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR, e.getMessage());
+            alert.showAndWait();
+        }
+    }
+
 }

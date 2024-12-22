@@ -4,6 +4,7 @@ import Entity.Student;
 import javafx.animation.*;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import javafx.fxml.FXML;
@@ -601,5 +602,13 @@ public class LoginController {
         // Play the animation
         timeline.play();
 
+    }
+
+    @FXML
+    private void goAdminLogin(MouseEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/stages/login/logFXML/adminLogin_view.fxml"));
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setScene(new Scene(root));
+        stage.show();
     }
 }

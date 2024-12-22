@@ -20,6 +20,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import Function.*;
+import stages.admin.library.libraryController;
 
 public class inventoryController implements Initializable {
 

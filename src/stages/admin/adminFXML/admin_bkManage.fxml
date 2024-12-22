@@ -349,7 +349,7 @@
                   </VBox>
                </children>
             </VBox>
-            <Button mnemonicParsing="false" prefHeight="37.0" prefWidth="171.0" styleClass="bgcolor-brown" stylesheets="@../../../style_File/Dashboard.css" text="Manage" textFill="WHITE">
+            <Button mnemonicParsing="false" prefHeight="37.0" prefWidth="171.0" styleClass="bgcolor-brown" stylesheets="@../../../style_File/Dashboard.css" text="Modify" textFill="WHITE">
                <font>
                   <Font size="16.0" />
                </font>
@@ -373,7 +373,7 @@
                      </padding>
                   </Label>
                   <Pane prefHeight="56.0" prefWidth="258.0" />
-                  <ChoiceBox prefHeight="26.0" prefWidth="142.0" styleClass="bgcolor-white" stylesheets="@../../../style_File/Dashboard.css" />
+                  <ChoiceBox fx:id="categoryCB" prefHeight="26.0" prefWidth="142.0" styleClass="bgcolor-white" stylesheets="@../../../style_File/Dashboard.css" />
                </children>
                <padding>
                   <Insets left="10.0" />

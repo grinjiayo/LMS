@@ -102,3 +102,7 @@
     -fx-background-color: #D9D9D9;
 }
 
+.button:hover {
+    -fx-cursor: pointer;
+}
+

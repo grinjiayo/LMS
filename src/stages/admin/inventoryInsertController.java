@@ -87,13 +87,13 @@ public class inventoryInsertController implements Initializable {
         stage.show();
     }
 
-//    @FXML
-//    private void goInventory(MouseEvent event) throws IOException {
-//        Parent root = FXMLLoader.load(getClass().getResource("/stages/admin/adminFXML/admin_inventory.fxml"));
-//        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-//        stage.setScene(new Scene(root));
-//        stage.show();
-//    }
+    @FXML
+    private void goInventory(MouseEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/stages/admin/adminFXML/inventory/admin_inventory.fxml"));
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setScene(new Scene(root));
+        stage.show();
+    }
 
     @FXML
     private void goLogout(MouseEvent event) throws IOException {

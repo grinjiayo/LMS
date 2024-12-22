@@ -112,6 +112,10 @@ public class config {
             stmt.executeUpdate(sqlTableStaff);
             System.out.println("Table 'staff' created successfully");
 
+            String sqlInsertCategory = "INSERT INTO bkcategory(ctgry_name) values (\"Fiction\"),(\"Non-Fiction\"),(\"Academic\"),(\"Childrens\"),(\"Philosophy\"),(\"Comics\");";
+            stmt.executeUpdate(sqlInsertCategory);
+            System.out.println("Category created");
+
             insertAdmin();
 //            insertSampleBook();
         } catch (SQLException e) {
