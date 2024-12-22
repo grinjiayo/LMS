@@ -6,6 +6,7 @@ import java.util.LinkedList;
 
 import Entity.Book;
 import Entity.Category;
+import Entity.Student;
 import LinkedList.*;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
@@ -184,5 +185,36 @@ public class dbFunction {
             alert.show();
         }
         return id;
+    }
+
+    public int insertStudentDB(Student student) {
+        int staffId = 0;
+        try{
+            conn = connectToDB();
+            staffId = resetAutoIncrement(conn, "student", "stud_id");
+            String sqlInsertStudent = "INSERT INTO librarydb.student" +
+                    "(school_id, fName, lName, section, email, password, penalty)" +
+                    " VALUES (?, ?, ?, ?, ?, ?, ?)";
+            pstmt = conn.prepareStatement(sqlInsertStudent);
+            pstmt.setInt(1, student.getSchoolID());
+            pstmt.setString(2, student.getfName());
+            pstmt.setString(3, student.getlName());
+            pstmt.setString(4, student.getSection());
+            pstmt.setString(5, student.getEmail());
+            pstmt.setString(6, student.getPass());
+            pstmt.setDouble(7, student.getPenalty());
+
+            pstmt.execute();
+            return staffId+1;
+        }catch(SQLException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR, e.getMessage(), ButtonType.OK);
+            alert.setTitle("InsertBkImgError");
+            alert.show();
+        }catch(Exception e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR, e.getMessage(), ButtonType.OK);
+            alert.setTitle("InsertBkImgError");
+            alert.show();
+        }
+        return staffId;
     }
 }

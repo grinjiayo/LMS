@@ -38,9 +38,11 @@ public class LoginController {
     //@FXML=======================================================================================================================================================================================
     @FXML private AnchorPane adminRoot, staffRoot, userRoot, loginRoot, setFrame;
     @FXML private Button passButton, staffLog, userLog, signInStudent, exit;
-    @FXML private PasswordField passwordtextfield;
-    @FXML private TextField passwordTextVisible, tf_staffid, tfAdminName, studentIDField;
-    @FXML private ImageView passwordIcon;
+    @FXML private PasswordField passwordtextfield, passwordtextfield2;
+    @FXML private TextField passwordTextVisible, passwordTextVisible2, tf_staffid, tfAdminName, studentIDField;
+    @FXML private ImageView passwordIcon, passwordIcon2;
+    @FXML private TextField studentIDFld, fNameFld, lNameFld, sectionFld, emailFld, passwordTextVisible1;
+    @FXML private Label errorText;
 //EXIT=======================================================================================================================================================================================
 
     public void close() {
@@ -71,6 +73,30 @@ public class LoginController {
             passwordIcon.setImage(new Image(getClass().getResource("/icons/passIconeyehide.png").toExternalForm()));
         }
         isPasswordVisible = !isPasswordVisible;
+    }
+
+    boolean isPasswordVisible2 = false;
+
+    @FXML
+    public void togglePasswordVisibility2() {
+        if (isPasswordVisible2) {
+            // Hide plain text and show PasswordField
+            passwordTextVisible2.setVisible(false);
+            passwordtextfield2.setText(passwordTextVisible2.getText());
+            passwordtextfield2.setVisible(true);
+
+            // Update the icon
+            passwordIcon2.setImage(new Image(getClass().getResource("/icons/passIconeyeshow.png").toExternalForm()));
+        } else {
+            // Show plain text and hide PasswordField
+            passwordtextfield2.setVisible(false);
+            passwordTextVisible2.setText(passwordtextfield2.getText());
+            passwordTextVisible2.setVisible(true);
+
+            // Update the icon
+            passwordIcon2.setImage(new Image(getClass().getResource("/icons/passIconeyehide.png").toExternalForm()));
+        }
+        isPasswordVisible2 = !isPasswordVisible2;
     }
 
 //Login_Main=======================================================================================================================================================================================
@@ -151,6 +177,14 @@ public class LoginController {
             String id = tf_staffid.getText();
             String password = passwordtextfield.getText();
 
+            if(id.isEmpty()) {
+                errorText.setText("Staff ID is empty"); return;
+            }else if(fnc.staffIDChecker(id)==false) {
+                errorText.setText("Staff ID format is wrong"); return;
+            }else if(password.isEmpty()) {
+                errorText.setText("Password is empty"); return;
+            }
+
             //TO_BE_ERASED
             if(id.equalsIgnoreCase("Staff1") && password.equalsIgnoreCase("staff123")) {
                 Parent root = FXMLLoader.load(getClass().getResource("/stages/staff/staffFXML/staff_dashboard.fxml"));
@@ -159,32 +193,41 @@ public class LoginController {
                 stage.show();
             }
 
-            System.out.println(id);
-            System.out.println(password);
-            if(fnc.staffIDChecker(id)) {
-                int staffId = Integer.parseInt(id);
-                String sqlFindStaff = "SELECT * FROM staff WHERE staff_id = ? AND password = ?";
+            boolean validStaffID = fnc.staffIDChecker(id);
+            if(validStaffID) {
+                String staffLName = "";
+                int staffId = 0;
+
+                for (char ch : id.toCharArray()) {
+                    if (Character.isLetter(ch)) {
+                        staffLName += ch;
+                    } else if (Character.isDigit(ch)) {
+                        staffId = staffId * 10 + (ch - '0');
+                    }
+                }
+
+
+                String sqlFindStaff = "SELECT * FROM staff WHERE staff_id = ? AND lName = ? AND password = ?";
                 pstmt = conn.prepareStatement(sqlFindStaff);
                 pstmt.setInt(1, staffId);
-                pstmt.setString(2, password);
+                pstmt.setString(2, staffLName);
+                pstmt.setString(3, password);
+
                 rs = pstmt.executeQuery();
                 if (rs.next()) {
-                    //INSERT THE STAFF MENU HERE
-                    JOptionPane.showMessageDialog(null,
-                            "Wrong id or password",
-                            "Login Failed",
-                            JOptionPane.ERROR_MESSAGE);
+                    Parent root = FXMLLoader.load(getClass().getResource("/stages/staff/staffFXML/staff_dashboard.fxml"));
+                    Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                    stage.setScene(new Scene(root));
+                    stage.show();
                 } else {
-                    JOptionPane.showMessageDialog(null,
-                            "Wrong id or password",
-                            "Login Failed",
-                            JOptionPane.ERROR_MESSAGE);
+                    Alert alert = new Alert(Alert.AlertType.NONE, "Staff login not successful", ButtonType.OK);
+                    alert.setTitle("Login");
+                    alert.show();
                 }
             }else {
-                JOptionPane.showMessageDialog(null,
-                        "Wrong id or password",
-                        "Login Failed",
-                        JOptionPane.ERROR_MESSAGE);
+                Alert alert = new Alert(Alert.AlertType.NONE, "Wrong ID format e.g.(lastName001)", ButtonType.OK);
+                alert.setTitle("Login");
+                alert.show();
             }
 
         }catch(SQLException e){
@@ -307,6 +350,66 @@ public class LoginController {
             System.out.println(e.getMessage());
         }catch(Exception e) {
             System.out.println(e.getMessage());
+        }
+    }
+
+
+    @FXML
+    private void registerStudent(ActionEvent event) {
+        String studentIDStr = studentIDFld.getText();
+        String fName = fNameFld.getText();
+        String lName = lNameFld.getText();
+        String email = emailFld.getText();
+        String section = sectionFld.getText();
+        String pass = passwordtextfield.getText();
+        String confirmPass = passwordtextfield2.getText();
+        int studentID = 0;
+
+        if(studentIDStr.isEmpty()) {
+            errorText.setText("Student ID is missing"); return;
+        }
+        if(fnc.retrieveStudentID(studentIDStr)!=null) {
+            studentID = Integer.parseInt(fnc.retrieveStudentID(studentIDStr));
+        }else {
+            errorText.setText("Incorrect ID format (NNNN-NNNNN)"); return;
+        }
+
+        if(fName.isEmpty()) {
+            errorText.setText("First name is missing"); return;
+        }else if(lName.isEmpty()) {
+            errorText.setText("Last name is missing"); return;
+        }else if(email.isEmpty()) {
+            errorText.setText("Email is missing"); return;
+        }else if(section.isEmpty()) {
+            errorText.setText("Email is missing"); return;
+        }else if(pass.isEmpty()) {
+            errorText.setText("Password is missing"); return;
+        }else if(confirmPass.isEmpty()) {
+            errorText.setText("Confirm password is missing"); return;
+        }
+
+        if(fnc.passwordChecker(pass)==false) {
+            errorText.setText("Password is atleast 8 characters with letter and number or special character"); return;
+        }
+        if(pass.equals(confirmPass)==false) {
+            errorText.setText("Password does not match"); return;
+        }
+
+        Student newStudent = new Student(studentID, fName, lName, section, email, pass, 0);
+        studentID = dbFunc.insertStudentDB(newStudent);
+        if(studentID!=0) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION, "Student registered successfully");
+            alert.setTitle("Student Registration");
+            alert.showAndWait();
+            try {
+                switchUsers(event);
+            }catch (IOException evt) {
+                Alert alertError = new Alert(Alert.AlertType.ERROR, "Fail to back in Login");
+                alert.setContentText(evt.getMessage());
+                alert.showAndWait();
+            }
+        }else {
+            errorText.setText("Student Registration Fail"); return;
         }
     }
 

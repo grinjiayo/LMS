@@ -87,7 +87,7 @@ public class config {
             System.out.println("Table 'book' created succesfully");
 
             String sqlTableStudent = "CREATE TABLE IF NOT EXISTS librarydb.student (" +
-                    "stud_id INT NOT NULL, " +
+                    "stud_id INT NOT NULL AUTO_INCREMENT, " +
                     "school_id INT NOT NULL, " +
                     "fName VARCHAR(64) NOT NULL, " +
                     "lName VARCHAR(64) NOT NULL, " +

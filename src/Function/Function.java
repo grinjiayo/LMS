@@ -14,11 +14,6 @@ public class Function {
     Date dateNow = new Date();
     int year = dateNow.getYear();
 
-    public boolean passLengthChecker(String s) {
-        if(s.length()>=8) return true;
-        else return false;
-    }
-
     public boolean digitChecker(String s) {
         for(int i = 0; i<s.length(); i++) {
             if(Character.isDigit(s.charAt(i))==false) {
@@ -145,10 +140,16 @@ public class Function {
         return studentId;
     }
 
-    public boolean staffIDChecker(String s) {
-        return true;
-//        int i = 0;
-//        if(s.charAt(i)=='S') {  //The staffID should start at 0
-//        }else return false;
+    public boolean staffIDChecker(String s) {   //Correct format lName+staffID
+        String pattern = "^[a-zA-Z]+\\d{3}$";
+        return s.matches(pattern);
+    }
+
+    public boolean passwordChecker(String s) { //password should have letter and a number or special character greater than 8 chars
+        if (s.length() < 8) {
+            return false;
+        }
+        String pattern = "^(?=.*[a-zA-Z])(?=.*[\\d\\W]).+$";
+        return s.matches(pattern);
     }
 }

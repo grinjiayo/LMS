@@ -106,10 +106,11 @@
 
 /* General styles for the checkbox */
 .checkbox {
-    appearance: none; /* Remove the default checkbox styling */
+    -fx-appearance: none; /* Remove the default checkbox styling */
     width: 20px; /* Adjust size as needed */
     height: 20px;
     background-color: black; /* Make the square black */
-    border: 2px solid black; /* Optional: black border for styling */
+    -fx-border-color: black; /* Border color */
+    -fx-border-width: 2px; /* Border width */
     cursor: pointer;
 }

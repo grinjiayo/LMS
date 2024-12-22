@@ -39,6 +39,8 @@ public class DoublyLinkList {
         return size;
     }
 
+
+
     public void insertNOrder(Book e) {  //The algo is like insertAfter but after the right alphabetical order
 
         Link newLink = new Link(e);
