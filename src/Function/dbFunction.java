@@ -10,6 +10,7 @@ import java.util.UUID;
 
 import Entity.Book;
 import Entity.Category;
+import Entity.Staff;
 import Entity.Student;
 import LinkedList.*;
 import javafx.scene.control.Alert;
@@ -49,6 +50,8 @@ public class dbFunction {
         }
         return null;
     }
+
+
 
     public ArrayList<Category> retrieveCategories() {
         ArrayList<Category> categories = new ArrayList<Category>();
@@ -141,6 +144,12 @@ public class dbFunction {
             alert.show();
         }
         return id+1;
+    }
+
+    private void showAlert(String title, String message) {
+        Alert alert = new Alert(Alert.AlertType.ERROR, message, ButtonType.OK);
+        alert.setTitle(title);
+        alert.show();
     }
 
     public boolean insertBookDB(Book book, String imgName) {
@@ -240,4 +249,105 @@ public class dbFunction {
         }
         return staffId;
     }
+
+    public int insertStaffDB(Staff staff) {
+        int staffId = 0;
+        try {
+            Connection conn = connectToDB();
+            staffId = resetAutoIncrement(conn, "staff", "staff_id");
+            String sqlInsertStaff = "INSERT INTO librarydb.staff " +
+                    "(staff_id, fName, lName, position, email, password) " +
+                    "VALUES (?, ?, ?, ?, ?, ?)";
+            PreparedStatement pstmt = conn.prepareStatement(sqlInsertStaff);
+            pstmt.setInt(1, staff.getStaffID());
+            pstmt.setString(2, staff.getfName());
+            pstmt.setString(3, staff.getlName());
+            pstmt.setString(4, staff.getPosition());
+            pstmt.setString(5, staff.getEmail());
+            pstmt.setString(6, staff.getPass());
+
+            pstmt.execute();
+            return staffId + 1;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            showAlert("InsertStaffError", e.getMessage());
+        }
+        return staffId;
+    }
+
+    public void updateStudentDB(Student student) {
+        try {
+            Connection conn = connectToDB();
+            String sqlUpdateStudent = "UPDATE librarydb.student SET " +
+                    "fName = ?, lName = ?, section = ?, email = ?, password = ?, penalty = ? " +
+                    "WHERE stud_id = ?";
+            PreparedStatement pstmt = conn.prepareStatement(sqlUpdateStudent);
+            pstmt.setString(1, student.getfName());
+            pstmt.setString(2, student.getlName());
+            pstmt.setString(3, student.getSection());
+            pstmt.setString(4, student.getEmail());
+            pstmt.setString(5, student.getPass());
+            pstmt.setDouble(6, student.getPenalty());
+            pstmt.setInt(7, student.getSchoolID());
+
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            showAlert("UpdateStudentError", e.getMessage());
+        }
+    }
+
+    public void updateStaffDB(Staff staff) {
+        try {
+            Connection conn = connectToDB();
+            String sqlUpdateStaff = "UPDATE librarydb.staff SET " +
+                    "fName = ?, lName = ?, position = ?, email = ?, password = ? " +
+                    "WHERE staff_id = ?";
+            PreparedStatement pstmt = conn.prepareStatement(sqlUpdateStaff);
+            pstmt.setString(1, staff.getfName());
+            pstmt.setString(2, staff.getlName());
+            pstmt.setString(3, staff.getPosition());
+            pstmt.setString(4, staff.getEmail());
+            pstmt.setString(5, staff.getPass());
+            pstmt.setInt(6, staff.getStaffID());
+
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            showAlert("UpdateStaffError", e.getMessage());
+        }
+    }
+
+    public void deleteStaffDB(int staffId) {
+        try {
+            Connection conn = connectToDB();
+            String sqlDeleteStaff = "DELETE FROM librarydb.staff WHERE staff_id = ?";
+            PreparedStatement pstmt = conn.prepareStatement(sqlDeleteStaff);
+            pstmt.setInt(1, staffId);
+
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            showAlert("DeleteStaffError", e.getMessage());
+        }
+    }
+
+    public void deleteStudentDB(int studentId) {
+        try {
+            Connection conn = connectToDB();
+            String sqlDeleteStudent = "DELETE FROM librarydb.student WHERE stud_id = ?";
+            PreparedStatement pstmt = conn.prepareStatement(sqlDeleteStudent);
+            pstmt.setInt(1, studentId);
+
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            showAlert("DeleteStudentError", e.getMessage());
+        }
+    }
+
+
+
+
+
 }
