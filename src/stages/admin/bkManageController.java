@@ -3,8 +3,6 @@ package stages.admin;
 import Entity.Book;
 import Entity.Category;
 import LinkedList.DoublyLinkList;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -168,7 +166,7 @@ public class bkManageController implements Initializable {
 
     @FXML
     private void goReports(MouseEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/stages/admin/adminFXML/admin_reports.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/stages/admin/adminFXML/reports/admin_acc_reports.fxml"));
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setScene(new Scene(root));
         stage.show();
