@@ -1,5 +1,6 @@
 package Function;
 
+import Entity.Staff;
 import Entity.Student;
 import LinkedList.DoublyLinkList;
 import javafx.fxml.FXML;
@@ -20,5 +21,12 @@ public class globalVariable {
     public static void refresh() {  //Refreshes the book in the bookList
 
     }
+
+    public static ArrayList<Staff> sortedStaffListASC = new ArrayList<>();
+    public static ArrayList<Staff> sortedStaffListDESC = new ArrayList<>();
+    public static ArrayList<Student> sortedStudentListASC = new ArrayList<>();
+    public static ArrayList<Student> sortedStudentListDESC = new ArrayList<>();
+
+
 
 }
