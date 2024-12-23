@@ -11,6 +11,8 @@ import java.util.UUID;
 
 import Entity.*;
 import LinkedList.*;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.image.Image;
@@ -512,6 +514,37 @@ public class dbFunction {
             showAlert("SearchStaffError", e.getMessage());
         }
         return staff;
+    }
+
+    public ObservableList<Book> inventoryBookView() {
+        try {
+            conn = connectToDB();
+            stmt = conn.createStatement();
+            ObservableList<Book> inventoryBook = FXCollections.observableArrayList();
+            String query = "SELECT * FROM book";
+            // Execute the query
+            rs = stmt.executeQuery(query);
+
+            while (rs.next()) {
+                String title = rs.getString("title");
+                String author = rs.getString("author");
+                String category = rs.getString("ctgry");
+                String ISBN = rs.getString("isbn");
+                int quantity = rs.getInt("quantity");
+                String imgID = rs.getString("imgID");
+                int borrowed = rs.getInt("borrowed");
+
+                Image bkImage = fnc.getImage(imgID);
+
+                // Create a new book object and add it to the list
+                Book book = new Book(title, author, category, bkImage, ISBN, quantity, borrowed);
+                inventoryBook.add(book);
+            }
+            return inventoryBook;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
 }

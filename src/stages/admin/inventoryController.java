@@ -1,6 +1,8 @@
 package stages.admin;
 
+import Entity.Book;
 import LinkedList.DoublyLinkList;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -8,9 +10,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.Label;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
@@ -21,6 +22,8 @@ import java.util.ResourceBundle;
 
 import Function.*;
 import stages.admin.library.libraryController;
+
+import static Function.globalVariable.dbFnc;
 
 public class inventoryController implements Initializable {
 
@@ -56,6 +59,18 @@ public class inventoryController implements Initializable {
     private Label bookUniqueQty;
 
     Function fnc = new Function();
+    @FXML
+    private TableView<Book> BookTableView;
+    @FXML
+    private TableColumn<Book, String> authorCol;
+    @FXML
+    private TableColumn<Book, String> categoryCol;
+    @FXML
+    private TableColumn<Book, String> isbnCol;
+    @FXML
+    private TableColumn<Book, String> qtyCol;
+    @FXML
+    private TableColumn<Book, String> titleCol;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -63,6 +78,15 @@ public class inventoryController implements Initializable {
         bookQty.setText(Integer.toString(fnc.countBkQuantity(books)));
         bookUniqueQty.setText(Integer.toString(fnc.countUniBkQuantity(books)));
         bookBrrwQty.setText(Integer.toString(fnc.countBkBorrow(books)));
+
+        titleCol.setCellValueFactory(new PropertyValueFactory<Book, String>("title"));
+        authorCol.setCellValueFactory(new PropertyValueFactory<Book, String>("author"));
+        isbnCol.setCellValueFactory(new PropertyValueFactory<Book, String>("ISBN"));
+        categoryCol.setCellValueFactory(new PropertyValueFactory<Book, String>("category"));
+        qtyCol.setCellValueFactory(new PropertyValueFactory<Book, String>("quantity"));
+
+        ObservableList<Book> bookList = dbFnc.inventoryBookView();
+        BookTableView.setItems(bookList);
     }
 
 //SWITCHING MENU
