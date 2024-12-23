@@ -1,11 +1,16 @@
 package Function;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.UUID;
 
 import Entity.Book;
 import Entity.Category;
+import Entity.Staff;
 import Entity.Student;
 import LinkedList.*;
 import javafx.scene.control.Alert;
@@ -13,6 +18,8 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.image.Image;
 
 import javax.swing.*;
+
+import static Function.globalVariable.fnc;
 
 public class dbFunction {
     Connection conn;
@@ -43,6 +50,8 @@ public class dbFunction {
         }
         return null;
     }
+
+
 
     public ArrayList<Category> retrieveCategories() {
         ArrayList<Category> categories = new ArrayList<Category>();
@@ -137,20 +146,26 @@ public class dbFunction {
         return id+1;
     }
 
-    public boolean insertBookDB(Book book, int imageID) {
+    private void showAlert(String title, String message) {
+        Alert alert = new Alert(Alert.AlertType.ERROR, message, ButtonType.OK);
+        alert.setTitle(title);
+        alert.show();
+    }
+
+    public boolean insertBookDB(Book book, String imgName) {
         try{
             conn = connectToDB();
             String sqlInsertBook = "INSERT INTO librarydb.book" +
-                    "(title, author, isbn, category_id, quantity, borrowed, imgID)" +
+                    "(title, author, isbn, ctgry, quantity, borrowed, imgID)" +
                     "VALUES (?, ?, ?, ?, ?, 0, ?)";
             pstmt = conn.prepareStatement(sqlInsertBook);
             pstmt.setString(1, book.getTitle());
             pstmt.setString(2, book.getAuthor());
             pstmt.setString(3, book.getISBN());
             pstmt.setString(4, book.getCategory());
-            pstmt.setBlob(5, (Blob) book.getImageSrc());
-            pstmt.setInt(6, imageID);
-            rs = pstmt.executeQuery();
+            pstmt.setInt(5, book.getQuantity());
+            pstmt.setString(6, imgName);
+            pstmt.executeUpdate();
             return true;
         }catch(SQLException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR, e.getMessage(), ButtonType.OK);
@@ -164,28 +179,45 @@ public class dbFunction {
         return false;
     }
 
-    public int insertBookImageDB(Image img) {
-        int id = 0;
-        try{
-            conn = connectToDB();
-            id = resetAutoIncrement(conn, "image", "imgID");
-            String sqlInsertImage = "INSERT INTO librarydb.image(imgID, imgFile) VALUES (?, ?)";
-            pstmt = conn.prepareStatement(sqlInsertImage);
-            pstmt.setInt(1, id);
-            pstmt.setBlob(2, (Blob) img);
-            pstmt.execute();
-            return id;
-        }catch(SQLException e) {
+    public String insertBookImageDB(Image img, String imgTitle) {
+        String imgName = null;
+        try {
+            // Ensure the directory for storing images exists
+            File directory = new File("src/bookImages");
+            if (!directory.exists()) {
+                directory.mkdirs(); // Create the directory if it doesn't exist
+            }
+
+            imgName = imgTitle.replaceAll("\\s+", "_") + ".png";
+
+            // Define the file path for the image
+            String imagePath = "src/bookImages/" + imgName;
+
+            // Convert the JavaFX Image to a byte array
+            byte[] imgBytes = fnc.convertImageToByteArray(img);
+
+            // Save the byte array as a file in the directory
+            File imageFile = new File(imagePath);
+            try (FileOutputStream fos = new FileOutputStream(imageFile)) {
+                fos.write(imgBytes);
+            }
+
+            System.out.println("Image saved as: " + imgName);
+            return imgName; // Return the name of the image file
+        } catch (IOException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR, e.getMessage(), ButtonType.OK);
             alert.setTitle("InsertBkImgError");
             alert.show();
-        }catch(Exception e) {
+            System.out.println(e.getMessage());
+        } catch (Exception e) {
             Alert alert = new Alert(Alert.AlertType.ERROR, e.getMessage(), ButtonType.OK);
             alert.setTitle("InsertBkImgError");
             alert.show();
+            System.out.println(e.getMessage());
         }
-        return id;
+        return imgName;
     }
+
 
     public int insertStudentDB(Student student) {
         int staffId = 0;
@@ -217,4 +249,105 @@ public class dbFunction {
         }
         return staffId;
     }
+
+    public int insertStaffDB(Staff staff) {
+        int staffId = 0;
+        try {
+            Connection conn = connectToDB();
+            staffId = resetAutoIncrement(conn, "staff", "staff_id");
+            String sqlInsertStaff = "INSERT INTO librarydb.staff " +
+                    "(staff_id, fName, lName, position, email, password) " +
+                    "VALUES (?, ?, ?, ?, ?, ?)";
+            PreparedStatement pstmt = conn.prepareStatement(sqlInsertStaff);
+            pstmt.setInt(1, staff.getStaffID());
+            pstmt.setString(2, staff.getfName());
+            pstmt.setString(3, staff.getlName());
+            pstmt.setString(4, staff.getPosition());
+            pstmt.setString(5, staff.getEmail());
+            pstmt.setString(6, staff.getPass());
+
+            pstmt.execute();
+            return staffId + 1;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            showAlert("InsertStaffError", e.getMessage());
+        }
+        return staffId;
+    }
+
+    public void updateStudentDB(Student student) {
+        try {
+            Connection conn = connectToDB();
+            String sqlUpdateStudent = "UPDATE librarydb.student SET " +
+                    "fName = ?, lName = ?, section = ?, email = ?, password = ?, penalty = ? " +
+                    "WHERE stud_id = ?";
+            PreparedStatement pstmt = conn.prepareStatement(sqlUpdateStudent);
+            pstmt.setString(1, student.getfName());
+            pstmt.setString(2, student.getlName());
+            pstmt.setString(3, student.getSection());
+            pstmt.setString(4, student.getEmail());
+            pstmt.setString(5, student.getPass());
+            pstmt.setDouble(6, student.getPenalty());
+            pstmt.setInt(7, student.getSchoolID());
+
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            showAlert("UpdateStudentError", e.getMessage());
+        }
+    }
+
+    public void updateStaffDB(Staff staff) {
+        try {
+            Connection conn = connectToDB();
+            String sqlUpdateStaff = "UPDATE librarydb.staff SET " +
+                    "fName = ?, lName = ?, position = ?, email = ?, password = ? " +
+                    "WHERE staff_id = ?";
+            PreparedStatement pstmt = conn.prepareStatement(sqlUpdateStaff);
+            pstmt.setString(1, staff.getfName());
+            pstmt.setString(2, staff.getlName());
+            pstmt.setString(3, staff.getPosition());
+            pstmt.setString(4, staff.getEmail());
+            pstmt.setString(5, staff.getPass());
+            pstmt.setInt(6, staff.getStaffID());
+
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            showAlert("UpdateStaffError", e.getMessage());
+        }
+    }
+
+    public void deleteStaffDB(int staffId) {
+        try {
+            Connection conn = connectToDB();
+            String sqlDeleteStaff = "DELETE FROM librarydb.staff WHERE staff_id = ?";
+            PreparedStatement pstmt = conn.prepareStatement(sqlDeleteStaff);
+            pstmt.setInt(1, staffId);
+
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            showAlert("DeleteStaffError", e.getMessage());
+        }
+    }
+
+    public void deleteStudentDB(int studentId) {
+        try {
+            Connection conn = connectToDB();
+            String sqlDeleteStudent = "DELETE FROM librarydb.student WHERE stud_id = ?";
+            PreparedStatement pstmt = conn.prepareStatement(sqlDeleteStudent);
+            pstmt.setInt(1, studentId);
+
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            showAlert("DeleteStudentError", e.getMessage());
+        }
+    }
+
+
+
+
+
 }

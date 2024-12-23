@@ -39,8 +39,6 @@ public class DoublyLinkList {
         return size;
     }
 
-
-
     public void insertNOrder(Book e) {  //The algo is like insertAfter but after the right alphabetical order
 
         Link newLink = new Link(e);
@@ -104,6 +102,64 @@ public class DoublyLinkList {
             current = current.next;
         }
         System.out.println("");
+    }
+
+    public Book findISBN(String isbn) {
+        if(isEmpty()) return null;
+
+        Link current = first;
+        Book bk = current.getElement();
+        while(!bk.getISBN().equals(isbn)) {
+            if(current.next == null) return null;
+            else {
+                current = current.next;
+                bk = current.getElement();
+            }
+        }
+
+        return bk;
+    }
+
+    public Book findTitle(String title) {
+        if(isEmpty()) return null;
+
+        Link current = first;
+        Book bk = current.getElement();
+        while(!bk.getTitle().equals(title)) {
+            if(current.next == null) return null;
+            else {
+                current = current.next;
+                bk = current.getElement();
+            }
+        }
+
+        return bk;
+    }
+
+    public Book deleteBook(String title) {
+        if(isEmpty()) return null;
+        Link current = first;
+
+        Book bk = current.getElement();
+        while(!bk.getTitle().equals(title)) {
+            current = current.next;
+            if(current==null) return null;
+            bk = current.getElement();
+        }
+
+        if(current==first) {
+            first = current.next;
+        }else {
+            current.getPrev().setNext(current.getNext());
+        }
+
+        if(current==last) {
+            last = current.getPrev();
+        }else {
+            current.getNext().setPrev(current.getPrev());
+        }
+
+        return bk;
     }
 
     public Link getFirst(){

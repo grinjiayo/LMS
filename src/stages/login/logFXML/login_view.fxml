@@ -8,6 +8,7 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane fx:id="loginRoot" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="970.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="stages.login.LoginController">
@@ -78,6 +79,7 @@
                         <DropShadow height="41.52" radius="23.9225" width="56.17" />
                      </effect>
                   </ImageView>
+                  <HBox layoutX="410.0" layoutY="79.0" onMouseClicked="#goAdminLogin" prefHeight="65.0" prefWidth="115.0" />
                </children>
                <effect>
                   <BoxBlur height="0.0" width="1.0" />

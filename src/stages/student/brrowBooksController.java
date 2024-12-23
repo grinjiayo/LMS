@@ -54,6 +54,7 @@ public class brrowBooksController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {
             studentLogin = globalVariable.loginStudent;
+
             // Load the library view
             FXMLLoader fxmlLoader = new FXMLLoader();
             fxmlLoader.setLocation(bkManageController.class.getResource("/stages/admin/library/libraryView.fxml"));
@@ -103,7 +104,6 @@ public class brrowBooksController implements Initializable {
                 "\nISBN:  " + bkISBNField.getText()
         );
         alert.showAndWait();
-
 
     }
 

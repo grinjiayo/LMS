@@ -3,6 +3,7 @@ package stages.admin;
 import Entity.Book;
 import Entity.Category;
 import Function.globalVariable;
+import LinkedList.DoublyLinkList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -23,43 +24,43 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-public class inventoryInsertController implements Initializable {
+public class inventoryModifyController implements Initializable {
 
     @FXML
-    private TextField tfAuthor;
+    private TextField searchField, titleField, authorField, isbnField, qtyField;
 
+    @FXML
+    private ChoiceBox<String> sortCB;
     @FXML
     private ChoiceBox<Category> tfCategory;
 
     @FXML
-    private TextField tfISBN;
+    private ImageView bkImage;
 
     @FXML
-    private TextField tfQuantity;
-
-    @FXML
-    private TextField tfTitle;
-
-    @FXML
-    private TextField pathField;
-
-    @FXML
-    private ImageView imgView;
-
-    @FXML
-    private Label lblError;
+    private Label lblError, lblError2;
 
     private Image newImage;
+    private Button saveBttn, changeImgBttn;
+
+
+    @FXML
+    private RadioButton titleRB, isbnRB;
+    Book searchBook;
+    DoublyLinkList bookList;
+    ArrayList<Category> categories;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        ArrayList<Category> categories = globalVariable.dbFnc.retrieveCategories();
+        bookList = globalVariable.bookList;
+        categories = globalVariable.dbFnc.retrieveCategories();
         if (categories != null && !categories.isEmpty()) {
             tfCategory.getItems().addAll(categories);
             tfCategory.setValue(categories.get(0)); // Optional: Set a default value
         } else {
-            System.out.println("No categories retrieved.");
+
         }
+        sortCB.getItems().addAll("A-Z", "Z-A");
     }
 
 //SWITCHING MENU
@@ -89,7 +90,7 @@ public class inventoryInsertController implements Initializable {
 
     @FXML
     private void goInventory(MouseEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/stages/admin/adminFXML/inventory/admin_inventory.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("stages/admin/adminFXML/inventory/admin_inventory.fxml"));
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setScene(new Scene(root));
         stage.show();
@@ -120,11 +121,6 @@ public class inventoryInsertController implements Initializable {
     }
 
     @FXML
-    private void goProfileAdmin(MouseEvent event) {
-
-    }
-
-    @FXML
     private void goReports(MouseEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/stages/admin/adminFXML/admin_reports.fxml"));
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -132,24 +128,50 @@ public class inventoryInsertController implements Initializable {
         stage.show();
     }
 
-    //PROCEED TO SUB MENU
+    //METHODS HERE
     @FXML
-    private void doInsert(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/stages/admin/adminFXML/inventory/admin_inventoryInsert.fxml"));
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        stage.setScene(new Scene(root));
-        stage.show();
+    private void doSearch(MouseEvent event) {
+        String selected = "isbn";
+        String searchFld;
+
+        if(isbnRB.isSelected()) { //find which button selected
+            selected = "isbn";
+        }else {
+            selected = "title";
+        }
+
+        if(!searchField.getText().isEmpty()) {  //if searchfield is empty
+            lblError.setText("Search text is blank"); return;
+        }
+        searchFld = searchField.getText();
+
+        //REtrieve the book data
+        if(selected.equals("title")) {
+            searchBook = bookList.findTitle(searchFld);
+        }else {
+            searchBook = bookList.findISBN(searchFld);
+        }
+
+        if(searchBook==null) {
+            lblError.setText("Found no book"); return;
+        }else {
+            Image img = searchBook.getImageSrc();
+            bkImage.setImage(img);
+            titleField.setText(searchBook.getTitle());
+            authorField.setText(searchBook.getAuthor());
+            isbnField.setText(searchBook.getISBN());
+            tfCategory.setValue(categories.getFirst());
+            qtyField.setText(Integer.toString(searchBook.getQuantity()));
+            changeImgBttn.setDisable(false);
+            titleField.setDisable(false);
+            authorField.setDisable(false);
+            isbnField.setDisable(false);
+            tfCategory.setDisable(false);
+            qtyField.setDisable(false);
+            saveBttn.setDisable(false);
+        }
     }
 
-    @FXML
-    private void doModify(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/stages/admin/adminFXML/inventory/admin_inventoryModify.fxml"));
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        stage.setScene(new Scene(root));
-        stage.show();
-    }
-
-    //INSERT FUNCTIONS
     @FXML
     private void browseImage(ActionEvent event) {
         FileChooser fileChooser = new FileChooser();
@@ -162,68 +184,65 @@ public class inventoryInsertController implements Initializable {
 
         if (file != null) {
             String filePath = file.toURI().toString();
-            pathField.setText(filePath);
 
             newImage = new Image(filePath);
 
-            imgView.setImage(newImage);
-            imgView.setFitWidth(120);
-            imgView.setFitHeight(144);
-            imgView.setPreserveRatio(false);
+            bkImage.setImage(newImage);
+            bkImage.setFitWidth(120);
+            bkImage.setFitHeight(144);
+            bkImage.setPreserveRatio(false);
         }
     }
 
     @FXML
-    private void createBook(ActionEvent event) {
+    private void editBook(ActionEvent event) {
         if(newImage==null) {
             lblError.setText("No image selected");  return;
-        }else if(tfTitle.getText()==null) {
+        }else if(titleField.getText()==null) {
             lblError.setText("Title is blank");  return;
-        }else if(tfAuthor.getText()==null) {
+        }else if(authorField.getText()==null) {
             lblError.setText("Author is blank"); return;
-        }else if(tfISBN.getText()==null) {
+        }else if(isbnField.getText()==null) {
             lblError.setText("ISBN is blank");return;
-        }else if(globalVariable.fnc.digitChecker(tfISBN.getText())==false) {
+        }else if(globalVariable.fnc.digitChecker(isbnField.getText())==false) {
             lblError.setText("ISBN should be all digits"); return;
         }else if(tfCategory.getSelectionModel()==null) {
             lblError.setText("No category selected"); return;
-        }else if(tfQuantity.getText()==null) {
+        }else if(qtyField.getText()==null) {
             lblError.setText("Quantity is blank"); return;
-        }else if(globalVariable.fnc.digitChecker(tfQuantity.getText()) == false) {
+        }else if(globalVariable.fnc.digitChecker(qtyField.getText()) == false) {
             lblError.setText("Quantity should be digits"); return;
         }
 
         //Upload the image to database
-        String bkTitle = tfTitle.getText();
-        String bkAuthor = tfAuthor.getText();
-        String bkISBN = tfISBN.getText();
+        String bkTitle = titleField.getText();
+        String bkAuthor = authorField.getText();
+        String bkISBN = isbnField.getText();
         Category ctgryObj = tfCategory.getSelectionModel().getSelectedItem();
         String category = ctgryObj.getName();
-        int quantity = Integer.parseInt(tfQuantity.getText());
+        int quantity = Integer.parseInt(qtyField.getText());
 
         String imgName = globalVariable.dbFnc.insertBookImageDB(newImage, bkTitle+bkAuthor);
 
         Book newBook = new Book(bkTitle, bkAuthor, category, newImage, bkISBN, quantity);
 
-        //Upload the book to database
-        boolean ifSuccess = globalVariable.dbFnc.insertBookDB(newBook, imgName);
-        if(ifSuccess) {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION, "Book inserted successfully", ButtonType.OK);
-            alert.setTitle("Book Insert");
-            alert.show();
-            globalVariable.bookList.insertNOrder(newBook);
-            imgView.setImage(null);
-            pathField.setText(null);
-            tfTitle.setText(null);
-            tfAuthor.setText(null);
-            tfISBN.setText(null);
-            tfQuantity.setText(null);
-            lblError.setText(null);
-        }else {
-            Alert alert = new Alert(Alert.AlertType.ERROR, "Book is not inserted", ButtonType.OK);
-            alert.setTitle("Book Insert");
-            alert.show();
-        }
+        bookList.deleteBook(searchBook.getTitle());
+        bookList.insertNOrder(newBook);
+
+        searchField.setText(null);
+        bkImage.setImage(null);
+        titleField.setText(null);
+        authorField.setText(null);
+        isbnField.setText(null);
+        tfCategory.setValue(categories.getFirst());
+        qtyField.setText(null);
+        changeImgBttn.setDisable(true);
+        titleField.setDisable(true);
+        authorField.setDisable(true);
+        isbnField.setDisable(true);
+        tfCategory.setDisable(true);
+        qtyField.setDisable(true);
+        saveBttn.setDisable(true);
     }
 
 }

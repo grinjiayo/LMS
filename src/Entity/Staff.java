@@ -1,25 +1,30 @@
 package Entity;
 
 public class Staff {
+    private int StaffID;
     private String fName;
     private String lName;
     private String email;
     private String pass;
-    private int staffKey;
+    private String position;
 
-    public Staff(String fName, String lName, String email, String pass) {
+
+    public Staff(int StaffID,String fName, String lName, String email, String pass, String position) {
+        this.StaffID = StaffID;
         this.fName = fName;
         this.lName = lName;
         this.email = email;
         this.pass = pass;
+        this.position = position;
     }
 
-    public Staff(String fName, String lName, String email, String pass, int staffKey) {
+    public Staff(String fName, String lName, String email, String pass, int StaffID, String position) {
         this.fName = fName;
         this.lName = lName;
         this.email = email;
         this.pass = pass;
-        this.staffKey = staffKey;
+        this.StaffID = StaffID;
+        this.position = position;
     }
 
     public String getfName() {
@@ -54,11 +59,19 @@ public class Staff {
         this.pass = pass;
     }
 
-    public int getStaffKey() {
-        return staffKey;
+    public int getStaffID() {
+        return StaffID;
     }
 
-    public void setStaffKey(int staffKey) {
-        this.staffKey = staffKey;
+    public void setStaffID(int StaffID) {
+        this.StaffID = StaffID;
+    }
+
+    public String getPosition() {
+        return position;
+    }
+
+    public void setPosition(String position) {
+        this.position = position;
     }
 }

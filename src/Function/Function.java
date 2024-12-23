@@ -4,11 +4,16 @@ import LinkedList.DoublyLinkList;
 import LinkedList.Link;
 
 import javax.swing.*;
+import java.io.ByteArrayOutputStream;
+import java.nio.ByteBuffer;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import Entity.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.PixelReader;
+import javafx.scene.image.WritablePixelFormat;
 
 public class Function {
     Date dateNow = new Date();
@@ -34,7 +39,7 @@ public class Function {
         return bookQuantity;
     }
 
-    public String retrieveStudentID(String ID)  {
+    public String retrieveStudentID(String ID)  {       //2024-00001
         String studentID = null;
         if (!ID.isEmpty()) {
             if (ID.matches("\\d{4}-\\d{5}")) {
@@ -46,6 +51,36 @@ public class Function {
             return null;
         }
         return studentID;
+    }
+
+    public byte[] convertImageToByteArray(Image image) {
+        try {
+            // Get image width and height
+            int width = (int) image.getWidth();
+            int height = (int) image.getHeight();
+
+            // Create a pixel reader
+            PixelReader pixelReader = image.getPixelReader();
+
+            // Byte array output stream to store pixel data
+            ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+
+            // Create a buffer to store raw pixel data
+            byte[] buffer = new byte[width * height * 4]; // Assuming ARGB format (4 bytes per pixel)
+            WritablePixelFormat<ByteBuffer> pixelFormat = WritablePixelFormat.getByteBgraInstance();
+
+            // Read pixels from the image
+            pixelReader.getPixels(0, 0, width, height, pixelFormat, buffer, 0, width * 4);
+
+            // Write the buffer to the output stream
+            outputStream.write(buffer);
+
+            // Return the byte array
+            return outputStream.toByteArray();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     public String[] arrayListToStringArray(ArrayList<String> strs) {
@@ -151,5 +186,23 @@ public class Function {
         }
         String pattern = "^(?=.*[a-zA-Z])(?=.*[\\d\\W]).+$";
         return s.matches(pattern);
+    }
+
+    public DoublyLinkList selectCategoryBooks(Category ctgry) {
+        DoublyLinkList bookList = globalVariable.bookList;
+        DoublyLinkList categoryList = new DoublyLinkList();
+
+        if(bookList.isEmpty())  return null;
+
+        Link current = bookList.getFirst();
+        while (current != null) {
+            Book bk = current.getElement();
+            if (bk.getCategory().equals(ctgry)) {
+                categoryList.insertNOrder(bk);
+            }
+            current = current.getNext(); // Advance to the next link
+        }
+
+        return categoryList;
     }
 }
