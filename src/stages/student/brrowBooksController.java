@@ -129,7 +129,7 @@ public class brrowBooksController implements Initializable {
 
             if (alert.showAndWait().get() == ButtonType.YES) {
                 Transact newTransact = new Transact(transactID, studentLogin.getSchoolID(), bkISBN, dateNow, "PENDING");
-                transactID = dbFunc.booktransactdb(newTransact);
+
 
 
             } else {

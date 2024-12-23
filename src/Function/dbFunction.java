@@ -11,6 +11,7 @@ import java.util.UUID;
 import Entity.Book;
 import Entity.Category;
 import Entity.Student;
+import Entity.Transact;
 import LinkedList.*;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
@@ -240,4 +241,5 @@ public class dbFunction {
         }
         return staffId;
     }
+
 }
