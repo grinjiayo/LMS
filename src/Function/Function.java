@@ -6,6 +6,7 @@ import LinkedList.Link;
 import javax.swing.*;
 import java.io.ByteArrayOutputStream;
 import java.nio.ByteBuffer;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -204,5 +205,13 @@ public class Function {
         }
 
         return categoryList;
+    }
+
+    public java.sql.Date convertToSqlDate(LocalDate localDate) {
+        if (localDate == null) {
+            throw new IllegalArgumentException("LocalDate cannot be null");
+        }
+
+        return java.sql.Date.valueOf(localDate);
     }
 }

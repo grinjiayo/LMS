@@ -11,6 +11,7 @@ import java.util.UUID;
 import Entity.Book;
 import Entity.Category;
 import Entity.Student;
+import Entity.Transact;
 import LinkedList.*;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
@@ -140,7 +141,7 @@ public class dbFunction {
             alert.setTitle("ResetIncrementError");
             alert.show();
         }
-        return id+1;
+        return id;
     }
 
     public boolean insertBookDB(Book book, String imgName) {
@@ -240,4 +241,102 @@ public class dbFunction {
         }
         return staffId;
     }
+
+    public int booktransactdb(Transact transact) {
+        int transID = 0;
+        try{
+            conn = connectToDB();
+            transID = resetAutoIncrement(conn, "transact", "trans_id");
+            String sqlInsertStudent = "INSERT INTO librarydb.transact" +
+                    "(trans_id, stud_id, book_id, borrow_date, penalty, return_date, status)" +
+                    " VALUES (?, ?, ?, ?, ?, ?, ?)";
+            pstmt = conn.prepareStatement(sqlInsertStudent);
+            pstmt.setInt(1, transact.getTransID());
+            pstmt.setInt(2, transact.getBorrowerID());
+            pstmt.setInt(3, transact.getBookID());
+            pstmt.setDate(4, transact.getBorrowDate());
+            pstmt.setDouble(5, transact.getPenalty());
+            pstmt.setDate(6, transact.getPaidDate());
+            pstmt.setString(7, transact.getStatus());
+
+            pstmt.execute();
+            return transID+1;
+        }catch(SQLException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR, e.getMessage(), ButtonType.OK);
+            alert.setTitle("Book Borrow Request Error");
+            alert.show();
+        }catch(Exception e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR, e.getMessage(), ButtonType.OK);
+            alert.setTitle("BookBorrowRequestError");
+            alert.show();
+        }
+        return transID;
+    }
+
+    public int findBookID(int ISBN) {
+        int id = 0;
+        try {
+            conn = connectToDB();
+            stmt = conn.createStatement();
+            String sqlFindBookID = "SELECT book_id FROM book WHERE isbn =" + ISBN;
+            rs = stmt.executeQuery(sqlFindBookID);
+            if (rs.next()) {
+                id = rs.getInt("book_id");
+            } else {
+                Alert alert = new Alert(Alert.AlertType.ERROR, "No Book Found", ButtonType.OK);
+                alert.setTitle("Finding book ID Error");
+                alert.show();
+            }
+
+            return id;
+        }catch (SQLException e){
+            Alert alert = new Alert(Alert.AlertType.ERROR, e.getMessage(), ButtonType.OK);
+            alert.setTitle("Book Borrow Request Error");
+            alert.show();
+        }
+        return  id;
+    }
+
+    public boolean insertNewTransactDB(Transact newTransact) {
+        boolean inserted = false;
+        try{
+            conn = connectToDB();
+
+            int trans_id = newTransact.getTransID();
+            String bookISBN = newTransact.getBkIsbn();
+            int stud_id = newTransact.getBorrowerID();
+            int book_id = newTransact.getBookID();
+            Date borrowDate = newTransact.getBorrowDate();
+            double penalty = newTransact.getPenalty();
+            String status = newTransact.getStatus();
+
+            String sqlInsertStudent = "INSERT INTO librarydb.transact" +
+                    "(trans_id, stud_id, book_id, borrow_date, penalty, status)" +
+                    " VALUES (?, ?, ?, ?, ?, ?, ?)";
+            pstmt = conn.prepareStatement(sqlInsertStudent);
+            pstmt.setInt(1, trans_id);
+            pstmt.setInt(2, stud_id);
+            pstmt.setInt(3, book_id);
+            pstmt.setDate(4, borrowDate);
+            pstmt.setDouble(5, penalty);
+            pstmt.setString(6, status);
+
+            pstmt.execute();
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Borrow transact is pending for review", ButtonType.OK);
+            alert.setTitle("Borrow Request Successful");
+            alert.show();
+
+            return true;
+        }catch(SQLException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR, e.getMessage(), ButtonType.OK);
+            alert.setTitle("Book Borrow Request Error");
+            alert.show();
+        }catch(Exception e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR, e.getMessage(), ButtonType.OK);
+            alert.setTitle("BookBorrowRequestError");
+            alert.show();
+        }
+        return false;
+    }
+
 }

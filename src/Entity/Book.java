@@ -14,6 +14,7 @@ public class Book {
     private ImageIcon format = null;
     private byte[] pImage = null;
 
+    private int bookID;
     private String title;
     private String author;
     private String category;

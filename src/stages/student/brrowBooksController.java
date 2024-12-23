@@ -2,6 +2,7 @@ package stages.student;
 
 import Entity.Book;
 import Entity.Student;
+import Entity.Transact;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -22,10 +23,22 @@ import stages.admin.library.BookSelectionService;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.ResourceBundle;
 import Function.*;
 
 public class brrowBooksController implements Initializable {
+
+    PreparedStatement pstmt;
+    ResultSet rs;
+
+    Function fnc = new Function();
+    dbFunction dbFunc = new dbFunction();
 
     @FXML
     private VBox libraryBox;
@@ -49,6 +62,7 @@ public class brrowBooksController implements Initializable {
     private ImageView bkImage;
 
     private Student studentLogin;
+    private Connection conn;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -87,24 +101,45 @@ public class brrowBooksController implements Initializable {
 
     @FXML
     private void goBorrowBook(ActionEvent event) {
-        if(bkTitleField.getText()==null) {
-            Alert error = new Alert(Alert.AlertType.NONE, "No selected book", ButtonType.OK);
-            error.setTitle("Borrow Book");
-            error.showAndWait();
-            return;
+        try {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION, "Borrow Book Request", ButtonType.NO, ButtonType.YES);
+            alert.setTitle("Borrow Book");
+            alert.setHeaderText("Confirm Borrow Book Request");
+            alert.setContentText("Borrower Info\nBorrower ID:  " + studentLogin.getSchoolID() +
+                    "\nBorrower Name:  " + studentLogin.getfName() +
+                    "\n\nBook Info \nTitle:  " + bkTitleField.getText() +
+                    "\nISBN:  " + bkISBNField.getText()
+            );
+            alert.showAndWait();
+
+            conn = dbFunc.connectToDB();
+            int transactID = dbFunc.resetAutoIncrement(conn, "transact", "trans_id");
+            if (bkTitleField.getText() == null) {
+                Alert error = new Alert(Alert.AlertType.NONE, "No selected book", ButtonType.OK);
+                error.setTitle("Borrow Book");
+                error.showAndWait();
+                return;
+            }
+
+            String title = bkTitleField.getText();
+            String bookISBN = bkISBNField.getText();
+            int bkISBN = Integer.parseInt(bookISBN);
+            LocalDate return_date = LocalDate.now().plusDays(7);
+            java.sql.Date dateNow = fnc.convertToSqlDate(return_date);
+
+            if (alert.showAndWait().get() == ButtonType.YES) {
+                Transact newTransact = new Transact(transactID, studentLogin.getSchoolID(), bkISBN, dateNow, "PENDING");
+                transactID = dbFunc.booktransactdb(newTransact);
+
+
+            } else {
+                alert.close();
+            }
+        }catch(Exception e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR, e.getMessage(), ButtonType.OK);
+            alert.setTitle("Book Borrow Request Error");
+            alert.show();
         }
-        String title = bkTitleField.getText();
-
-        Alert alert = new Alert(Alert.AlertType.INFORMATION, "Borrow Book Request", ButtonType.NO, ButtonType.YES);
-        alert.setTitle("Borrow Book");
-        alert.setHeaderText("Confirm Borrow Book Request");
-        alert.setContentText("Borrower Info\nBorrower ID:  " + studentLogin.getSchoolID() +
-                "\nBorrower Name:  " + studentLogin.getfName() +
-                "\n\nBook Info \nTitle:  " + bkTitleField.getText() +
-                "\nISBN:  " + bkISBNField.getText()
-        );
-        alert.showAndWait();
-
     }
 
     @FXML

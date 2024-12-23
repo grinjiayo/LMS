@@ -96,6 +96,7 @@ public class config {
                     "borrow_date DATE NOT NULL, " +
                     "penalty DOUBLE," +
                     "return_date DATE, " +
+                    "status VARCHAR(64) NOT NULL, " +
                     "FOREIGN KEY(stud_id) REFERENCES student(stud_id)," +
                     "FOREIGN KEY(book_id) REFERENCES book(book_id)," +
                     "PRIMARY KEY(trans_id))";

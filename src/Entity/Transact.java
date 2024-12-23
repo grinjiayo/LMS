@@ -40,6 +40,27 @@ public class Transact {
         this.status = status;
     }
 
+    public Transact(int transID, int studID, int bookID, Date borrowDate, int penalty, Date returnDate, String status) {
+        setBorrowButton();
+        this.transID = transID;
+        this.borrowerID = studID;
+        this.bookID = bookID;
+        this.borrowDate = borrowDate;
+        this.penalty = penalty;
+        this.paidDate = returnDate;
+        this.status = status;
+    }
+
+    public Transact(int transID, int studID, int bookID, Date borrowDate, String status) {
+        this.transID = transID;
+        this.borrowerID = studID;
+        this.bookID = bookID;
+        this.borrowDate = borrowDate;
+        this.penalty = 0;
+        this.paidDate = null;
+        this.status = status;
+    }
+
     public void TransactReturn(int transID, String title, String ISBN, int borrowerID, String borrowerName, int bookID, String status, Date borrowDate) {
         setReturnButton();
         this.transID = transID;
