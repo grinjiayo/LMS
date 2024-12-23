@@ -374,13 +374,13 @@
             </HBox>
             <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="552.0" prefWidth="505.0" styleClass="bgcolor-brown" stylesheets="@../../../../style_File/Dashboard.css">
                <children>
-                  <TableView prefHeight="552.0" prefWidth="506.0" stylesheets="@../../../../style_File/Dashboard.css">
+                  <TableView fx:id="BookTableView" prefHeight="552.0" prefWidth="506.0" stylesheets="@../../../../style_File/Dashboard.css">
                     <columns>
-                      <TableColumn prefWidth="143.99998170137405" text="Title" />
-                      <TableColumn prefWidth="116.00007629394531" text="Author" />
-                        <TableColumn prefWidth="92.79998779296875" text="Category" />
-                        <TableColumn prefWidth="101.5999755859375" text="ISBN" />
-                        <TableColumn prefWidth="56.00006103515625" text="Qty" />
+                      <TableColumn fx:id="titleCol" prefWidth="143.99998170137405" text="Title" />
+                      <TableColumn fx:id="authorCol" prefWidth="116.00007629394531" text="Author" />
+                        <TableColumn fx:id="categoryCol" prefWidth="92.79998779296875" text="Category" />
+                        <TableColumn fx:id="isbnCol" prefWidth="101.5999755859375" text="ISBN" />
+                        <TableColumn fx:id="qtyCol" prefWidth="56.00006103515625" text="Qty" />
                     </columns>
                   </TableView>
                </children></VBox>
