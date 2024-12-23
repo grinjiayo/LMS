@@ -94,13 +94,12 @@ public class config {
 
             String sqlTableTransact = "CREATE TABLE IF NOT EXISTS librarydb.transact (" +
                     "trans_id INT NOT NULL AUTO_INCREMENT, " +
-                    "stud_id INT, " +
+                    "stud_id INT NOT NULL, " +
                     "book_id INT , " +
                     "borrow_date DATE NOT NULL, " +
                     "penalty DOUBLE," +
                     "return_date DATE, " +
                     "status VARCHAR(64) NOT NULL, " +
-                    "FOREIGN KEY(stud_id) REFERENCES student(stud_id)," +
                     "FOREIGN KEY(book_id) REFERENCES book(book_id)," +
                     "PRIMARY KEY(trans_id))";
             stmt.executeUpdate(sqlTableTransact);

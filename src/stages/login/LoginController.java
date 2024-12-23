@@ -336,9 +336,8 @@ public class LoginController {
                 String email = rs.getString("email");
                 String pass = rs.getString("password");
                 Double penalty = rs.getDouble("penalty");
-                int stud_id = rs.getInt("stud_id");
 
-                globalVariable.loginStudent = new Student(stud_id, school_id, fName,lName, section, email, pass, penalty);
+                globalVariable.loginStudent = new Student(school_id, fName,lName, section, email, pass, penalty);
 
                 Parent root = FXMLLoader.load(getClass().getResource("/stages/student/studentFXML/student_dashboard.fxml"));
                 Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
