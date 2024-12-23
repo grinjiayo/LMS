@@ -60,7 +60,7 @@ public class bkManageController implements Initializable {
         try {
             // Load the categories into the ChoiceBox as before
             ArrayList<Category> categories = globalVariable.dbFnc.retrieveCategories();
-            categories.add(new Category(0, "All"));
+            categories.addFirst(new Category(0, "All"));
             if (categories.size() != 0) {
                 categoryCB.getItems().addAll(categories);
                 categoryCB.setValue(categories.get(0));

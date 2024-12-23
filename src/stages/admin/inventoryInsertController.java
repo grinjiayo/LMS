@@ -3,6 +3,7 @@ package stages.admin;
 import Entity.Book;
 import Entity.Category;
 import Function.globalVariable;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -11,6 +12,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -22,6 +24,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+
+import static Function.globalVariable.fnc;
 
 public class inventoryInsertController implements Initializable {
 
@@ -51,6 +55,19 @@ public class inventoryInsertController implements Initializable {
 
     private Image newImage;
 
+    @FXML
+    private TableView<Book> BookTableView;
+    @FXML
+    private TableColumn<Book, String> authorCol;
+    @FXML
+    private TableColumn<Book, String> categoryCol;
+    @FXML
+    private TableColumn<Book, String> isbnCol;
+    @FXML
+    private TableColumn<Book, String> qtyCol;
+    @FXML
+    private TableColumn<Book, String> titleCol;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         ArrayList<Category> categories = globalVariable.dbFnc.retrieveCategories();
@@ -60,6 +77,19 @@ public class inventoryInsertController implements Initializable {
         } else {
             System.out.println("No categories retrieved.");
         }
+        refreshTable();
+    }
+
+    public void refreshTable() {
+        titleCol.setCellValueFactory(new PropertyValueFactory<Book, String>("title"));
+        authorCol.setCellValueFactory(new PropertyValueFactory<Book, String>("author"));
+        isbnCol.setCellValueFactory(new PropertyValueFactory<Book, String>("ISBN"));
+        categoryCol.setCellValueFactory(new PropertyValueFactory<Book, String>("category"));
+        qtyCol.setCellValueFactory(new PropertyValueFactory<Book, String>("quantity"));
+
+        ObservableList<Book> bookList = fnc.inventoryBookView();
+        System.out.println(bookList.size());
+        BookTableView.setItems(bookList);
     }
 
 //SWITCHING MENU
@@ -183,13 +213,13 @@ public class inventoryInsertController implements Initializable {
             lblError.setText("Author is blank"); return;
         }else if(tfISBN.getText()==null) {
             lblError.setText("ISBN is blank");return;
-        }else if(globalVariable.fnc.digitChecker(tfISBN.getText())==false) {
+        }else if(fnc.digitChecker(tfISBN.getText())==false) {
             lblError.setText("ISBN should be all digits"); return;
         }else if(tfCategory.getSelectionModel()==null) {
             lblError.setText("No category selected"); return;
         }else if(tfQuantity.getText()==null) {
             lblError.setText("Quantity is blank"); return;
-        }else if(globalVariable.fnc.digitChecker(tfQuantity.getText()) == false) {
+        }else if(fnc.digitChecker(tfQuantity.getText()) == false) {
             lblError.setText("Quantity should be digits"); return;
         }
 
@@ -219,6 +249,7 @@ public class inventoryInsertController implements Initializable {
             tfISBN.setText(null);
             tfQuantity.setText(null);
             lblError.setText(null);
+            refreshTable();
         }else {
             Alert alert = new Alert(Alert.AlertType.ERROR, "Book is not inserted", ButtonType.OK);
             alert.setTitle("Book Insert");

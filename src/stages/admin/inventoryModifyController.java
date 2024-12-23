@@ -4,6 +4,7 @@ import Entity.Book;
 import Entity.Category;
 import Function.globalVariable;
 import LinkedList.DoublyLinkList;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -12,6 +13,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -23,6 +25,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+
+import static Function.globalVariable.fnc;
 
 public class inventoryModifyController implements Initializable {
 
@@ -40,9 +44,20 @@ public class inventoryModifyController implements Initializable {
     @FXML
     private Label lblError, lblError2;
 
-    private Image newImage;
-    private Button saveBttn, changeImgBttn;
-
+    @FXML private Image newImage;
+    @FXML private Button saveBttn, changeImgBttn;
+    @FXML
+    private TableView<Book> BookTableView;
+    @FXML
+    private TableColumn<Book, String> authorCol;
+    @FXML
+    private TableColumn<Book, String> categoryCol;
+    @FXML
+    private TableColumn<Book, String> isbnCol;
+    @FXML
+    private TableColumn<Book, String> qtyCol;
+    @FXML
+    private TableColumn<Book, String> titleCol;
 
     @FXML
     private RadioButton titleRB, isbnRB;
@@ -54,13 +69,39 @@ public class inventoryModifyController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         bookList = globalVariable.bookList;
         categories = globalVariable.dbFnc.retrieveCategories();
+
         if (categories != null && !categories.isEmpty()) {
             tfCategory.getItems().addAll(categories);
             tfCategory.setValue(categories.get(0)); // Optional: Set a default value
         } else {
-
+            Alert alert = new Alert(Alert.AlertType.ERROR, "No categories");
+            alert.showAndWait();
         }
+
+        //Insert book in table
+        titleCol.setCellValueFactory(new PropertyValueFactory<Book, String>("title"));
+        authorCol.setCellValueFactory(new PropertyValueFactory<Book, String>("author"));
+        isbnCol.setCellValueFactory(new PropertyValueFactory<Book, String>("ISBN"));
+        categoryCol.setCellValueFactory(new PropertyValueFactory<Book, String>("category"));
+        qtyCol.setCellValueFactory(new PropertyValueFactory<Book, String>("quantity"));
+
+        ObservableList<Book> bookList = fnc.inventoryBookView();
+        System.out.println(bookList.size());
+        BookTableView.setItems(bookList);
+
         sortCB.getItems().addAll("A-Z", "Z-A");
+    }
+
+    public void refreshTable() {
+        titleCol.setCellValueFactory(new PropertyValueFactory<Book, String>("title"));
+        authorCol.setCellValueFactory(new PropertyValueFactory<Book, String>("author"));
+        isbnCol.setCellValueFactory(new PropertyValueFactory<Book, String>("ISBN"));
+        categoryCol.setCellValueFactory(new PropertyValueFactory<Book, String>("category"));
+        qtyCol.setCellValueFactory(new PropertyValueFactory<Book, String>("quantity"));
+
+        ObservableList<Book> bookList = fnc.inventoryBookView();
+        System.out.println(bookList.size());
+        BookTableView.setItems(bookList);
     }
 
 //SWITCHING MENU
@@ -140,7 +181,7 @@ public class inventoryModifyController implements Initializable {
             selected = "title";
         }
 
-        if(!searchField.getText().isEmpty()) {  //if searchfield is empty
+        if(searchField.getText().isEmpty()) {  //if searchfield is empty
             lblError.setText("Search text is blank"); return;
         }
         searchFld = searchField.getText();
@@ -204,13 +245,13 @@ public class inventoryModifyController implements Initializable {
             lblError.setText("Author is blank"); return;
         }else if(isbnField.getText()==null) {
             lblError.setText("ISBN is blank");return;
-        }else if(globalVariable.fnc.digitChecker(isbnField.getText())==false) {
+        }else if(fnc.digitChecker(isbnField.getText())==false) {
             lblError.setText("ISBN should be all digits"); return;
         }else if(tfCategory.getSelectionModel()==null) {
             lblError.setText("No category selected"); return;
         }else if(qtyField.getText()==null) {
             lblError.setText("Quantity is blank"); return;
-        }else if(globalVariable.fnc.digitChecker(qtyField.getText()) == false) {
+        }else if(fnc.digitChecker(qtyField.getText()) == false) {
             lblError.setText("Quantity should be digits"); return;
         }
 
@@ -228,6 +269,7 @@ public class inventoryModifyController implements Initializable {
 
         bookList.deleteBook(searchBook.getTitle());
         bookList.insertNOrder(newBook);
+        refreshTable();
 
         searchField.setText(null);
         bkImage.setImage(null);
