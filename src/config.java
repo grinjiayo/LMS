@@ -5,6 +5,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 import Function.*;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 
 public class config {
     Connection conn;
@@ -77,17 +79,18 @@ public class config {
             System.out.println("Table 'book' created succesfully");
 
             String sqlTableStudent = "CREATE TABLE IF NOT EXISTS librarydb.student (" +
-                    "stud_id INT NOT NULL AUTO_INCREMENT, " +
-                    "school_id INT NOT NULL, " +
+                    "school_id INT NOT NULL AUTO_INCREMENT, " +
                     "fName VARCHAR(64) NOT NULL, " +
                     "lName VARCHAR(64) NOT NULL, " +
                     "section VARCHAR(64) NOT NULL, " +
                     "email VARCHAR(64) NOT NULL, " +
                     "password VARCHAR(64) NOT NULL, " +
                     "penalty DOUBLE NOT NULL, " +
-                    "PRIMARY KEY(stud_id))";
+                    "PRIMARY KEY(school_id))";
             stmt.executeUpdate(sqlTableStudent);
             System.out.println("Table 'student' created successfully");
+
+            String setAutoIncrement = "ALTER TABLE student AUTO_INCREMENT=202400000;";
 
             String sqlTableTransact = "CREATE TABLE IF NOT EXISTS librarydb.transact (" +
                     "trans_id INT NOT NULL AUTO_INCREMENT, " +
@@ -141,25 +144,13 @@ public class config {
         }
     }
 
-    public void insertSampleBook() {
+    public static void retrieveBooks() {
         try {
-            //Establish connection
-            String url = "jdbc:mysql://localhost:3306/librarydb";
-            String user = "root";
-            String password = "";
-            conn = DriverManager.getConnection(url, user, password);
-            stmt = conn.createStatement();
-
-            String insertSql = "INSERT INTO book (TITLE, AUTHOR, ISBN, CATEGORY, QUANTITY, BORROWED) VALUES ('HarryPotter', 'JK Rowling', 01023840, 'SciFi', 12, 0)";
-            String insertSql2 = "INSERT INTO book (TITLE, AUTHOR, ISBN, CATEGORY, QUANTITY, BORROWED) VALUES ('King', 'AntMan', 01023840, 'Fiction', 13, 1)";
-            String insertSql3 = "INSERT INTO book (TITLE, AUTHOR, ISBN, CATEGORY, QUANTITY, BORROWED) VALUES ('Ashland', 'JK Rowling', 01023840, 'SciFi', 12, 0)";
-            stmt.executeUpdate(insertSql);
-            stmt.executeUpdate(insertSql2);
-            stmt.executeUpdate(insertSql3);
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, ex.getMessage(), "INSERT BOOK ERROR", JOptionPane.ERROR_MESSAGE);
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e.getMessage(), "INSERT BOOK ERROR", JOptionPane.ERROR_MESSAGE);
+            globalVariable.bookList = globalVariable.dbFnc.retrieveBooksnOrder();
+        }catch(Exception e) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION, e.getMessage(), ButtonType.NO, ButtonType.YES);
+            alert.setTitle("Retrieve Books Error");
+            alert.show();
         }
     }
 
