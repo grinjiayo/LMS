@@ -19,7 +19,7 @@ import javafx.event.ActionEvent;
 import javafx.animation.Interpolator;
 import java.io.IOException;
 import Function.*;
-import javax.swing.*;
+
 import java.sql.*;
 
 import static Function.globalVariable.bookList;
@@ -400,7 +400,7 @@ public class LoginController {
         }
 
         int id = dbFunc.resetAutoIncrement(conn, "student", "stud_id");
-        Student newStudent = new Student(studentID, fName, lName, section, email, pass, 0);
+        Student newStudent = new Student();
         studentID = dbFunc.insertStudentDB(newStudent);
         if(studentID!=0) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION, "Student registered successfully");

@@ -9,7 +9,7 @@ public class Staff {
     private String position;
 
 
-    public Staff(int StaffID,String fName, String lName, String email, String pass, String position) {
+    public Staff() {
         this.StaffID = StaffID;
         this.fName = fName;
         this.lName = lName;

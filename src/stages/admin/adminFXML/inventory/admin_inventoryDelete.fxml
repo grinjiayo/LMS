@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.gluonhq.charm.glisten.control.ToggleButtonGroup?>
 <?import java.lang.String?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -16,7 +18,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane blendMode="DARKEN" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="675.0" prefWidth="970.0" stylesheets="@../../../../style_File/Dashboard.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="stages.admin.inventoryController">
+<BorderPane blendMode="DARKEN" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="675.0" prefWidth="970.0" stylesheets="@../../../../style_File/Dashboard.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="stages.admin.inventoryDeleteController">
     <top>
         <HBox prefHeight="68.0" prefWidth="970.0" stylesheets="@../../../../style_File/Dashboard.css" BorderPane.alignment="CENTER">
             <children>
@@ -207,131 +209,218 @@
             <String fx:value="bgcolor-white" />
             <String fx:value="outlineLeft" />
          </styleClass>
+         <padding>
+            <Insets top="10.0" />
+         </padding>
          <children>
-            <HBox alignment="CENTER" prefHeight="24.0" prefWidth="266.0">
+            <HBox prefHeight="32.0" prefWidth="267.0" spacing="5.0">
                <children>
-                  <TextField focusTraversable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="200.0" promptText="Search" stylesheets="@../../../../style_File/Dashboard.css">
-                     <styleClass>
-                        <String fx:value="bgcolor-white" />
-                        <String fx:value="outlineAllBlack" />
-                     </styleClass>
-                  </TextField>
-                  <VBox maxHeight="-Infinity" minHeight="-Infinity" prefHeight="25.0" prefWidth="31.0" styleClass="bgcolor-darkbrown" stylesheets="@../../../../style_File/Dashboard.css">
+                  <HBox alignment="CENTER" onMouseClicked="#goInventory" prefHeight="29.0" prefWidth="38.0" stylesheets="@../../../../style_File/Dashboard.css">
                      <children>
-                        <ImageView fitHeight="20.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="21.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../../../icons/searchIcon.png" />
+                              <Image url="@../../../../icons/inventory/backArrow.png" />
                            </image>
                         </ImageView>
                      </children>
-                     <padding>
-                        <Insets left="4.0" top="2.0" />
-                     </padding>
+                     <styleClass>
+                        <String fx:value="bgcolor-darkbrown" />
+                        <String fx:value="roundEdge" />
+                     </styleClass>
+                  </HBox>
+                  <Label prefHeight="32.0" prefWidth="41.0" text="Back">
+                     <font>
+                        <Font size="13.0" />
+                     </font>
+                  </Label>
+               </children>
+               <padding>
+                  <Insets left="8.0" />
+               </padding>
+            </HBox>
+            <HBox prefHeight="55.0" prefWidth="267.0">
+               <children>
+                  <Label alignment="CENTER" prefHeight="26.0" prefWidth="278.0" text="DELETE BOOK">
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </Label>
+               </children>
+               <padding>
+                  <Insets top="20.0" />
+               </padding>
+            </HBox>
+            <VBox prefHeight="74.0" prefWidth="267.0">
+               <children>
+                  <HBox prefHeight="27.0" prefWidth="252.0" spacing="5.0">
+                     <children>
+                        <Label prefHeight="26.0" prefWidth="62.0" text="Search by: " />
+                        <ToggleButtonGroup selectionType="SINGLE">
+                           <toggles>
+                              <RadioButton fx:id="titleRB" mnemonicParsing="false" prefHeight="26.0" prefWidth="52.0" selected="true" text="Title" />
+                              <RadioButton fx:id="isbnRB" mnemonicParsing="false" prefHeight="26.0" prefWidth="57.0" text="ISBN" />
+                           </toggles>
+                        </ToggleButtonGroup>
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="30.0" prefWidth="260.0">
+                     <children>
+                        <TextField fx:id="searchField" prefHeight="30.0" prefWidth="210.0" />
+                        <VBox maxHeight="-Infinity" minHeight="-Infinity" onMouseClicked="#doSearch" prefHeight="30.0" prefWidth="30.0" styleClass="bgcolor-darkbrown" stylesheets="@../../../../style_File/Dashboard.css">
+                           <children>
+                              <ImageView fitHeight="20.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../../icons/searchIcon.png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                           <padding>
+                              <Insets left="4.0" top="2.0" />
+                           </padding>
+                        </VBox>
+                     </children>
+                  </HBox>
+                  <Label fx:id="lblError" alignment="CENTER" prefHeight="18.0" prefWidth="242.0" textFill="RED" />
+               </children>
+               <padding>
+                  <Insets left="15.0" />
+               </padding>
+            </VBox>
+            <HBox alignment="CENTER" prefHeight="128.0" prefWidth="267.0" spacing="10.0">
+               <children>
+                  <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="128.0" prefWidth="106.0" styleClass="outlineAllGray" stylesheets="@../../../../style_File/Dashboard.css">
+                     <children>
+                        <ImageView fx:id="bkImage" disable="true" fitHeight="105.0" fitWidth="230.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../../icons/defaultImage.png" />
+                           </image>
+                        </ImageView>
+                     </children>
                   </VBox>
                </children>
             </HBox>
-            <VBox prefHeight="412.0" prefWidth="266.0">
+            <VBox prefHeight="240.0" prefWidth="267.0">
                <children>
-                  <HBox alignment="CENTER" prefHeight="116.0" prefWidth="266.0" stylesheets="@../../../../style_File/Dashboard.css">
+                  <VBox prefHeight="54.0" prefWidth="267.0">
                      <children>
-                        <VBox alignment="TOP_CENTER" prefHeight="116.0" prefWidth="131.0" spacing="15.0">
-                           <children>
-                              <Label text="Number of Books: ">
-                                 <font>
-                                    <Font size="14.0" />
-                                 </font>
-                              </Label>
-                              <Label fx:id="bookQty" alignment="CENTER" prefHeight="64.0" prefWidth="84.0" stylesheets="@../../../../style_File/Dashboard.css" text="0" textFill="WHITE">
-                                 <font>
-                                    <Font size="36.0" />
-                                 </font>
-                                 <styleClass>
-                                    <String fx:value="bgcolor-darkbrown" />
-                                    <String fx:value="roundEdge" />
-                                 </styleClass>
-                              </Label>
-                           </children>
-                        </VBox>
+                        <Label text="Title">
+                           <font>
+                              <Font size="13.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="titleField" disable="true" prefHeight="30.0" prefWidth="267.0" stylesheets="@../../../../style_File/Dashboard.css">
+                           <styleClass>
+                              <String fx:value="bgcolor-white" />
+                              <String fx:value="outlineAllGray" />
+                           </styleClass>
+                        </TextField>
                      </children>
-                  </HBox>
-                  <HBox alignment="CENTER" prefHeight="116.0" prefWidth="266.0" stylesheets="@../../../../style_File/Dashboard.css">
+                     <padding>
+                        <Insets left="15.0" right="10.0" />
+                     </padding>
+                  </VBox>
+                  <VBox prefHeight="54.0" prefWidth="267.0">
                      <children>
-                        <VBox alignment="TOP_CENTER" prefHeight="116.0" prefWidth="131.0" spacing="15.0">
-                           <children>
-                              <Label text="Unique Books: ">
-                                 <font>
-                                    <Font size="14.0" />
-                                 </font>
-                              </Label>
-                              <Label fx:id="bookUniqueQty" alignment="CENTER" prefHeight="64.0" prefWidth="84.0" stylesheets="@../../../../style_File/Dashboard.css" text="0" textFill="WHITE">
-                                 <font>
-                                    <Font size="36.0" />
-                                 </font>
-                                 <styleClass>
-                                    <String fx:value="bgcolor-darkbrown" />
-                                    <String fx:value="roundEdge" />
-                                 </styleClass>
-                              </Label>
-                           </children>
-                        </VBox>
+                        <Label text="Author">
+                           <font>
+                              <Font size="13.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="authorField" disable="true" prefHeight="30.0" prefWidth="267.0" stylesheets="@../../../../style_File/Dashboard.css">
+                           <styleClass>
+                              <String fx:value="bgcolor-white" />
+                              <String fx:value="outlineAllGray" />
+                           </styleClass>
+                        </TextField>
                      </children>
-                  </HBox>
-                  <HBox alignment="CENTER" prefHeight="116.0" prefWidth="266.0" stylesheets="@../../../../style_File/Dashboard.css">
+                     <padding>
+                        <Insets left="15.0" right="10.0" />
+                     </padding>
+                  </VBox>
+                  <VBox prefHeight="54.0" prefWidth="267.0">
                      <children>
-                        <VBox alignment="TOP_CENTER" prefHeight="116.0" prefWidth="131.0" spacing="15.0">
+                        <Label text="ISBN">
+                           <font>
+                              <Font size="13.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="isbnField" disable="true" prefHeight="30.0" prefWidth="267.0" stylesheets="@../../../../style_File/Dashboard.css">
+                           <styleClass>
+                              <String fx:value="bgcolor-white" />
+                              <String fx:value="outlineAllGray" />
+                           </styleClass>
+                        </TextField>
+                     </children>
+                     <padding>
+                        <Insets left="15.0" right="10.0" />
+                     </padding>
+                  </VBox>
+                  <HBox prefHeight="61.0" prefWidth="267.0">
+                     <children>
+                        <VBox prefHeight="62.0" prefWidth="163.0">
                            <children>
-                              <Label text="Borrowed Books: ">
+                              <Label text="Category">
                                  <font>
-                                    <Font size="14.0" />
+                                    <Font size="13.0" />
                                  </font>
                               </Label>
-                              <Label fx:id="bookBrrwQty" alignment="CENTER" prefHeight="64.0" prefWidth="84.0" stylesheets="@../../../../style_File/Dashboard.css" text="0" textFill="WHITE">
-                                 <font>
-                                    <Font size="36.0" />
-                                 </font>
+                              <ChoiceBox fx:id="tfCategory" disable="true" prefHeight="27.0" prefWidth="144.0" stylesheets="@../../../../style_File/Dashboard.css">
                                  <styleClass>
-                                    <String fx:value="bgcolor-darkbrown" />
-                                    <String fx:value="roundEdge" />
+                                    <String fx:value="bgcolor-white" />
+                                    <String fx:value="outlineAllGray" />
                                  </styleClass>
-                              </Label>
+                              </ChoiceBox>
                            </children>
+                           <padding>
+                              <Insets left="15.0" right="5.0" />
+                           </padding>
+                        </VBox>
+                        <VBox prefHeight="62.0" prefWidth="110.0">
+                           <children>
+                              <Label prefHeight="19.0" prefWidth="58.0" text="Quantity">
+                                 <font>
+                                    <Font size="13.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="qtyField" disable="true" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="80.0" stylesheets="@../../../../style_File/Dashboard.css">
+                                 <styleClass>
+                                    <String fx:value="bgcolor-white" />
+                                    <String fx:value="outlineAllGray" />
+                                 </styleClass>
+                              </TextField>
+                           </children>
+                           <padding>
+                              <Insets left="15.0" right="10.0" />
+                           </padding>
                         </VBox>
                      </children>
                   </HBox>
                </children>
-               <VBox.margin>
-                  <Insets />
-               </VBox.margin>
                <padding>
-                  <Insets top="30.0" />
+                  <Insets top="20.0" />
                </padding>
             </VBox>
-            <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" spacing="10.0">
+            <Label fx:id="lblError2" alignment="CENTER" prefHeight="18.0" prefWidth="267.0" textFill="RED" />
+            <HBox alignment="TOP_CENTER" prefHeight="64.0" prefWidth="267.0">
+               <padding>
+                  <Insets top="5.0" />
+               </padding>
                <children>
-                  <Button mnemonicParsing="false" onAction="#doInsert" prefHeight="37.0" prefWidth="171.0" styleClass="bgcolor-brown" stylesheets="@../../../../style_File/Dashboard.css" text="Insert" textFill="WHITE">
+                  <Button mnemonicParsing="false" onAction="#deleteBook" prefHeight="44.0" prefWidth="127.0" stylesheets="@../../../../style_File/Dashboard.css" text="Delete" textFill="WHITE">
                      <font>
-                        <Font size="16.0" />
+                        <Font name="System Bold" size="15.0" />
                      </font>
-                  </Button>
-                  <Button mnemonicParsing="false" onAction="#doModify" prefHeight="37.0" prefWidth="171.0" styleClass="bgcolor-brown" stylesheets="@../../../../style_File/Dashboard.css" text="Modify" textFill="WHITE">
-                     <font>
-                        <Font size="16.0" />
-                     </font>
-                  </Button>
-                  <Button mnemonicParsing="false" prefHeight="37.0" prefWidth="171.0" styleClass="bgcolor-red" stylesheets="@../../../../style_File/Dashboard.css" text="Remove" textFill="WHITE">
-                     <font>
-                        <Font size="16.0" />
-                     </font>
+                     <styleClass>
+                        <String fx:value="bgcolor-red" />
+                        <String fx:value="roundEdge" />
+                     </styleClass>
                   </Button>
                </children>
-               <padding>
-                  <Insets top="15.0" />
-               </padding>
-            </VBox>
-         </children>
-         <padding>
-            <Insets top="20.0" />
-         </padding></VBox>
+            </HBox>
+         </children></VBox>
     </right>
     <center>
         <VBox prefHeight="607.0" prefWidth="505.0" styleClass="bgcolor-darkbrown" stylesheets="@../../../../style_File/Dashboard.css" BorderPane.alignment="CENTER">
@@ -347,9 +436,6 @@
                      </padding>
                   </Label>
                   <HBox alignment="CENTER_LEFT" prefHeight="56.0" prefWidth="261.0">
-                     <children>
-                        <ChoiceBox prefHeight="26.0" prefWidth="104.0" />
-                     </children>
                      <padding>
                         <Insets left="10.0" />
                      </padding>
@@ -361,7 +447,7 @@
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <ChoiceBox prefHeight="26.0" prefWidth="69.0" stylesheets="@../../../../style_File/Dashboard.css" />
+                        <ChoiceBox fx:id="sortCB" prefHeight="26.0" prefWidth="69.0" stylesheets="@../../../../style_File/Dashboard.css" />
                      </children>
                      <padding>
                         <Insets top="10.0" />
@@ -374,13 +460,13 @@
             </HBox>
             <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="552.0" prefWidth="505.0" styleClass="bgcolor-brown" stylesheets="@../../../../style_File/Dashboard.css">
                <children>
-                  <TableView fx:id="BookTableView" prefHeight="552.0" prefWidth="506.0" stylesheets="@../../../../style_File/Dashboard.css">
+                  <TableView prefHeight="552.0" prefWidth="506.0" stylesheets="@../../../../style_File/Dashboard.css">
                     <columns>
-                      <TableColumn fx:id="titleCol" prefWidth="143.99998170137405" text="Title" />
-                      <TableColumn fx:id="authorCol" prefWidth="116.00007629394531" text="Author" />
-                        <TableColumn fx:id="categoryCol" prefWidth="92.79998779296875" text="Category" />
-                        <TableColumn fx:id="isbnCol" prefWidth="101.5999755859375" text="ISBN" />
-                        <TableColumn fx:id="qtyCol" prefWidth="56.00006103515625" text="Qty" />
+                      <TableColumn id="cTitle" prefWidth="143.99998170137405" text="Title" />
+                      <TableColumn id="cAuthor" prefWidth="108.00001525878906" text="Author" />
+                        <TableColumn id="cCategory" prefWidth="94.40007019042969" text="Category" />
+                        <TableColumn id="cISBN" prefWidth="104.7999267578125" text="ISBN" />
+                        <TableColumn id="cQty" prefWidth="61.5999755859375" text="Qty" />
                     </columns>
                   </TableView>
                </children></VBox>
