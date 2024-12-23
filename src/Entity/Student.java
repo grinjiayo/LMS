@@ -10,7 +10,7 @@ public class Student {
     private double penalty;
     private int schoolID;
 
-    public Student (int schoolID, String fName, String lName, String section, String email, String pass, double penalty) {
+    public Student () {
         this.schoolID = schoolID;
         this.fName = fName;
         this.lName = lName;
