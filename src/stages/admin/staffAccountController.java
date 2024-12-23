@@ -114,16 +114,43 @@ public class staffAccountController {
 
     @FXML
     private void goAcctStudent(MouseEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/stages/admin/adminFXML/admin_acctStudents.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/stages/admin/adminFXML/students/admin_acctStudents.fxml"));
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setScene(new Scene(root));
         stage.show();
     }
 
     //doInsert para sa staff
-    public void doInsert(ActionEvent actionEvent) {
+    @FXML
+    private void doAdd(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("stages/admin/adminFXML/staff/admin_acctStaffsAdd.fxml"));
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setScene(new Scene(root));
+        stage.show();
     }
     //doModify para sa staff
-    public void doModify(ActionEvent actionEvent) {
+    @FXML
+    private void doModify(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("stages/admin/adminFXML/staff/admin_acctStaffsModify.fxml"));
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setScene(new Scene(root));
+        stage.show();
+     }
+
+    @FXML
+    private void doRemove(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("stages/admin/adminFXML/staff/admin_acctStaffsDelete.fxml"));
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setScene(new Scene(root));
+        stage.show();
+    }
+    public void addStaff(ActionEvent actionEvent) {
+    }
+
+    public void deleteStaff(ActionEvent actionEvent) {
+    }
+
+    public void back(MouseEvent mouseEvent) {
+
     }
 }
