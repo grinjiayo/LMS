@@ -12,6 +12,8 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import Entity.*;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.image.Image;
 import javafx.scene.image.PixelReader;
 import javafx.scene.image.WritablePixelFormat;
@@ -213,5 +215,22 @@ public class Function {
         }
 
         return java.sql.Date.valueOf(localDate);
+    }
+
+    public Image getImage(String imgName) {
+        Image img = null;
+        try {
+            String imagePath = getClass().getResource("/bookImages/" + imgName).toExternalForm();
+            img = new Image(imagePath);
+        } catch (Exception e) {
+            showAlert("Get Image Error", e.getMessage());
+        }
+        return img;
+    }
+
+    private void showAlert(String title, String message) {
+        Alert alert = new Alert(Alert.AlertType.ERROR, message, ButtonType.OK);
+        alert.setTitle(title);
+        alert.show();
     }
 }
