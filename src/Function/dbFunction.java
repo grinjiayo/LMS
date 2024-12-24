@@ -12,7 +12,6 @@ import Entity.Book;
 import Entity.Category;
 import Entity.Student;
 import LinkedList.*;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
@@ -86,22 +85,20 @@ public class dbFunction {
             DoublyLinkList books = new DoublyLinkList();
 
             conn = connectToDB();
-            String sqlGetBook = "SELECT * FROM book";
-            pstmt = conn.prepareStatement(sqlGetBook);
-            rs = pstmt.executeQuery();
+
+            String sqlGetBook = "SELECT * FROM books";
+            rs = pstmt.executeQuery(sqlGetBook);
             while(rs.next()) {
                 //Retrieve all
                 String title = rs.getString("title");
                 String author = rs.getString("author");
-                String imageSrc = rs.getString("imgID");
+                Image imageSrc =(Image) rs.getBlob("imageSrc");
                 String isbn = rs.getString("isbn");
-                String category = rs.getString("ctgry");
+                String category = rs.getString("category");
                 int quantity = rs.getInt("quantity");
                 int borrowed = rs.getInt("borrowed");   //0 if available, signify the number of books borrowed
 
-                Image img = fnc.getImage(imageSrc);
-
-                Book nBook = new Book(title, author, category, img, isbn, quantity, borrowed);
+                Book nBook = new Book(title, author, category, imageSrc, isbn, quantity, borrowed);
 
                 //Insert books in order
                 books.insertNOrder(nBook);
@@ -111,12 +108,10 @@ public class dbFunction {
             Alert alert = new Alert(Alert.AlertType.ERROR, e.getMessage(), ButtonType.OK);
             alert.setTitle("RetrieveBookError");
             alert.show();
-            e.printStackTrace();
         }catch(Exception e) {
             Alert alert = new Alert(Alert.AlertType.ERROR, e.getMessage(), ButtonType.OK);
             alert.setTitle("RetrieveBookError");
             alert.show();
-            e.printStackTrace();
         }
         return null;
     }
@@ -176,28 +171,6 @@ public class dbFunction {
         return false;
     }
 
-    public boolean removeBookDB(String title, String isbn) {
-        try{
-            conn = connectToDB();
-            String sqlDeleteBook = "DELETE FROM librarydb.book WHERE" +
-                    "title = '?' AND isbn = '?'";
-            pstmt = conn.prepareStatement(sqlDeleteBook);
-            pstmt.setString(1, title);
-            pstmt.setString(2, isbn);
-            pstmt.executeUpdate();
-            return true;
-        }catch(SQLException e) {
-            Alert alert = new Alert(Alert.AlertType.ERROR, e.getMessage(), ButtonType.OK);
-            alert.setTitle("DeleteBookError");
-            alert.show();
-        }catch(Exception e) {
-            Alert alert = new Alert(Alert.AlertType.ERROR, e.getMessage(), ButtonType.OK);
-            alert.setTitle("DeleteBookError");
-            alert.show();
-        }
-        return false;
-    }
-
     public String insertBookImageDB(Image img, String imgTitle) {
         String imgName = null;
         try {
@@ -237,6 +210,7 @@ public class dbFunction {
         return imgName;
     }
 
+
     public int insertStudentDB(Student student) {
         int staffId = 0;
         try{
@@ -268,34 +242,7 @@ public class dbFunction {
         return staffId;
     }
 
-    public ObservableList<Book> inventoryBookView() {
-        try {
-            conn = connectToDB();
-            stmt = conn.createStatement();
-            ObservableList<Book> inventoryBook = FXCollections.observableArrayList();
-            String query = "SELECT * FROM book";
-            // Execute the query
-            rs = stmt.executeQuery(query);
-
-            while (rs.next()) {
-                String title = rs.getString("title");
-                String author = rs.getString("author");
-                String category = rs.getString("ctgry");
-                String ISBN = rs.getString("isbn");
-                int quantity = rs.getInt("quantity");
-                String imgID = rs.getString("imgID");
-                int borrowed = rs.getInt("borrowed");
-
-                Image bkImage = fnc.getImage(imgID);
-
-                // Create a new book object and add it to the list
-                Book book = new Book(title, author, category, bkImage, ISBN, quantity, borrowed);
-                inventoryBook.add(book);
-            }
-            return inventoryBook;
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+    public ObservableList<Book> BookTableView() {
         return null;
     }
 }
