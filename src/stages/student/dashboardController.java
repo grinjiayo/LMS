@@ -1,6 +1,7 @@
 package stages.student;
 
 import Entity.Student;
+import Function.globalVariable;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -44,7 +45,7 @@ public class dashboardController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
+        userStudent = globalVariable.loginStudent;
     }
 
     //Set the student

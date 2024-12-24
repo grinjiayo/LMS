@@ -67,8 +67,6 @@ public class brrowBooksController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {
-            studentLogin = globalVariable.loginStudent;
-
             // Load the library view
             FXMLLoader fxmlLoader = new FXMLLoader();
             fxmlLoader.setLocation(bkManageController.class.getResource("/stages/admin/library/libraryView.fxml"));
@@ -129,8 +127,6 @@ public class brrowBooksController implements Initializable {
 
             if (alert.showAndWait().get() == ButtonType.YES) {
                 Transact newTransact = new Transact(transactID, studentLogin.getSchoolID(), bkISBN, dateNow, "PENDING");
-
-
 
             } else {
                 alert.close();

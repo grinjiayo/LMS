@@ -179,8 +179,7 @@ public class dbFunction {
     public boolean removeBookDB(String title, String isbn) {
         try{
             conn = connectToDB();
-            String sqlDeleteBook = "DELETE FROM librarydb.book WHERE" +
-                    "title = '?' AND isbn = '?'";
+            String sqlDeleteBook = "DELETE FROM librarydb.book WHERE title = ? AND isbn = ?";
             pstmt = conn.prepareStatement(sqlDeleteBook);
             pstmt.setString(1, title);
             pstmt.setString(2, isbn);
@@ -204,7 +203,7 @@ public class dbFunction {
             // Ensure the directory for storing images exists
             File directory = new File("src/bookImages");
             if (!directory.exists()) {
-                directory.mkdirs(); // Create the directory if it doesn't exist
+                directory.mkdirs();
             }
 
             imgName = imgTitle.replaceAll("\\s+", "_") + ".png";
@@ -298,4 +297,5 @@ public class dbFunction {
         }
         return null;
     }
+
 }
