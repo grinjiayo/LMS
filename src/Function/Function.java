@@ -6,17 +6,22 @@ import LinkedList.Link;
 import javax.swing.*;
 import java.io.ByteArrayOutputStream;
 import java.nio.ByteBuffer;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import Entity.*;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.image.Image;
 import javafx.scene.image.PixelReader;
 import javafx.scene.image.WritablePixelFormat;
+
+import static Function.globalVariable.fnc;
 
 public class Function {
     Date dateNow = new Date();
@@ -198,9 +203,10 @@ public class Function {
         if(bookList.isEmpty())  return null;
 
         Link current = bookList.getFirst();
+        String ctgryName = ctgry.getName();
         while (current != null) {
             Book bk = current.getElement();
-            if (bk.getCategory().equals(ctgry)) {
+            if (bk.getCategory().equals(ctgryName)) {
                 categoryList.insertNOrder(bk);
             }
             current = current.getNext(); // Advance to the next link
@@ -233,4 +239,41 @@ public class Function {
         alert.setTitle(title);
         alert.show();
     }
+
+    public ObservableList<Book> inventoryBookView() {
+        try {
+            DoublyLinkList books = globalVariable.bookList; // Assuming this is correctly defined.
+            ObservableList<Book> inventoryBook = FXCollections.observableArrayList();
+
+            Link current = books.getFirst();
+            while (current != null) {
+                Book book = current.getElement(); // Get the current Book.
+
+                String title = book.getTitle();
+                String author = book.getAuthor();
+                String category = book.getCategory();
+                String ISBN = book.getISBN();
+                int quantity = book.getQuantity();
+                Image img = book.getImageSrc();
+                int borrowed = book.getBorrowed();
+
+                // Create a new book object and add it to the list
+                Book newBook = new Book(title, author, category, img, ISBN, quantity, borrowed);
+
+                inventoryBook.add(newBook); // Add it to the ObservableList.
+                System.out.println("Inserted in observable: " + newBook.getTitle());
+                current = current.getNext(); // Move to the next node.
+            }
+
+            System.out.println(inventoryBook.size());
+            return inventoryBook;
+        } catch (NullPointerException e) {
+            showAlert("Inventory Book View Error", "A null pointer was encountered: " + e.getMessage());
+        } catch (Exception e) {
+            showAlert("Inventory Book View Error", "An unexpected error occurred: " + e.getMessage());
+        }
+
+        return null; // Return null if an exception occurs.
+    }
+
 }

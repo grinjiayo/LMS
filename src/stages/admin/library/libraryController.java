@@ -4,6 +4,7 @@ import Function.Function;
 import LinkedList.DoublyLinkList;
 import Entity.Book;
 import LinkedList.Link;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -55,6 +56,9 @@ public class libraryController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {
+            bookLayout.getChildren().clear();
+            bookLayout2.getChildren().clear();
+            bookLayout3.getChildren().clear();
             initializeLibraryView(books = globalVariable.bookList);
         } catch (Exception e) {
             Alert alert = new Alert(Alert.AlertType.ERROR, e.getMessage());
@@ -189,17 +193,17 @@ public class libraryController implements Initializable {
         try {
             // Check if the list of books is empty
             if (books == null || books.isEmpty()) {
-                Alert alert = new Alert(Alert.AlertType.INFORMATION, "Book list is empty", ButtonType.OK);
-                alert.setTitle("Book Display");
-                alert.show();
+                bookLayout.getChildren().clear();
+                bookLayout2.getChildren().clear();
+                bookLayout3.getChildren().clear();
                 moveRightBtn.setDisable(true);
                 moveLeftBtn.setDisable(true);
                 return;
             }
 
-            bookLayout.getChildren().removeAll();
-            bookLayout2.getChildren().removeAll();
-            bookLayout3.getChildren().removeAll();
+            bookLayout.getChildren().clear();
+            bookLayout2.getChildren().clear();
+            bookLayout3.getChildren().clear();
 
             moveLeftBtn.setDisable(true);
 
@@ -253,9 +257,9 @@ public class libraryController implements Initializable {
 
             moveLeftBtn.setDisable(true);
 
-            bookLayout.getChildren().removeAll();
-            bookLayout2.getChildren().removeAll();
-            bookLayout3.getChildren().removeAll();
+            bookLayout.getChildren().clear();
+            bookLayout2.getChildren().clear();
+            bookLayout3.getChildren().clear();
 
             int bookCount = books.getSize(); // Indicates the number of books
             bookNum.setText(Integer.toString(bookCount));
@@ -294,5 +298,20 @@ public class libraryController implements Initializable {
             alert.showAndWait();
         }
     }
+
+    public void clearLibraryBox() {
+        try {
+            Platform.runLater(() -> {
+                if (bookLayout != null) bookLayout.getChildren().clear();
+                if (bookLayout2 != null) bookLayout2.getChildren().clear();
+                if (bookLayout3 != null) bookLayout3.getChildren().clear();
+            });
+        } catch (Exception e) {
+            e.printStackTrace(); // Log the full error for debugging
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Error clearing library box: " + e.getMessage());
+            alert.showAndWait();
+        }
+    }
+
 
 }

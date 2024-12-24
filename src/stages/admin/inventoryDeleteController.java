@@ -4,6 +4,7 @@ import Entity.Book;
 import Entity.Category;
 import Function.globalVariable;
 import LinkedList.DoublyLinkList;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -12,6 +13,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -23,6 +25,9 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+
+import static Function.globalVariable.dbFnc;
+import static Function.globalVariable.fnc;
 
 public class inventoryDeleteController implements Initializable {
 
@@ -40,9 +45,20 @@ public class inventoryDeleteController implements Initializable {
     @FXML
     private Label lblError, lblError2;
 
-    private Image newImage;
-    private Button saveBttn, changeImgBttn;
-
+    @FXML private Image newImage;
+    @FXML private Button deleteBttn, changeImgBttn;
+    @FXML
+    private TableView<Book> BookTableView;
+    @FXML
+    private TableColumn<Book, String> authorCol;
+    @FXML
+    private TableColumn<Book, String> categoryCol;
+    @FXML
+    private TableColumn<Book, String> isbnCol;
+    @FXML
+    private TableColumn<Book, String> qtyCol;
+    @FXML
+    private TableColumn<Book, String> titleCol;
 
     @FXML
     private RadioButton titleRB, isbnRB;
@@ -54,16 +70,42 @@ public class inventoryDeleteController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         bookList = globalVariable.bookList;
         categories = globalVariable.dbFnc.retrieveCategories();
+
         if (categories != null && !categories.isEmpty()) {
             tfCategory.getItems().addAll(categories);
             tfCategory.setValue(categories.get(0)); // Optional: Set a default value
         } else {
-
+            Alert alert = new Alert(Alert.AlertType.ERROR, "No categories");
+            alert.showAndWait();
         }
+
+        //Insert book in table
+        titleCol.setCellValueFactory(new PropertyValueFactory<Book, String>("title"));
+        authorCol.setCellValueFactory(new PropertyValueFactory<Book, String>("author"));
+        isbnCol.setCellValueFactory(new PropertyValueFactory<Book, String>("ISBN"));
+        categoryCol.setCellValueFactory(new PropertyValueFactory<Book, String>("category"));
+        qtyCol.setCellValueFactory(new PropertyValueFactory<Book, String>("quantity"));
+
+        ObservableList<Book> bookList = fnc.inventoryBookView();
+        System.out.println(bookList.size());
+        BookTableView.setItems(bookList);
+
         sortCB.getItems().addAll("A-Z", "Z-A");
     }
 
-//SWITCHING MENU
+    public void refreshTable() {
+        titleCol.setCellValueFactory(new PropertyValueFactory<Book, String>("title"));
+        authorCol.setCellValueFactory(new PropertyValueFactory<Book, String>("author"));
+        isbnCol.setCellValueFactory(new PropertyValueFactory<Book, String>("ISBN"));
+        categoryCol.setCellValueFactory(new PropertyValueFactory<Book, String>("category"));
+        qtyCol.setCellValueFactory(new PropertyValueFactory<Book, String>("quantity"));
+
+        ObservableList<Book> bookList = fnc.inventoryBookView();
+        System.out.println(bookList.size());
+        BookTableView.setItems(bookList);
+    }
+
+    //SWITCHING MENU
     @FXML
     private void goDashboard(MouseEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/stages/admin/adminFXML/admin_dashboard.fxml"));
@@ -140,7 +182,7 @@ public class inventoryDeleteController implements Initializable {
             selected = "title";
         }
 
-        if(!searchField.getText().isEmpty()) {  //if searchfield is empty
+        if(searchField.getText().isEmpty()) {  //if searchfield is empty
             lblError.setText("Search text is blank"); return;
         }
         searchFld = searchField.getText();
@@ -162,58 +204,12 @@ public class inventoryDeleteController implements Initializable {
             isbnField.setText(searchBook.getISBN());
             tfCategory.setValue(categories.getFirst());
             qtyField.setText(Integer.toString(searchBook.getQuantity()));
-            changeImgBttn.setDisable(false);
-            titleField.setDisable(false);
-            authorField.setDisable(false);
-            isbnField.setDisable(false);
-            tfCategory.setDisable(false);
-            qtyField.setDisable(false);
-            saveBttn.setDisable(false);
+            deleteBttn.setDisable(false);
         }
     }
 
     @FXML
-    private void browseImage(ActionEvent event) {
-        FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Select an Image");
-
-        fileChooser.getExtensionFilters().addAll(
-                new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg")
-        );
-        File file = fileChooser.showOpenDialog(null);
-
-        if (file != null) {
-            String filePath = file.toURI().toString();
-
-            newImage = new Image(filePath);
-
-            bkImage.setImage(newImage);
-            bkImage.setFitWidth(120);
-            bkImage.setFitHeight(144);
-            bkImage.setPreserveRatio(false);
-        }
-    }
-
-    @FXML
-    private void editBook(ActionEvent event) {
-        if(newImage==null) {
-            lblError.setText("No image selected");  return;
-        }else if(titleField.getText()==null) {
-            lblError.setText("Title is blank");  return;
-        }else if(authorField.getText()==null) {
-            lblError.setText("Author is blank"); return;
-        }else if(isbnField.getText()==null) {
-            lblError.setText("ISBN is blank");return;
-        }else if(globalVariable.fnc.digitChecker(isbnField.getText())==false) {
-            lblError.setText("ISBN should be all digits"); return;
-        }else if(tfCategory.getSelectionModel()==null) {
-            lblError.setText("No category selected"); return;
-        }else if(qtyField.getText()==null) {
-            lblError.setText("Quantity is blank"); return;
-        }else if(globalVariable.fnc.digitChecker(qtyField.getText()) == false) {
-            lblError.setText("Quantity should be digits"); return;
-        }
-
+    private void deleteBook(ActionEvent event) {
         //Upload the image to database
         String bkTitle = titleField.getText();
         String bkAuthor = authorField.getText();
@@ -222,12 +218,8 @@ public class inventoryDeleteController implements Initializable {
         String category = ctgryObj.getName();
         int quantity = Integer.parseInt(qtyField.getText());
 
-        String imgName = globalVariable.dbFnc.insertBookImageDB(newImage, bkTitle+bkAuthor);
-
-        Book newBook = new Book(bkTitle, bkAuthor, category, newImage, bkISBN, quantity);
-
+        boolean deletedInDB = dbFnc.removeBookDB(bkTitle, bkISBN);
         bookList.deleteBook(searchBook.getTitle());
-        bookList.insertNOrder(newBook);
 
         searchField.setText(null);
         bkImage.setImage(null);
@@ -236,15 +228,8 @@ public class inventoryDeleteController implements Initializable {
         isbnField.setText(null);
         tfCategory.setValue(categories.getFirst());
         qtyField.setText(null);
-        changeImgBttn.setDisable(true);
-        titleField.setDisable(true);
-        authorField.setDisable(true);
-        isbnField.setDisable(true);
-        tfCategory.setDisable(true);
-        qtyField.setDisable(true);
-        saveBttn.setDisable(true);
+        refreshTable();
+        deleteBttn.setDisable(true);
     }
 
-    public void deleteBook(ActionEvent actionEvent) {
-    }
 }
