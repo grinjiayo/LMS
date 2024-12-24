@@ -1,5 +1,6 @@
 package Function;
 
+import Entity.Book;
 import Entity.Staff;
 import Entity.Student;
 import LinkedList.DoublyLinkList;
@@ -26,7 +27,6 @@ public class globalVariable {
     public static ArrayList<Staff> sortedStaffListDESC = new ArrayList<>();
     public static ArrayList<Student> sortedStudentListASC = new ArrayList<>();
     public static ArrayList<Student> sortedStudentListDESC = new ArrayList<>();
-
-
+    public static Book modifyBook;
 
 }

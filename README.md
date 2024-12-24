@@ -10,4 +10,8 @@ SETUP VM Options
 1Go to File >Run >EditConfiguration
 2Add new Application, locate the ModifyOptions then select Add VM Options
 3Insert this in VM option textfield (--module-path "C:path/to/javafx/lib" --add-modules javafx.controls,javafx.fxml) change the path with "" and insert the location of your lib folder
-4Then select the index.java as the main file
+4Then select the index.java as the main file 
+
+TODO
+- deleteBookDB
+- borrowTransact student

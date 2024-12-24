@@ -26,7 +26,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-import static Function.globalVariable.fnc;
+import static Function.globalVariable.*;
 
 public class inventoryModifyController implements Initializable {
 
@@ -67,6 +67,7 @@ public class inventoryModifyController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
         bookList = globalVariable.bookList;
         categories = globalVariable.dbFnc.retrieveCategories();
 
@@ -76,6 +77,26 @@ public class inventoryModifyController implements Initializable {
         } else {
             Alert alert = new Alert(Alert.AlertType.ERROR, "No categories");
             alert.showAndWait();
+        }
+
+        //If search
+        if(modifyBook!=null) {
+            searchBook = modifyBook;
+            Image img = searchBook.getImageSrc();
+            bkImage.setImage(img);
+            titleField.setText(searchBook.getTitle());
+            authorField.setText(searchBook.getAuthor());
+            isbnField.setText(searchBook.getISBN());
+            tfCategory.setValue(categories.getFirst());
+            qtyField.setText(Integer.toString(searchBook.getQuantity()));
+            changeImgBttn.setDisable(false);
+            titleField.setDisable(false);
+            authorField.setDisable(false);
+            isbnField.setDisable(false);
+            tfCategory.setDisable(false);
+            qtyField.setDisable(false);
+            saveBttn.setDisable(false);
+            modifyBook = null;
         }
 
         //Insert book in table

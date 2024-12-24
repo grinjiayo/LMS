@@ -87,13 +87,7 @@ public class bkManageController implements Initializable {
             lblError.setText("Search text is blank"); return;
         }
         searchFld = searchField.getText();
-
-        //REtrieve the book data
-        if(selected.equals("title")) {
-            searchBook = bookList.findTitle(searchFld);
-        }else {
-            searchBook = bookList.findISBN(searchFld);
-        }
+        searchBook = bookList.findTitle(searchFld);
 
         if(searchBook==null) {
             lblError.setText("Found no book"); return;
@@ -104,7 +98,8 @@ public class bkManageController implements Initializable {
             bkAuthorField.setText(searchBook.getAuthor());
             bkISBNField.setText(searchBook.getISBN());
             bkCtgryField.setText(searchBook.getCategory());
-            bkCtgryField.setText(Integer.toString(searchBook.getQuantity()));
+            bkQtyField.setText(Integer.toString(searchBook.getQuantity()));
+
         }
     }
     public void setBookData(Book book) {
@@ -115,6 +110,7 @@ public class bkManageController implements Initializable {
             bkISBNField.setText(book.getISBN());
             bkCtgryField.setText(book.getCategory());
             bkQtyField.setText(Integer.toString(book.getQuantity()));
+            searchBook = book;
         }
     }
 
@@ -183,9 +179,15 @@ public class bkManageController implements Initializable {
     }
 
     @FXML
-    void doModify(ActionEvent event) {
-
+    private void doModify(ActionEvent event) throws IOException {
+        if(bkTitleField==null || bkTitleField.getText()==null) {
+            lblError.setText("No book selected");
+        }
+        globalVariable.modifyBook = searchBook;
+        Parent root = FXMLLoader.load(getClass().getResource("/stages/admin/adminFXML/inventory/admin_inventoryModify.fxml"));
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setScene(new Scene(root));
+        stage.show();
     }
-
 
 }

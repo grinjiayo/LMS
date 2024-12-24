@@ -55,7 +55,6 @@ public class libraryController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {
-
             bookLayout.getChildren().clear();
             bookLayout2.getChildren().clear();
             bookLayout3.getChildren().clear();
