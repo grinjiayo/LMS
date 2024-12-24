@@ -20,7 +20,7 @@ public class Student {
         this.penalty = penalty;
     }
 
-    public Student (int studentID, int schoolID, String fName, String lName, String section, String email, String pass, double penalty) {
+    public Student (int studentID, String fName, String lName, String section, String email, String pass, double penalty) {
         this.schoolID = schoolID;
         this.fName = fName;
         this.lName = lName;

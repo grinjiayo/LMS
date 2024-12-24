@@ -12,6 +12,7 @@ import Entity.Book;
 import Entity.Category;
 import Entity.Student;
 import LinkedList.*;
+import javafx.collections.ObservableList;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.image.Image;
@@ -239,5 +240,9 @@ public class dbFunction {
             alert.show();
         }
         return staffId;
+    }
+
+    public ObservableList<Book> BookTableView() {
+        return null;
     }
 }
