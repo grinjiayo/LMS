@@ -135,10 +135,18 @@
          </children>
       </VBox>
    </left>
-   <right>
-      <VBox prefHeight="607.0" prefWidth="268.0" styleClass="bgcolor-white" stylesheets="@../../../style_File/Dashboard.css" BorderPane.alignment="CENTER" />
-   </right>
    <center>
-      <VBox prefHeight="607.0" prefWidth="505.0" styleClass="bgcolor-darkbrown" stylesheets="@../../../style_File/Dashboard.css" BorderPane.alignment="CENTER" />
+      <VBox prefHeight="607.0" prefWidth="505.0" styleClass="bgcolor-darkbrown" stylesheets="@../../../style_File/Dashboard.css" BorderPane.alignment="CENTER">
+         <children>
+            <VBox prefHeight="190.0" prefWidth="773.0" />
+            <HBox prefHeight="609.0" prefWidth="505.0">
+               <children>
+                  <HBox prefHeight="486.0" prefWidth="60.0" stylesheets="@../../../style_File/Dashboard.css" />
+                  <HBox prefHeight="535.0" prefWidth="714.0" styleClass="bgcolor-brown" stylesheets="@../../../style_File/Dashboard.css" />
+                  <HBox prefHeight="535.0" prefWidth="60.0" stylesheets="@../../../style_File/Dashboard.css" />
+               </children>
+            </HBox>
+            <VBox prefHeight="180.0" prefWidth="773.0" />
+         </children></VBox>
    </center>
 </BorderPane>

@@ -92,6 +92,9 @@
 .roundEdge {
     -fx-background-radius: 15;
 }
+.roundEdgecircle {
+    -fx-background-radius: 50;
+}
 
 .roundEdgeTop {
     -fx-background-radius: 15 15 0 0;

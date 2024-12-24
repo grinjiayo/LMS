@@ -86,6 +86,14 @@ public class dashboardController implements Initializable {
         stage.setScene(new Scene(root));
         stage.show();    }
 
+    @FXML
+    private void goDashboard(MouseEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/stages/student/studentFXML/student_dashboard.fxml"));
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setScene(new Scene(root));
+        stage.show();
+    }
+
 
 //    @FXML
 //    void goReports(MouseEvent event) throws IOException {
