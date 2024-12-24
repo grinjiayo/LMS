@@ -182,7 +182,7 @@ public class inventoryDeleteController implements Initializable {
             selected = "title";
         }
 
-        if(searchField.getText().isEmpty()) {  //if searchfield is empty
+        if(searchField==null || searchField.getText().isEmpty()) {  //if searchfield is empty
             lblError.setText("Search text is blank"); return;
         }
         searchFld = searchField.getText();

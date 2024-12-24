@@ -3,16 +3,15 @@ package stages.admin;
 import Entity.Book;
 import Entity.Category;
 import LinkedList.DoublyLinkList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
@@ -49,40 +48,22 @@ public class bkManageController implements Initializable {
     @FXML
     private ImageView bkImage;
 
-    @FXML
-    private ChoiceBox<Category> categoryCB;
+    @FXML private TextField searchField;
+    @FXML private Label lblError;
 
-    @FXML
-    private libraryController libraryCtrl; // Reference to the libraryController
-
+    // Reference to the libraryController
+    private Book searchBook;
+    private DoublyLinkList bookList;
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {
-            // Load the categories into the ChoiceBox as before
-            ArrayList<Category> categories = globalVariable.dbFnc.retrieveCategories();
-            categories.addFirst(new Category(0, "All"));
-            if (categories.size() != 0) {
-                categoryCB.getItems().addAll(categories);
-                categoryCB.setValue(categories.get(0));
-            }
-
-            // Add a listener to the selected item property
-            categoryCB.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-                if (newValue != null) {
-                    System.out.println("Selected: " + newValue.getName());
-                    // Call the handleChoice method when category is selected
-                    handleChoice(newValue);
-                }
-            });
+            bookList = globalVariable.bookList;
 
             // Load the library view and get the controller instance
             FXMLLoader fxmlLoader = new FXMLLoader();
             fxmlLoader.setLocation(bkManageController.class.getResource("/stages/admin/library/libraryView.fxml"));
             VBox libraryView = fxmlLoader.load();
             libraryBox.getChildren().add(libraryView);
-
-            // Get the libraryController instance from the FXMLLoader
-            libraryCtrl = fxmlLoader.getController();
 
             BookSelectionService.getInstance().selectedBookProperty().addListener((observable, oldBook, newBook) -> {
                 if (newBook != null) {
@@ -97,6 +78,35 @@ public class bkManageController implements Initializable {
         }
     }
 
+    @FXML
+    private void doSearch(MouseEvent event) {
+        String selected = "isbn";
+        String searchFld;
+
+        if(searchField==null || searchField.getText().isEmpty()) {  //if searchfield is empty
+            lblError.setText("Search text is blank"); return;
+        }
+        searchFld = searchField.getText();
+
+        //REtrieve the book data
+        if(selected.equals("title")) {
+            searchBook = bookList.findTitle(searchFld);
+        }else {
+            searchBook = bookList.findISBN(searchFld);
+        }
+
+        if(searchBook==null) {
+            lblError.setText("Found no book"); return;
+        }else {
+            Image img = searchBook.getImageSrc();
+            bkImage.setImage(img);
+            bkTitleField.setText(searchBook.getTitle());
+            bkAuthorField.setText(searchBook.getAuthor());
+            bkISBNField.setText(searchBook.getISBN());
+            bkCtgryField.setText(searchBook.getCategory());
+            bkCtgryField.setText(Integer.toString(searchBook.getQuantity()));
+        }
+    }
     public void setBookData(Book book) {
         if (book != null) {
             bkImage.setImage(book.getImageSrc());
@@ -172,20 +182,10 @@ public class bkManageController implements Initializable {
         stage.show();
     }
 
-    private void handleChoice(Category category) {
-        if (category.getName().equals("All")) {
-            DoublyLinkList bookList = globalVariable.bookList;
-            // Initialize the library view with all books
-            if (libraryCtrl != null) {
-                libraryCtrl.initializeLibraryView(bookList);
-            }
-        } else {
-            DoublyLinkList categoryList = globalVariable.fnc.selectCategoryBooks(category);
-            // Initialize the library view with the selected category's books
-            if (libraryCtrl != null) {
-                libraryCtrl.initializeLibraryView(categoryList);
-            }
-        }
+    @FXML
+    void doModify(ActionEvent event) {
+
     }
+
 
 }

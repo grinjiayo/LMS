@@ -1,5 +1,6 @@
 package stages.admin.library;
 
+import Entity.Category;
 import Function.Function;
 import LinkedList.DoublyLinkList;
 import Entity.Book;
@@ -9,16 +10,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Group;
-import javafx.scene.Parent;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.Label;
-import javafx.scene.image.Image;
+import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import stages.admin.bkManageController;
@@ -26,6 +19,7 @@ import stages.admin.bkManageController;
 import javax.swing.*;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import Function.*;
@@ -48,18 +42,60 @@ public class libraryController implements Initializable {
     private Button moveRightBtn;
     @FXML
     private Label cabinetPos;
+    @FXML
+    private ChoiceBox<String> sortCB;
 
     private DoublyLinkList books;
     private int cabinetIndex = 0;
     private int cabinetCount;
 
+    @FXML
+    private ChoiceBox<Category> categoryCB;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {
+
             bookLayout.getChildren().clear();
             bookLayout2.getChildren().clear();
             bookLayout3.getChildren().clear();
             initializeLibraryView(books = globalVariable.bookList);
+
+            //SORT CHOICEBOX
+            String[] sortType = {"A-Z", "Z-A"};
+            sortCB.getItems().addAll(sortType);
+            sortCB.setValue(sortType[0]);
+
+            sortCB.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+                if (newValue != null) {
+                    // Call the handleChoice method when category is selected
+                    if(newValue.equals("A-Z")) {
+                        initializeLibraryView(books);
+                    }else if(newValue.equals("Z-A")) {
+                        initializeLibraryViewReverse(books);
+                    }
+                }
+            });
+
+            //CATEGORY CHOICEBOX
+            ArrayList<Category> categories = globalVariable.dbFnc.retrieveCategories();
+            categories.addFirst(new Category(0, "All"));
+            if (categories.size() != 0) {
+                categoryCB.getItems().addAll(categories);
+                categoryCB.setValue(categories.get(0));
+            }
+
+            categoryCB.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+                if (newValue != null) {
+                    // Call the handleChoice method when category is selected
+                    if (newValue.getName().equals("All")) {
+                        initializeLibraryView(books = globalVariable.bookList);
+                    }else {
+                        books = globalVariable.fnc.selectCategoryBooks(newValue);
+                        initializeLibraryView(books);
+                    }
+                }
+            });
         } catch (Exception e) {
             Alert alert = new Alert(Alert.AlertType.ERROR, e.getMessage());
             alert.showAndWait();
@@ -313,5 +349,18 @@ public class libraryController implements Initializable {
         }
     }
 
+//    private void handleChoice(Category category) {
+//        if (category.getName().equals("All")) {
+//            DoublyLinkList bookList = globalVariable.bookList;
+//            if (libraryCtrl != null) {
+//                libraryCtrl.initializeLibraryView(bookList);
+//
+//        } else {
+//            DoublyLinkList categoryList = globalVariable.fnc.selectCategoryBooks(category);
+//            if (libraryCtrl != null) {
+//                libraryCtrl.initializeLibraryView(categoryList);
+//            }
+//        }
+//    }
 
 }
