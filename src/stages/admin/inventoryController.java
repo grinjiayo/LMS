@@ -176,4 +176,12 @@ public class inventoryController implements Initializable {
         stage.show();
     }
 
+    @FXML
+    private void doRemove(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/stages/admin/adminFXML/inventory/admin_inventoryDelete.fxml"));
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setScene(new Scene(root));
+        stage.show();
+    }
+
 }
