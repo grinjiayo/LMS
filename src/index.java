@@ -50,7 +50,6 @@ public class index extends Application {
 
             //Copy the book in database
             globalVariable.bookList = globalVariable.dbFnc.retrieveBooksnOrder();
-            System.out.println(globalVariable.bookList.getSize());
         }catch (Exception e) {
             Alert alert = new Alert(Alert.AlertType.ERROR, e.getMessage(), ButtonType.OK);
             alert.setTitle("Indexing Error");

@@ -56,6 +56,12 @@ public class dbFunction {
         ArrayList<Category> categories = new ArrayList<Category>();
         try{
             conn = connectToDB();
+            if(conn==null) {
+                Alert alert = new Alert(Alert.AlertType.ERROR, "You have not yet open the server", ButtonType.OK);
+                alert.setTitle("Server Error");
+                alert.show();
+                return null;
+            }
 
             String sqlGetCategory = "SELECT ctgry_id, ctgry_name FROM bkcategory";
             pstmt = conn.prepareStatement(sqlGetCategory);
@@ -86,6 +92,13 @@ public class dbFunction {
             DoublyLinkList books = new DoublyLinkList();
 
             conn = connectToDB();
+            if(conn==null) {
+                Alert alert = new Alert(Alert.AlertType.ERROR, "You have not yet open the server", ButtonType.OK);
+                alert.setTitle("Server Error");
+                alert.show();
+                return null;
+            }
+
             String sqlGetBook = "SELECT * FROM book";
             pstmt = conn.prepareStatement(sqlGetBook);
             rs = pstmt.executeQuery();
@@ -124,6 +137,13 @@ public class dbFunction {
     public int resetAutoIncrement(Connection conn, String table, String column) {
         int id = 0;
         try {
+            conn = connectToDB();
+            if(conn==null) {
+                Alert alert = new Alert(Alert.AlertType.ERROR, "You have not yet open the server", ButtonType.OK);
+                alert.setTitle("Server Error");
+                alert.show();
+                return 0;
+            }
             Statement stmt = conn.createStatement();
             String sqlChecker = "SELECT MAX(" + column + ") FROM " + table + " ;";
             ResultSet rs = stmt.executeQuery(sqlChecker);
@@ -152,6 +172,12 @@ public class dbFunction {
     public boolean insertBookDB(Book book, String imgName) {
         try{
             conn = connectToDB();
+            if(conn==null) {
+                Alert alert = new Alert(Alert.AlertType.ERROR, "You have not yet open the server", ButtonType.OK);
+                alert.setTitle("Server Error");
+                alert.show();
+                return false;
+            }
             String sqlInsertBook = "INSERT INTO librarydb.book" +
                     "(title, author, isbn, ctgry, quantity, borrowed, imgID)" +
                     "VALUES (?, ?, ?, ?, ?, 0, ?)";
@@ -179,6 +205,12 @@ public class dbFunction {
     public boolean removeBookDB(String title, String isbn) {
         try{
             conn = connectToDB();
+            if(conn==null) {
+                Alert alert = new Alert(Alert.AlertType.ERROR, "You have not yet open the server", ButtonType.OK);
+                alert.setTitle("Server Error");
+                alert.show();
+                return false;
+            }
             String sqlDeleteBook = "DELETE FROM librarydb.book WHERE title = ? AND isbn = ?";
             pstmt = conn.prepareStatement(sqlDeleteBook);
             pstmt.setString(1, title);
@@ -200,7 +232,6 @@ public class dbFunction {
     public String insertBookImageDB(Image img, String imgTitle) {
         String imgName = null;
         try {
-            // Ensure the directory for storing images exists
             File directory = new File("src/bookImages");
             if (!directory.exists()) {
                 directory.mkdirs();
@@ -208,13 +239,10 @@ public class dbFunction {
 
             imgName = imgTitle.replaceAll("\\s+", "_") + ".png";
 
-            // Define the file path for the image
             String imagePath = "src/bookImages/" + imgName;
 
-            // Convert the JavaFX Image to a byte array
             byte[] imgBytes = fnc.convertImageToByteArray(img);
 
-            // Save the byte array as a file in the directory
             File imageFile = new File(imagePath);
             try (FileOutputStream fos = new FileOutputStream(imageFile)) {
                 fos.write(imgBytes);
@@ -240,6 +268,12 @@ public class dbFunction {
         int staffId = 0;
         try{
             conn = connectToDB();
+            if(conn==null) {
+                Alert alert = new Alert(Alert.AlertType.ERROR, "You have not yet open the server", ButtonType.OK);
+                alert.setTitle("Server Error");
+                alert.show();
+                return 0;
+            }
             staffId = resetAutoIncrement(conn, "student", "stud_id");
             String sqlInsertStudent = "INSERT INTO librarydb.student" +
                     "(school_id, fName, lName, section, email, password, penalty)" +
@@ -257,11 +291,11 @@ public class dbFunction {
             return staffId+1;
         }catch(SQLException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR, e.getMessage(), ButtonType.OK);
-            alert.setTitle("InsertBkImgError");
+            alert.setTitle("Insert Student Error");
             alert.show();
         }catch(Exception e) {
             Alert alert = new Alert(Alert.AlertType.ERROR, e.getMessage(), ButtonType.OK);
-            alert.setTitle("InsertBkImgError");
+            alert.setTitle("Insert Student Error");
             alert.show();
         }
         return staffId;
@@ -270,6 +304,12 @@ public class dbFunction {
     public ObservableList<Book> inventoryBookView() {
         try {
             conn = connectToDB();
+            if(conn==null) {
+                Alert alert = new Alert(Alert.AlertType.ERROR, "You have not yet open the server", ButtonType.OK);
+                alert.setTitle("Server Error");
+                alert.show();
+                return null;
+            }
             stmt = conn.createStatement();
             ObservableList<Book> inventoryBook = FXCollections.observableArrayList();
             String query = "SELECT * FROM book";

@@ -1,0 +1,386 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane blendMode="DARKEN" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="675.0" prefWidth="970.0" stylesheets="@../../../style_File/Dashboard.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="stages.student.dashboardController">
+   <top>
+      <HBox prefHeight="68.0" prefWidth="970.0" styleClass="bgcolor-lightPink" stylesheets="@../../../style_File/Dashboard.css" BorderPane.alignment="CENTER">
+         <children>
+            <HBox alignment="CENTER_RIGHT" prefHeight="68.0" prefWidth="60.0">
+               <children>
+                  <ImageView fitHeight="33.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../icons/book.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </HBox>
+            <Separator orientation="VERTICAL" prefHeight="68.0" prefWidth="0.0" styleClass="bgcolor-darkbrown" stylesheets="@../../../style_File/Dashboard.css" visible="false" />
+            <HBox alignment="CENTER" prefHeight="68.0" prefWidth="281.0">
+               <children>
+                  <Separator orientation="VERTICAL" prefHeight="200.0" />
+                  <Label prefHeight="27.0" prefWidth="256.0" text="LIBRARY SYSTEM">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <Separator orientation="VERTICAL" prefHeight="200.0" />
+            <HBox prefHeight="68.0" prefWidth="317.0" />
+            <HBox alignment="CENTER" prefHeight="68.0" prefWidth="300.0">
+               <children>
+                  <Label />
+                  <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="27.0" prefWidth="181.0" text="Welcome Student">
+                     <font>
+                        <Font name="System Italic" size="20.0" />
+                     </font>
+                  </Label>
+                  <ImageView fitHeight="46.0" fitWidth="47.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../icons/usericon.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </HBox>
+         </children>
+      </HBox>
+   </top>
+   <left>
+      <VBox alignment="CENTER" prefHeight="607.0" prefWidth="197.0" styleClass="bgcolor-brown" stylesheets="@../../../style_File/Dashboard.css" BorderPane.alignment="CENTER">
+         <children>
+            <VBox prefHeight="22.0" prefWidth="198.0" />
+            <VBox prefHeight="300.0" prefWidth="198.0">
+               <children>
+                  <HBox fx:id="dashboardBtn" alignment="CENTER" onMouseClicked="#goDashboard" prefHeight="38.0" prefWidth="198.0" stylesheets="@../../../style_File/Dashboard.css">
+                     <children>
+                        <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../icons/dashboard.png" />
+                           </image>
+                        </ImageView>
+                        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="20.0" prefWidth="118.0" text="Dashboard" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+                  <VBox prefHeight="51.0" prefWidth="198.0">
+                     <children>
+                        <VBox prefHeight="23.0" prefWidth="198.0" />
+                        <Label alignment="CENTER" prefHeight="20.0" prefWidth="90.0" text="Features" textFill="WHITE">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </VBox>
+                  <HBox fx:id="brrowBooks" alignment="CENTER_LEFT" onMouseClicked="#gobrrowBooks" prefHeight="38.0" prefWidth="198.0" styleClass="mouse-moved" stylesheets="@../../../style_File/Dashboard.css">
+                     <children>
+                        <HBox prefHeight="38.0" prefWidth="21.0" />
+                        <ImageView fitHeight="20.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../icons/bkIcon.png" />
+                           </image>
+                        </ImageView>
+                        <HBox prefHeight="38.0" prefWidth="10.0" />
+                        <Label prefHeight="20.0" prefWidth="113.0" text="View Library" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+                  <HBox fx:id="rtnBooks" alignment="CENTER_LEFT" onMouseClicked="#gortnBooks" prefHeight="38.0" prefWidth="198.0" styleClass="mouse-moved" stylesheets="@../../../style_File/Dashboard.css">
+                     <children>
+                        <HBox prefHeight="38.0" prefWidth="19.0" />
+                        <ImageView fitHeight="20.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../icons/invIcon.png" />
+                           </image>
+                        </ImageView>
+                        <HBox prefHeight="38.0" prefWidth="10.0" />
+                        <Label prefHeight="20.0" prefWidth="113.0" text="Borrowed Book" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+            <HBox prefHeight="226.0" prefWidth="198.0" />
+            <HBox fx:id="logoutBtn" alignment="CENTER" maxWidth="-Infinity" minWidth="-Infinity" onMouseClicked="#goLogout" prefHeight="36.0" prefWidth="150.0" styleClass="logoutm-m" stylesheets="@../../../style_File/Dashboard.css">
+               <children>
+                  <ImageView fitHeight="20.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../icons/logoutIcon.png" />
+                     </image>
+                  </ImageView>
+                  <Label alignment="CENTER" prefHeight="20.0" prefWidth="70.0" text="Logout" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </left>
+   <center>
+      <VBox prefHeight="607.0" prefWidth="505.0" styleClass="bgcolor-darkbrown" stylesheets="@../../../style_File/Dashboard.css" BorderPane.alignment="CENTER">
+         <children>
+            <VBox prefHeight="607.0" prefWidth="505.0" styleClass="bgcolor-darkbrown" stylesheets="@../../../style_File/Dashboard.css">
+               <children>
+                  <VBox prefHeight="190.0" prefWidth="773.0" />
+                  <HBox prefHeight="609.0" prefWidth="505.0">
+                     <children>
+                        <HBox prefHeight="486.0" prefWidth="60.0" stylesheets="@../../../style_File/Dashboard.css" />
+                        <HBox prefHeight="535.0" prefWidth="714.0" styleClass="bgcolor-brown" stylesheets="@../../../style_File/Dashboard.css">
+                           <children>
+                              <VBox prefHeight="486.0" prefWidth="694.0">
+                                 <children>
+                                    <HBox prefHeight="78.0" prefWidth="694.0" stylesheets="@../../../style_File/Dashboard.css">
+                                       <children>
+                                          <VBox minHeight="-Infinity" prefHeight="59.0" prefWidth="51.0">
+                                             <padding>
+                                                <Insets left="15.0" right="10.0" />
+                                             </padding>
+                                          </VBox>
+                                          <VBox minHeight="-Infinity" prefHeight="59.0" prefWidth="51.0">
+                                             <padding>
+                                                <Insets left="15.0" right="10.0" />
+                                             </padding>
+                                          </VBox>
+                                       </children>
+                                    </HBox>
+                                    <VBox minHeight="-Infinity" prefHeight="22.0" prefWidth="694.0">
+                                       <padding>
+                                          <Insets left="15.0" right="10.0" />
+                                       </padding>
+                                       <children>
+                                          <VBox maxHeight="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="2.0" prefWidth="596.0" styleClass="bgcolor-lightPink">
+                                             <padding>
+                                                <Insets left="15.0" right="10.0" />
+                                             </padding>
+                                          </VBox>
+                                       </children>
+                                    </VBox>
+                                    <HBox prefHeight="78.0" prefWidth="694.0" stylesheets="@../../../style_File/Dashboard.css">
+                                       <children>
+                                          <VBox maxHeight="-Infinity" minHeight="-Infinity" prefHeight="70.0" prefWidth="266.0">
+                                             <children>
+                                                <Label text="Program" textFill="#fffdd1">
+                                                   <font>
+                                                      <Font name="System Bold" size="13.0" />
+                                                   </font>
+                                                </Label>
+                                                <TextField maxHeight="-Infinity" minHeight="-Infinity" prefHeight="40.0" prefWidth="240.0" stylesheets="@../../../style_File/Dashboard.css">
+                                                   <styleClass>
+                                                      <String fx:value="bgcolor-lightPink" />
+                                                      <String fx:value="outlineAllGray" />
+                                                   </styleClass>
+                                                </TextField>
+                                             </children>
+                                             <padding>
+                                                <Insets left="15.0" right="10.0" />
+                                             </padding>
+                                          </VBox>
+                                          <HBox maxHeight="-Infinity" prefHeight="42.0" prefWidth="112.0">
+                                             <children>
+                                                <VBox maxHeight="-Infinity" minHeight="-Infinity" prefHeight="70.0" prefWidth="200.0">
+                                                   <children>
+                                                      <Label prefHeight="19.0" prefWidth="58.0" text="College" textFill="#fffdd1">
+                                                         <font>
+                                                            <Font name="System Bold" size="13.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <TextField maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="174.0" stylesheets="@../../../style_File/Dashboard.css">
+                                                         <styleClass>
+                                                            <String fx:value="bgcolor-lightPink" />
+                                                            <String fx:value="outlineAllGray" />
+                                                         </styleClass>
+                                                      </TextField>
+                                                   </children>
+                                                   <padding>
+                                                      <Insets left="15.0" right="10.0" />
+                                                   </padding>
+                                                </VBox>
+                                             </children>
+                                          </HBox>
+                                          <HBox maxHeight="-Infinity" prefHeight="42.0" prefWidth="112.0">
+                                             <children>
+                                                <VBox minHeight="-Infinity" prefHeight="70.0" prefWidth="205.0">
+                                                   <children>
+                                                      <Label prefHeight="19.0" prefWidth="73.0" text="Year Level" textFill="#fffdd1">
+                                                         <font>
+                                                            <Font name="System Bold" size="13.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <TextField maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="179.0" stylesheets="@../../../style_File/Dashboard.css">
+                                                         <styleClass>
+                                                            <String fx:value="bgcolor-lightPink" />
+                                                            <String fx:value="outlineAllGray" />
+                                                         </styleClass>
+                                                      </TextField>
+                                                   </children>
+                                                   <padding>
+                                                      <Insets left="15.0" right="10.0" />
+                                                   </padding>
+                                                </VBox>
+                                             </children>
+                                          </HBox>
+                                       </children>
+                                    </HBox>
+                                    <HBox prefHeight="78.0" prefWidth="694.0" stylesheets="@../../../style_File/Dashboard.css">
+                                       <children>
+                                          <VBox maxHeight="-Infinity" minHeight="-Infinity" prefHeight="70.0" prefWidth="430.0">
+                                             <children>
+                                                <Label text="Email Address" textFill="#fffdd1">
+                                                   <font>
+                                                      <Font name="System Bold" size="13.0" />
+                                                   </font>
+                                                </Label>
+                                                <TextField maxHeight="-Infinity" minHeight="-Infinity" prefHeight="40.0" prefWidth="292.0" stylesheets="@../../../style_File/Dashboard.css">
+                                                   <styleClass>
+                                                      <String fx:value="bgcolor-lightPink" />
+                                                      <String fx:value="outlineAllGray" />
+                                                   </styleClass>
+                                                </TextField>
+                                             </children>
+                                             <padding>
+                                                <Insets left="15.0" right="10.0" />
+                                             </padding>
+                                          </VBox>
+                                          <HBox maxHeight="-Infinity" prefHeight="70.0" prefWidth="326.0">
+                                             <children>
+                                                <VBox maxHeight="-Infinity" minHeight="-Infinity" prefHeight="70.0" prefWidth="262.0">
+                                                   <children>
+                                                      <Label prefHeight="19.0" prefWidth="102.0" text="Phone Number" textFill="#fffdd1">
+                                                         <font>
+                                                            <Font name="System Bold" size="13.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <TextField maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="245.0" stylesheets="@../../../style_File/Dashboard.css">
+                                                         <styleClass>
+                                                            <String fx:value="bgcolor-lightPink" />
+                                                            <String fx:value="outlineAllGray" />
+                                                         </styleClass>
+                                                      </TextField>
+                                                   </children>
+                                                   <padding>
+                                                      <Insets left="15.0" right="10.0" />
+                                                   </padding>
+                                                </VBox>
+                                             </children>
+                                          </HBox>
+                                       </children>
+                                    </HBox>
+                                    <HBox prefHeight="80.0" prefWidth="694.0" stylesheets="@../../../style_File/Dashboard.css">
+                                       <children>
+                                          <VBox maxHeight="-Infinity" minHeight="-Infinity" prefHeight="70.0" prefWidth="430.0">
+                                             <padding>
+                                                <Insets left="15.0" right="10.0" />
+                                             </padding>
+                                          </VBox>
+                                          <HBox maxHeight="-Infinity" prefHeight="70.0" prefWidth="326.0">
+                                             <children>
+                                                <VBox maxHeight="-Infinity" minHeight="-Infinity" prefHeight="70.0" prefWidth="262.0">
+                                                   <children>
+                                                      <Label prefHeight="19.0" prefWidth="102.0" text="Password" textFill="#fffdd1">
+                                                         <font>
+                                                            <Font name="System Bold" size="13.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <TextField maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="245.0" stylesheets="@../../../style_File/Dashboard.css">
+                                                         <styleClass>
+                                                            <String fx:value="bgcolor-lightPink" />
+                                                            <String fx:value="outlineAllGray" />
+                                                         </styleClass>
+                                                      </TextField>
+                                                   </children>
+                                                   <padding>
+                                                      <Insets left="15.0" right="10.0" />
+                                                   </padding>
+                                                </VBox>
+                                             </children>
+                                          </HBox>
+                                       </children>
+                                    </HBox>
+                                    <HBox prefHeight="140.0" prefWidth="694.0" stylesheets="@../../../style_File/Dashboard.css">
+                                       <children>
+                                          <VBox maxHeight="-Infinity" minHeight="-Infinity" prefHeight="114.0" prefWidth="399.0">
+                                             <padding>
+                                                <Insets left="15.0" right="10.0" />
+                                             </padding>
+                                             <children>
+                                                <VBox alignment="TOP_CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="146.0" prefWidth="374.0" spacing="15.0">
+                                                   <children>
+                                                      <Label text="Number of Books Borrowed: " textFill="#fffdd1">
+                                                         <font>
+                                                            <Font name="System Bold" size="14.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <Label fx:id="bookQty" alignment="CENTER" prefHeight="80.0" prefWidth="80.0" stylesheets="@../../../style_File/Dashboard.css" text="0" textFill="WHITE">
+                                                         <font>
+                                                            <Font size="36.0" />
+                                                         </font>
+                                                         <styleClass>
+                                                            <String fx:value="bgcolor-darkbrown" />
+                                                            <String fx:value="roundEdgecircle" />
+                                                         </styleClass>
+                                                      </Label>
+                                                   </children>
+                                                </VBox>
+                                             </children>
+                                          </VBox>
+                                          <VBox maxHeight="-Infinity" minHeight="-Infinity" prefHeight="116.0" prefWidth="285.0">
+                                             <padding>
+                                                <Insets left="15.0" right="10.0" />
+                                             </padding>
+                                             <children>
+                                                <VBox maxHeight="-Infinity" minHeight="-Infinity" prefHeight="30.0" prefWidth="210.0">
+                                                   <padding>
+                                                      <Insets left="15.0" right="10.0" />
+                                                   </padding>
+                                                </VBox>
+                                                <Label alignment="CENTER" prefHeight="58.0" prefWidth="245.0" text="Change Password" textAlignment="CENTER" textFill="WHITE">
+                                                   <font>
+                                                      <Font name="System Bold" size="14.0" />
+                                                   </font>
+                                                   <styleClass>
+                                                      <String fx:value="bgcolor-darkbrown" />
+                                                      <String fx:value="roundEdge" />
+                                                   </styleClass>
+                                                </Label>
+                                             </children>
+                                          </VBox>
+                                       </children>
+                                    </HBox>
+                                 </children>
+                                 <padding>
+                                    <Insets top="10.0" />
+                                 </padding>
+                              </VBox>
+                           </children>
+                        </HBox>
+                        <HBox prefHeight="535.0" prefWidth="60.0" stylesheets="@../../../style_File/Dashboard.css" />
+                     </children>
+                  </HBox>
+                  <VBox prefHeight="180.0" prefWidth="773.0" />
+               </children>
+            </VBox>
+         </children></VBox>
+   </center>
+</BorderPane>

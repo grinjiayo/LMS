@@ -172,8 +172,10 @@ public class LoginController {
     public void staffLoginEvt(ActionEvent event) throws Exception {
         try {
             conn = dbFunc.connectToDB();
-            if (conn == null) {
-                System.out.println("Database connection failed.");
+            if(conn==null) {
+                Alert alert = new Alert(Alert.AlertType.ERROR, "You have not yet open the server", ButtonType.OK);
+                alert.setTitle("Server Error");
+                alert.show();
                 return;
             }
 
@@ -244,6 +246,12 @@ public class LoginController {
     public void adminLoginEvt(ActionEvent event) throws Exception {
         try {
             conn = dbFunc.connectToDB();
+            if(conn==null) {
+                Alert alert = new Alert(Alert.AlertType.ERROR, "You have not yet open the server", ButtonType.OK);
+                alert.setTitle("Server Error");
+                alert.show();
+                return;
+            }
 
             String username = tfAdminName.getText();
             String password = passwordtextfield.getText();
@@ -290,6 +298,12 @@ public class LoginController {
     private void loginStudent(ActionEvent event) {
         try {
             conn = dbFunc.connectToDB();
+            if(conn==null) {
+                Alert alert = new Alert(Alert.AlertType.ERROR, "You have not yet open the server", ButtonType.OK);
+                alert.setTitle("Server Error");
+                alert.show();
+                return;
+            }
 
             String studentID = studentIDField.getText();
             String password = passwordtextfield.getText();
@@ -356,7 +370,6 @@ public class LoginController {
             System.out.println(e.getMessage());
         }
     }
-
 
     @FXML
     private void registerStudent(ActionEvent event) {
